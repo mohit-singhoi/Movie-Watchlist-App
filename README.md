@@ -269,7 +269,9 @@ src
 
 ## Database
 
-- H2 Database
+- H2 Database Development Phase
+- MySQL (Development)
+- PostgreSQL (Production Ready) 
 
 ---
 
