@@ -13,6 +13,112 @@
 		  
 	
 		  <style>
+			
+			/* Hero Section */
+			.hero{
+			    display:flex;
+			    align-items:center;
+			    justify-content:space-between;
+			    gap:40px;
+			    margin-top:30px;
+			}
+
+			/* Left Content */
+			.hero-content{
+			    flex:1;
+			    animation:slideLeft 2s ease;
+			}
+
+			/* Right Image */
+			.hero-image{
+			    flex:1;
+			    text-align:center;
+			    animation:slideRight 5s ease;
+			}
+
+			.hero-image img{
+			    width:100%;
+			    max-width:450px;
+			    border-radius:20px;
+			    box-shadow:0 20px 40px rgba(0,0,0,.35);
+			    transition:.4s;
+			}
+
+			.hero-image img:hover{
+			    transform:scale(1.05);
+			}
+			
+			.carousel{
+			    border-radius:20px;
+			    overflow:hidden;
+			    box-shadow:0 20px 40px rgba(0,0,0,.35);
+			}
+
+			.carousel img{
+			    width:100%;
+			    height:340px;
+			    object-fit:cover;
+			}
+
+			/* Button Animation */
+			.btn{
+			    transition:.3s;
+			}
+
+			.btn:hover{
+			    transform:translateY(-4px);
+			    box-shadow:0 10px 25px rgba(0,0,0,.25);
+			}
+
+			/* Animations */
+
+			@keyframes slideLeft{
+
+			from{
+			opacity:0;
+			transform:translateX(-60px);
+			}
+
+			to{
+			opacity:1;
+			transform:translateX(0);
+			}
+
+			}
+
+			@keyframes slideRight{
+
+			from{
+			opacity:0;
+			transform:translateX(60px);
+			}
+
+			to{
+			opacity:1;
+			transform:translateX(0);
+			}
+
+			}
+
+			/* Mobile */
+
+			@media(max-width:768px){
+
+			.hero{
+
+			flex-direction:column-reverse;
+			text-align:center;
+
+			}
+
+			.hero-image img{
+
+			max-width:300px;
+
+			}
+			}
+
+			
 
 		  td {
 		      word-break: break-word;
@@ -128,6 +234,20 @@
                             ➕ Add Movie
                         </a>
                     </li>
+					
+					<li class="nav-item">
+					    <a class="nav-link"
+					       href="#">
+					        ℹ️ About
+					    </a>
+					</li>
+					
+					<li class="nav-item">
+					    <a class="nav-link"
+					       href="#">
+					        📞 Contact Us
+					    </a>
+					</li>
 
                 </ul>
 
@@ -135,66 +255,158 @@
 
         </nav>
 
-        <h2 class="mt-4">
-            🎬 Movie Watchlist
-        </h2>
-		
-		<p class="tagline">
-		    Organize • Rate • Prioritize • Discover Your Next Favorite Movie
-		</p>
-		
-		<p class="mt-4">
-		    Manage your personal movie collection with automatic IMDb ratings, smart priorities, and personalized reviews—all in one place.
-		</p>
-		
-		<a href="/watchlistItemForm" class="btn btn-danger btn-lg mt-3">
-		    ➕ Add Your First Movie
-		</a>
+		<div class="hero">
 
-		<a href="/watchlist" class="btn btn-dark btn-lg mt-3 ml-2">
-		    🎥 View Watchlist
-		</a>
+		    <div class="hero-content">
+
+		        <h2>
+		            🎬 Movie Watchlist
+		        </h2>
+
+		        <p class="tagline">
+		            Organize • Rate • Prioritize • Discover Your Next Favorite Movie
+		        </p>
+
+		        <p class="mt-4">
+		            Manage your personal movie collection with automatic IMDb ratings,
+		            smart priorities and personalized reviews—all in one place.
+		        </p>
+
+		        <a href="/watchlistItemForm"
+		           class="btn btn-danger btn-lg mt-3">
+		            ➕ Add Your First Movie
+		        </a>
+
+		        <a href="/watchlist"
+		           class="btn btn-dark btn-lg mt-3 ml-2">
+		            🎥 View Watchlist
+		        </a>
+
+		    </div>
+			<div class="hero-image">
+
+			    <div id="movieCarousel"
+			         class="carousel slide"
+			         data-ride="carousel">
+
+			        <div class="carousel-inner">
+
+			            <div class="carousel-item active">
+			                <img src="/Images/movie-bg.jpg"
+			                     class="d-block w-100"
+			                     alt="Movie 1">
+			            </div>
+
+			            <div class="carousel-item">
+			                <img src="/Images/movie-bg1.jpg"
+			                     class="d-block w-100"
+			                     alt="Movie 2">
+			            </div>
+
+			            <div class="carousel-item">
+			                <img src="/Images/movie-bg2.jpg"
+			                     class="d-block w-100"
+			                     alt="Movie 3">
+			            </div>
+
+			            <div class="carousel-item">
+			                <img src="/Images/movie-bg3.jpg"
+			                     class="d-block w-100"
+			                     alt="Movie 4">
+			            </div>
+
+			        </div>
+
+			        <!-- Previous -->
+
+			        <a class="carousel-control-prev"
+			           href="#movieCarousel"
+			           role="button"
+			           data-slide="prev">
+
+			            <span class="carousel-control-prev-icon"></span>
+
+			        </a>
+
+			        <!-- Next -->
+
+			        <a class="carousel-control-next"
+			           href="#movieCarousel"
+			           role="button"
+			           data-slide="next">
+
+			            <span class="carousel-control-next-icon"></span>
+
+			        </a>
+
+			    </div>
+
+			</div>
+
+		</div>
 
 
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+	<hr>
+	
+	</div>
+	
+	<footer>
 
+	<hr>
+
+	<p>
+
+	© 2026 Mohit Kumar
+
+	</p>
+
+	<p>
+
+	Built with ❤️ using Spring Boot • Spring MVC • Thymeleaf • Hibernate • H2 Database • OMDb API
+
+	</p>
+
+	<div class="social-links">
+	        <a href="https://github.com/mohit-singhoi" target="_blank">
+	            <i class="fab fa-github"></i> GitHub
+	        </a>
+
+	        &nbsp;&nbsp;|&nbsp;&nbsp;
+
+	        <a href="https://www.linkedin.com/in/mohit-kumar-0310a1257/" target="_blank">
+	            <i class="fab fa-linkedin"></i> LinkedIn
+	        </a>
+	    </div>
+
+	</footer>
+	
+	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+	<!-- Popper -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+	<!-- Carousel -->
+	<script>
+	    $('.carousel').carousel({
+	        interval: 2500,
+	        pause: false,
+	        ride: 'carousel'
+	    });
+	</script>
+
+	</body>
 </body>
-
-
-<footer>
-
-<hr>
-
-<p>
-
-© 2026 Mohit Kumar
-
-</p>
-
-<p>
-
-Built with ❤️ using Spring Boot • Spring MVC • Thymeleaf • Hibernate • H2 Database • OMDb API
-
-</p>
-
-<div class="social-links">
-        <a href="https://github.com/mohit-singhoi" target="_blank">
-            <i class="fab fa-github"></i> GitHub
-        </a>
-
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-
-        <a href="https://www.linkedin.com/in/mohit-kumar-0310a1257/" target="_blank">
-            <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-    </div>
-
-</footer>
 
 </html>
