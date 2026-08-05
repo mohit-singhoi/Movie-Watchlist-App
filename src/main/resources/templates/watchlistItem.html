@@ -69,6 +69,14 @@
 <body>
 
 <div class="container">
+	
+	
+	<!---Navbar--->
+	<!------Creating a reusable navbar fragment is exactly how Thymeleaf projects are typically organized.------->
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<!-----
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
 
@@ -131,6 +139,8 @@
         </div>
 
     </nav>
+	
+	--->
 
     <h2 class="mt-4 mb-4">Submit a Movie</h2>
 	

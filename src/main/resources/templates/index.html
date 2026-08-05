@@ -202,6 +202,13 @@
 <body>
 
     <div class="container">
+		
+		<!----Navbar--->
+		<!------Creating a reusable navbar fragment is exactly how Thymeleaf projects are typically organized.------->
+
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		
+		<!-------
 
         <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
 
@@ -243,12 +250,6 @@
                     </li>
 					
 					<li class="nav-item">
-					 <!---  <a class="nav-link"
-					       href="/about">
-					        ℹ️ About
-					    </a>
-					--->	
-						
 						<a class="nav-link" th:href="@{/about}">
 						    ℹ️ About
 						</a>
@@ -266,6 +267,8 @@
             </div>
 
         </nav>
+		
+		-->
 
 		<div class="hero">
 

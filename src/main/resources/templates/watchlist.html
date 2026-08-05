@@ -108,6 +108,11 @@
 <div class="container">
 
     <!-- Navbar -->
+	<!------Creating a reusable navbar fragment is exactly how Thymeleaf projects are typically organized.------->
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<!----
     <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
 
         <a class="navbar-brand" href="/">
@@ -170,6 +175,8 @@
             </ul>
         </div>
     </nav>
+	
+	-->
 	
 
     <!-- Heading -->
