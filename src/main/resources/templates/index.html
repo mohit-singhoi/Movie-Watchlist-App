@@ -166,11 +166,18 @@
 		  }
 		  
 		  
-		  .btn{
+		/*  .btn{
+		      border-radius:10px;
+		      font-weight:450;
+		      padding:12px 28px;
+		  } */
+		  
+		  .hero-btn{
 		      border-radius:10px;
 		      font-weight:450;
 		      padding:12px 28px;
 		  }
+		  
 		 
 		  
 		  footer{
@@ -189,7 +196,7 @@
 		  </style>
 	
 
-    <title>Watchlist App</title>
+    <title>Home | Movie Watchlist</title>
 
 </head>
 <body>
@@ -236,15 +243,20 @@
                     </li>
 					
 					<li class="nav-item">
-					    <a class="nav-link"
-					       href="#">
+					 <!---  <a class="nav-link"
+					       href="/about">
 					        ℹ️ About
 					    </a>
+					--->	
+						
+						<a class="nav-link" th:href="@{/about}">
+						    ℹ️ About
+						</a>
 					</li>
 					
 					<li class="nav-item">
 					    <a class="nav-link"
-					       href="#">
+					       href="/contact">
 					        📞 Contact Us
 					    </a>
 					</li>
@@ -273,12 +285,12 @@
 		        </p>
 
 		        <a href="/watchlistItemForm"
-		           class="btn btn-danger btn-lg mt-3">
+		           class="btn btn-danger btn-lg hero-btn mt-3">
 		            ➕ Add Your First Movie
 		        </a>
 
 		        <a href="/watchlist"
-		           class="btn btn-dark btn-lg mt-3 ml-2">
+		           class="btn btn-dark btn-lg mt-3 hero-btn ml-2">
 		            🎥 View Watchlist
 		        </a>
 
@@ -393,6 +405,10 @@
 	
 	</div>
 	
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	
+	<!---
+	
 	<footer>
 
 	<hr>
@@ -422,6 +438,8 @@
 	    </div>
 
 	</footer>
+	
+	-->
 	
 	
 	<!-- jQuery -->

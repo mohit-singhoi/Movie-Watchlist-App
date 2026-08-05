@@ -13,190 +13,530 @@
 		  
 	
 		  <style>
+			body{
+			    background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+			                url('/Images/movie-bg.jpg');
+			    background-size: cover;
+			    background-position: center;
+			    background-attachment: fixed;
+			}
+			.hero{
+			display:flex;
+			align-items:center;
+			justify-content:space-between;
+			gap:50px;
+			margin:40px 0;
+			}
 			
+			.container{
+			    background: rgba(255,255,255,0.90);
+			    backdrop-filter: blur(10px);
+			    border-radius:20px;
+			    padding:30px;
+			    margin-top:30px;
+			    box-shadow:0 15px 40px rgba(0,0,0,.35);
+			}
 
+			.hero-content{
+			flex:1;
+			}
 
-		  td {
-		      word-break: break-word;
-		      max-width: 300px;
-		  }
+			.hero-image{
+			flex:1;
+			text-align:center;
+			}
 
-		  a {
-		      word-break: break-all;
-		  }
+			.hero-image img{
+			width:100%;
+			max-width:450px;
+			border-radius:20px;
+			box-shadow:0 15px 35px rgba(0,0,0,.3);
+			}
 
-		  /* Heading shadow */
-		  h2 {
-		      text-shadow: 2px 2px 5px gray;
-		      font-weight: bold;
-		  }
-		  
-		  body{
-		      background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-		                  url('/Images/movie-bg.jpg');
-		      background-size: cover;
-		      background-position: center;
-		      background-attachment: fixed;
-		  }
-		  
-		  .table{
-		      background:white;
-		      border-radius:10px;
-		  }
-		  
-		  .container{
-		      background: rgba(255,255,255,0.90);
-		      backdrop-filter: blur(10px);
-		      border-radius:20px;
-		      padding:30px;
-		      margin-top:30px;
-		      box-shadow:0 15px 40px rgba(0,0,0,.35);
-		  }
-		  
-		  .tagline{
-		      font-size:18px;
-		      color:#444;
-		      margin-top:15px;
-		      font-style:italic;
-		      letter-spacing:1px;
-		  }
-		  
-		  
-		  .btn{
-		      border-radius:10px;
-		      font-weight:450;
-		      padding:12px 28px;
-		  }
-		 
-		  
-		  footer{
-		      margin-top: 60px;
-		      padding: 20px;
-		      text-align: center;
-		      color: white;
-		      font-size: 15px;
-		      background: rgba(255,255,255,0.08);
-		      backdrop-filter: blur(10px);
-		      border-radius: 12px;
-		  }
-		  
-		  
-		  
+			.section{
+			margin:40px 0;
+			}
+
+			.feature-card{
+			background:#fff;
+			padding:25px;
+			border-radius:15px;
+			text-align:center;
+			box-shadow:0 10px 25px rgba(0,0,0,.12);
+			transition:.3s;
+			height:100%;
+			}
+
+			.feature-card:hover{
+			transform:translateY(-8px);
+			}
+
+			.timeline-item{
+			border-left:4px solid #dc3545;
+			padding-left:20px;
+			margin-bottom:25px;
+			}
+
+			.badges span{
+			margin:6px;
+			padding:10px 15px;
+			font-size:15px;
+			}
+
+			.developer-card{
+			background:#fff;
+			padding:35px;
+			border-radius:20px;
+			text-align:center;
+			box-shadow:0 10px 30px rgba(0,0,0,.15);
+			}
+
+			@media(max-width:768px){
+			.hero{
+			flex-direction:column;
+			text-align:center;
+			}
+			}
+			
+			footer{
+			    margin-top: 60px;
+			    padding: 20px;
+			    text-align: center;
+			    color: white;
+			    font-size: 15px;
+			    background: rgba(255,255,255,0.08);
+			    backdrop-filter: blur(10px);
+			    border-radius: 12px;
+			}
 		  </style>
 	
 
-    <title>Watchlist App</title>
+    <title>About | Movie Watchlist</title>
 
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
+    <!-- Navbar -->
 
-            <a class="navbar-brand"
-               href="/">Watchlist App</a>
+	        <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
+	            <a class="navbar-brand"
+	               href="/">Watchlist App</a>
 
-                <span class="navbar-toggler-icon"></span>
+	            <button class="navbar-toggler"
+	                    type="button"
+	                    data-toggle="collapse"
+	                    data-target="#navbarSupportedContent"
+	                    aria-controls="navbarSupportedContent"
+	                    aria-expanded="false"
+	                    aria-label="Toggle navigation">
 
-            </button>
+	                <span class="navbar-toggler-icon"></span>
 
-            <div class="collapse navbar-collapse"
-                 id="navbarSupportedContent">
+	            </button>
 
-                <ul class="navbar-nav mr-auto">
+	            <div class="collapse navbar-collapse"
+	                 id="navbarSupportedContent">
 
-                    <li class="nav-item">
-                        <a class="nav-link active"
-                           href="/">🏠 Home </a>
-                    </li>
+	                <ul class="navbar-nav mr-auto">
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="watchlist"> 🎬 Watchlist </a>
-                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link active"
+	                           href="/">🏠 Home </a>
+	                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="watchlistItem">
-                            ➕ Add Movie
-                        </a>
-                    </li>
-					
-					<li class="nav-item">
-					    <a class="nav-link"
-					       href="#">
-					        ℹ️ About
-					    </a>
-					</li>
-					
-					<li class="nav-item">
-					    <a class="nav-link"
-					       href="#">
-					        📞 Contact Us
-					    </a>
-					</li>
-					
-					
+	                    <li class="nav-item">
+	                        <a class="nav-link"
+	                           href="watchlist"> 🎬 Watchlist </a>
+	                    </li>
 
-                </ul>
+	                    <li class="nav-item">
+	                        <a class="nav-link"
+	                           href="watchlistItem">
+	                            ➕ Add Movie
+	                        </a>
+	                    </li>
+						
+						<li class="nav-item">
+						    <a class="nav-link"
+						       href="/about">
+						        ℹ️ About
+						    </a>
+						</li>
+						
+						<li class="nav-item">
+						    <a class="nav-link"
+						       href="/contact">
+						        📞 Contact Us
+						    </a>
+						</li>
 
-            </div>
+	                </ul>
 
-        </nav>
+	            </div>
 
-        <h2 class="mt-4">
-            ℹ️ About US
-        </h2>
-		
-    </div>
+	        </nav>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<!-- Hero Section -->
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-	
-	<hr>
-	<hr>
-	
-	<footer>
+	<div class="hero">
 
-	<hr>
+	    <div class="hero-content">
 
-	<p>
+	        <h1>🎬 Movie Watchlist</h1>
 
-	© 2026 Mohit Kumar
+	        <h4>Your Personal Movie Companion</h4>
 
-	</p>
+	        <p class="lead">
 
-	<p>
+	            Organize • Track • Rate • Discover your next favorite movie with an elegant and easy-to-use watchlist application.
 
-	Built with ❤️ using Spring Boot • Spring MVC • Thymeleaf • Hibernate • H2 Database • OMDb API
+	        </p>
 
-	</p>
-
-	<div class="social-links">
-	        <a href="https://github.com/mohit-singhoi" target="_blank">
-	            <i class="fab fa-github"></i> GitHub
+	        <a href="/watchlist"
+	           class="btn btn-danger btn-lg">
+	            🎥 Explore Watchlist
 	        </a>
 
-	        &nbsp;&nbsp;|&nbsp;&nbsp;
-
-	        <a href="https://www.linkedin.com/in/mohit-kumar-0310a1257/" target="_blank">
-	            <i class="fab fa-linkedin"></i> LinkedIn
-	        </a>
 	    </div>
 
-	</footer>
+	    <div class="hero-image">
+
+	        <img src="/Images/movie-bg1.jpg"
+	             alt="Movie Banner">
+
+	    </div>
+
+	</div>
+	
+	<hr>
+	
+	
+
+    <!-- Project Overview -->
+	
+	<section class="section">
+
+	<h2>📖 Project Overview</h2>
+
+	<p>
+
+	Movie Watchlist is a full-stack Java web application built using Spring Boot.
+
+	It enables users to organize their personal movie collection by storing IMDb ratings, comments, priorities, and movie links in a responsive and cloud-hosted application.
+
+	The project demonstrates enterprise Java development, responsive web design, database integration, and cloud deployment.
+
+	</p>
+
+	</section>
+	
+	<hr>
+    <!-- Features -->
+	<section class="section">
+
+	<h2>✨ Features</h2>
+
+	<div class="row">
+
+	<div class="col-md-4 mb-4">
+
+	<div class="feature-card">
+
+	<h3>🎬</h3>
+
+	<h5>Movie Management</h5>
+
+	<p>Add, update and delete movies.</p>
+
+	</div>
+
+	</div>
+
+	<div class="col-md-4 mb-4">
+
+	<div class="feature-card">
+
+	<h3>⭐</h3>
+
+	<h5>IMDb Ratings</h5>
+
+	<p>Store movie ratings and reviews.</p>
+
+	</div>
+
+	</div>
+
+	<div class="col-md-4 mb-4">
+
+	<div class="feature-card">
+
+	<h3>📱</h3>
+
+	<h5>Responsive Design</h5>
+
+	<p>Optimized for desktop and mobile devices.</p>
+
+	</div>
+
+	</div>
+
+	<div class="col-md-4 mb-4">
+
+	<div class="feature-card">
+
+	<h3>☁️</h3>
+
+	<h5>Cloud Hosted</h5>
+
+	<p>Deployed on Render using PostgreSQL.</p>
+
+	</div>
+
+	</div>
+
+	<div class="col-md-4 mb-4">
+
+	<div class="feature-card">
+
+	<h3>📝</h3>
+
+	<h5>Personal Notes</h5>
+
+	<p>Store comments and recommendations.</p>
+
+	</div>
+
+	</div>
+
+	<div class="col-md-4 mb-4">
+
+	<div class="feature-card">
+
+	<h3>🔗</h3>
+
+	<h5>Movie Links</h5>
+
+	<p>Save streaming or IMDb links.</p>
+
+	</div>
+
+	</div>
+
+	</div>
+
+	</section>
+	
+	<hr>
+
+    <!-- Project Journey -->
+	<!-- ========================= -->
+
+
+	<section class="section">
+
+	    <h2>🚀 Project Journey</h2>
+
+	    <div class="timeline">
+
+	        <div class="timeline-item">
+	            <h5>🟢 Phase 1 • Initial Development</h5>
+
+	            <p>
+	                Started by building the core application using an
+	                <strong>H2 in-memory database</strong> to rapidly develop and
+	                test CRUD operations, MVC architecture, and Thymeleaf templates.
+	            </p>
+	        </div>
+
+	        <div class="timeline-item">
+	            <h5>🟡 Phase 2 • MySQL Integration</h5>
+
+	            <p>
+	                Migrated to <strong>MySQL</strong> to work with a persistent
+	                relational database and gain practical experience with
+	                Spring Data JPA, Hibernate, and SQL-based data management.
+	            </p>
+	        </div>
+
+	        <div class="timeline-item">
+	            <h5>🔵 Phase 3 • PostgreSQL Migration</h5>
+
+	            <p>
+	                Upgraded the application to <strong>PostgreSQL</strong>,
+	                aligning it with modern production environments and cloud
+	                deployment best practices while improving scalability and reliability.
+	            </p>
+	        </div>
+
+	        <div class="timeline-item">
+	            <h5>☁️ Phase 4 • Cloud Deployment</h5>
+
+	            <p>
+	                Configured environment variables and prepared the application
+	                for deployment on <strong>Render Cloud</strong>, enabling
+	                online access with a production-ready PostgreSQL database.
+	            </p>
+	        </div>
+
+	        <div class="timeline-item">
+	            <h5>🚀 Future Roadmap</h5>
+
+	            <p>
+	                Planned enhancements include <strong>Spring Security</strong>,
+	                user authentication, role-based authorization, personalized
+	                watchlists, movie search, filtering, REST APIs, Docker support,
+	                and CI/CD integration for a complete enterprise-ready application.
+	            </p>
+	        </div>
+
+	    </div>
+
+	</section>
+	
+
+	<hr>
+    <!-- Technology Stack -->
+	<section class="section">
+
+	<h2>🛠 Technology Stack</h2>
+
+	<div class="badges">
+
+	<span class="badge badge-dark">Java 21</span>
+
+	<span class="badge badge-success">Spring Boot</span>
+
+	<span class="badge badge-info">Hibernate</span>
+
+	<span class="badge badge-primary">Spring MVC</span>
+
+	<span class="badge badge-warning">Thymeleaf</span>
+
+	<span class="badge badge-secondary">Bootstrap</span>
+
+	<span class="badge badge-danger">PostgreSQL</span>
+
+	<span class="badge badge-dark">Render</span>
+
+	<span class="badge badge-info">Git</span>
+
+	<span class="badge badge-success">GitHub</span>
+
+	<span class="badge badge-primary">HTML</span>
+
+	<span class="badge badge-warning">CSS</span>
+
+	<span class="badge badge-danger">JavaScript</span>
+
+	</div>
+
+	</section>
+	
+
+	<hr>
+	
+	<!-- ========================= -->
+	<!-- Project Highlights -->
+	<!-- ========================= -->
+
+	<section class="section">
+
+	    <h2>📊 Project Highlights</h2>
+
+	    <div class="row text-center mt-5">
+
+	        <div class="col-md-3 mb-4">
+	            <h1>🚀</h1>
+	            <h3>Spring Boot</h3>
+	            <p>
+	                Production-ready backend with MVC architecture, Hibernate & JPA.
+	            </p>
+	        </div>
+
+	        <div class="col-md-3 mb-4">
+	            <h1>🐘</h1>
+	            <h3>PostgreSQL</h3>
+	            <p>
+	                Cloud-ready relational database with Hibernate integration.
+	            </p>
+	        </div>
+
+	        <div class="col-md-3 mb-4">
+	            <h1>☁️</h1>
+	            <h3>Render Cloud</h3>
+	            <p>
+	                Deployed with environment variables for real-world hosting.
+	            </p>
+	        </div>
+
+	        <div class="col-md-3 mb-4">
+	            <h1>🎬</h1>
+	            <h3>IMDb Integration</h3>
+	            <p>
+	                Automatically fetches movie ratings and manages personal watchlists.
+	            </p>
+	        </div>
+
+	    </div>
+
+	</section>
+
+	<hr>
+    <!-- Developer -->
+	
+	<section class="section">
+
+	    <h2>👨‍💻 Developer</h2>
+
+	    <div class="developer-card">
+
+	        <h3>Mohit Kumar</h3>
+
+	        <h5>Java Full Stack Developer | MCA Graduate</h5>
+
+	        <p>
+	            Passionate Java Full Stack Developer with a strong foundation in
+	            Java, Spring Boot, Spring MVC, Hibernate, REST APIs, SQL, and modern
+	            web development. I enjoy building scalable, user-friendly applications
+	            and continuously improving my skills in backend development, cloud
+	            deployment, and software engineering. This Movie Watchlist App reflects
+	            my hands-on experience in developing real-world applications using
+	            industry-standard technologies.
+	        </p>
+
+	        <div class="mt-4">
+
+	            <a href="mailto:mohitsinghoi501@gmail.com"
+	               class="btn btn-danger"
+	               target="_blank">
+	                📧 Gmail
+	            </a>
+
+	            <a href="https://github.com/mohit-singhoi"
+	               class="btn btn-dark"
+	               target="_blank">
+	                🐙 GitHub
+	            </a>
+
+	            <a href="https://www.linkedin.com/in/mohit-kumar-0379gu/"
+	               class="btn btn-primary"
+	               target="_blank">
+	                💼 LinkedIn
+	            </a>
+
+	        </div>
+
+	    </div>
+
+	</section>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 
 
 </body>

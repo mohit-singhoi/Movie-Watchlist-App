@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<style>
+		footer{
+		    margin-top:60px;
+		    background:rgba(255,255,255,.10);
+		    backdrop-filter:blur(10px);
+		    border-radius:15px;
+		    padding:30px;
+		    color:white;
+		    text-align:center;
+		}
+		
+		footer .btn{
+		    margin:5px;
+		    min-width:130px;
+		    height:48px;
+		    border-radius:12px;
+		    font-size:18px;
+		    font-weight:600;
+		    display:inline-flex;
+		    align-items:center;
+		    justify-content:center;
+			padding:8px 18px;
+			border-radius:8px;
+			font-size:14px;
+		}
+
+		.hero-btn{
+		    border-radius:10px;
+		    font-weight:450;
+		    padding:12px 28px;
+		}
+		
+		footer h5{
+		    font-weight:bold;
+		    margin-bottom:15px;
+		}
+
+		footer p{
+		    color:#ddd;
+		}
+
+		footer .btn{
+		    margin:5px;
+		}
+
+		footer small{
+		    color:#bbb;
+		}
+	</style>
+
+<body>
+
+<footer th:fragment="footer">
+
+    <hr>
+
+    <div class="text-center py-4">
+
+        <h5>🎬 Movie Watchlist App</h5>
+
+        <p>
+            Built with ❤️ using Java • Spring Boot • Spring MVC • Hibernate •
+            Thymeleaf • PostgreSQL • Bootstrap • Render
+        </p>
+
+        <div class="mb-3">
+			
+
+			<a href="mailto:mohitsinghoi501@gmail.com"
+			   target="_blank"
+			   class="btn btn-danger btn-sm">
+			    Gmail
+			</a>
+
+            <a href="https://github.com/mohit-singhoi"
+               target="_blank"
+               class="btn btn-dark btn-sm">
+
+                GitHub
+
+            </a>
+			
+
+            <a href="https://www.linkedin.com/in/mohit-kumar-0379gu/"
+               target="_blank"
+               class="btn btn-primary btn-sm">
+
+                LinkedIn
+
+            </a>
+
+        </div>
+
+        <small>
+
+            © 2026 Mohit Kumar • All Rights Reserved
+
+        </small>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

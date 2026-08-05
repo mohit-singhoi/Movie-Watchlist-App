@@ -157,4 +157,15 @@ public class MovieController {
 
         return redirectView;
     }
+    
+    
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+    
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
 }
