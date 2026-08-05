@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<style>
+	<style>
+
+	.navbar{
+	    background:rgba(108,117,125,.95) !important;
+	    backdrop-filter:blur(12px);
+	    border-radius:15px;
+	    padding:12px 20px;
+	    box-shadow:0 8px 20px rgba(0,0,0,.25);
+	}
+
+	.navbar-brand{
+	    font-size:26px;
+	    font-weight:700;
+	    letter-spacing:.5px;
+	    color:#fff !important;
+	    transition:.3s;
+	}
+
+	.navbar-brand:hover{
+	    color:#ffc107 !important;
+	}
+
+	.navbar-nav .nav-link{
+	    color:#f8f9fa !important;
+	    font-size:16px;
+	    font-weight:600;
+	    transition:all .3s ease;
+	}
+
+	.navbar-nav .nav-link:hover{
+	    color:#ffc107 !important;
+	    background:rgba(255,255,255,.12);
+	}
+
+	.nav-item.active .nav-link{
+	    background:#dc3545;
+	    color:#ffffff !important;
+	}
+
+	.navbar-toggler{
+	    border:none;
+	    outline:none;
+	}
+
+	.navbar-toggler:focus{
+	    box-shadow:none;
+	}
+
+	@media (max-width:768px){
+
+	    .navbar-nav{
+	        margin-top:10px;
+	    }
+
+	    .navbar-nav .nav-link{
+	        margin:4px 0;
+	    }
+
+	}
+
+	</style>
+</style>
+
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-secondary"
+     th:fragment="navbar">
+
+    <a class="navbar-brand" href="/">
+        Watchlist App
+    </a>
+
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent">
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse"
+         id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    🏠 Home
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/watchlist">
+                    🎬 Watchlist
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/watchlistItemForm">
+                    ➕ Add Movie
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/about">
+                    ℹ️ About
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">
+                    📞 Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+</body>
+</html>
