@@ -495,7 +495,7 @@ http://localhost:8080/h2-console
 
 📧 Email: *mohitsinghoi501@gmail.com*
 
-🔗 LinkedIn: *https://www.linkedin.com/in/mohit-kumar-0310a1257*
+🔗 LinkedIn: *https://www.linkedin.com/in/mohit-kumar-0379gu*
 
 ### Skills
 
