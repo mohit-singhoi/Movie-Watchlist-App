@@ -112,73 +112,6 @@
 
 	<div th:replace="~{fragments/navbar :: navbar}"></div>
 	
-	<!----
-    <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
-
-        <a class="navbar-brand" href="/">
-            Watchlist App
-        </a>
-
-        <button class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse"
-             id="navbarSupportedContent">
-
-            <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="/">
-                        🏠 Home
-                    </a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link"
-                       href="watchlist">
-                        🎬 Watchlist
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="watchlistItemForm">
-                        ➕ Add Movie
-                    </a>
-                </li>
-				
-
-				<li class="nav-item">
-				    <a class="nav-link"
-				       href="/about">
-				        ℹ️ About
-				    </a>
-				</li>
-				
-				<li class="nav-item">
-				    <a class="nav-link"
-				       href="/contact">
-				        📞 Contact Us
-				    </a>
-				</li>
-				
-
-            </ul>
-        </div>
-    </nav>
-	
-	-->
-	
-
     <!-- Heading -->
     <h2 class="mt-4">Watchlist</h2>
 	
@@ -193,52 +126,6 @@
 	    </a>
 	</div>
 	
-
-    <!-- Table -->
-<!--	<div class="table-box"> 
-	<table class="table"> -->
-
-       <!-- <tbody>
-
-        <tr th:each = "movie :${watchlistrows}">
-            <td th:text = "${movie.title}">Avatar</td>
-            <td th:text = "${movie.rating}" >7.8</td>
-			<td>
-			    <a th:href="${movie.source}"
-			       target="_blank">
-			       🎬 Watch
-			    </a>
-			</td>
-            <td th:text = "${movie.priority}">LOW</td>
-            <td th:text = "${movie.comment}">Peter recommended</td>
-			
-			
-            <td>
-
-				    <a class="btn btn-info"
-				       role="button"
-				       th:href="@{/watchlistItemForm(id=${movie.id})}">
-				        ✏ Update
-				    </a>
-				
-			<td>
-            
-				<a class="btn btn-danger"
-				   role="button"
-				   th:href="@{/delete(id=${movie.id})}">
-				    🗑 Delete
-				</a>
-			</td>
-			
-			
-        </tr>
-
-
-        </tbody>
-		
-		-->
-		
-		
 		
 		<!-- Empty Watchlist -->
 		<div th:if="${#lists.isEmpty(watchlistrows)}"
@@ -349,38 +236,6 @@
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
-<!---
-<footer>
-
-<hr>
-
-<p>
-
-© 2026 Mohit Kumar
-
-</p>
-
-<p>
-
-Built with ❤️ using Spring Boot • Spring MVC • Thymeleaf • Hibernate • H2 Database • OMDb API
-
-</p>
-
-<div class="social-links">
-        <a href="https://github.com/mohit-singhoi" target="_blank">
-            <i class="fab fa-github"></i> GitHub
-        </a>
-
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-
-        <a href="https://www.linkedin.com/in/mohit-kumar-0310a1257/" target="_blank">
-            <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-    </div>
-
-</footer>
-
--->
 
 </body>
 

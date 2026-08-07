@@ -15,14 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.mohit.watchlist.entity.Movie;
-import com.example.mohit.watchlist.service.DatabaseService;
+import com.example.mohit.watchlist.service.MovieServices;
 
 
 @Controller
 public class MovieController {
 
 	@Autowired
-	DatabaseService databaseService;
+	MovieServices databaseService;
 	
     @GetMapping("/watchlistItemForm")
     public ModelAndView showWatchListForm(@RequestParam(required = false) Integer id) {
@@ -140,10 +140,10 @@ public class MovieController {
     
     
     
-    @GetMapping("/")
-    public String home() {
-        return "index";   // Your home html page name
-    }
+//    @GetMapping("/")
+//    public String home() {
+//        return "index";   // Your home html page name
+//    }
     
     
     
@@ -158,14 +158,14 @@ public class MovieController {
         return redirectView;
     }
     
-    
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
-    
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact";
-    }
+//    
+//    @GetMapping("/about")
+//    public String about() {
+//        return "about";
+//    }
+//    
+//    @GetMapping("/contact")
+//    public String contact() {
+//        return "contact";
+//    }
 }

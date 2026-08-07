@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Sign Up | Movie Watchlist</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <style>
+
+        body{
+            background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
+                       url('/Images/movie-bg.jpg');
+            background-size:cover;
+            background-position:center;
+            background-attachment:fixed;
+            min-height:100vh;
+        }
+
+        .container-box{
+            max-width:520px;
+            margin:50px auto;
+            background:rgba(255,255,255,.92);
+            backdrop-filter:blur(10px);
+            border-radius:20px;
+            padding:40px;
+            box-shadow:0 15px 40px rgba(0,0,0,.35);
+        }
+
+        h2{
+            text-align:center;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#666;
+            margin-bottom:30px;
+        }
+
+        .form-control{
+            height:48px;
+            border-radius:10px;
+        }
+
+        .btn-signup{
+            width:100%;
+            border-radius:10px;
+            padding:12px;
+            font-size:17px;
+            font-weight:bold;
+        }
+
+        .login-link{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .login-link a{
+            font-weight:bold;
+            text-decoration:none;
+        }
+
+        .login-link a:hover{
+            text-decoration:underline;
+        }
+
+        .back-home{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .back-home a{
+            text-decoration:none;
+        }
+
+        .text-danger{
+            font-size:14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="container-box">
+
+        <h2>🚀 Create Your Account</h2>
+
+        <p class="subtitle">
+            Join Movie Watchlist and organize your favorite movies.
+        </p>
+
+        <form th:action="@{/signup}"
+              th:object="${signupRequest}"
+              method="post">
+
+            <!-- Full Name -->
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       th:field="*{fullName}"
+                       class="form-control"
+                       placeholder="Enter your full name">
+
+                <small class="text-danger"
+                       th:errors="*{fullName}">
+                </small>
+
+            </div>
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input type="email"
+                       th:field="*{email}"
+                       class="form-control"
+                       placeholder="Enter your email">
+
+                <small class="text-danger"
+                       th:errors="*{email}">
+                </small>
+
+            </div>
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       th:field="*{password}"
+                       class="form-control"
+                       placeholder="Minimum 6 characters">
+
+                <small class="text-danger"
+                       th:errors="*{password}">
+                </small>
+
+            </div>
+
+            <!-- Confirm Password -->
+
+            <div class="form-group">
+
+                <label>Confirm Password</label>
+
+                <input type="password"
+                       name="confirmPassword"
+                       class="form-control"
+                       placeholder="Re-enter password">
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-success btn-signup">
+
+                🚀 Create Account
+
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="/login">
+
+                Login Here
+
+            </a>
+
+        </div>
+
+        <div class="back-home">
+
+            <a href="/">
+
+                ← Back to Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
