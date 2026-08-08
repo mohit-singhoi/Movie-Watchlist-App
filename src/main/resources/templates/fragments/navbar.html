@@ -1,136 +1,3 @@
-<!----
-
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	
-<style>
-	<style>
-
-	.navbar{
-	    background:rgba(108,117,125,.95) !important;
-	    backdrop-filter:blur(12px);
-	    border-radius:15px;
-	    padding:12px 20px;
-	    box-shadow:0 8px 20px rgba(0,0,0,.25);
-	}
-
-	.navbar-brand{
-	    font-size:26px;
-	    font-weight:700;
-	    letter-spacing:.5px;
-	    color:#fff !important;
-	    transition:.3s;
-	}
-
-	.navbar-brand:hover{
-	    color:#ffc107 !important;
-	}
-
-	.navbar-nav .nav-link{
-	    color:#f8f9fa !important;
-	    font-size:16px;
-	    font-weight:600;
-	    transition:all .3s ease;
-	}
-
-	.navbar-nav .nav-link:hover{
-	    color:#ffc107 !important;
-	    background:rgba(255,255,255,.12);
-	}
-
-	.nav-item.active .nav-link{
-	    background:#dc3545;
-	    color:#ffffff !important;
-	}
-
-	.navbar-toggler{
-	    border:none;
-	    outline:none;
-	}
-
-	.navbar-toggler:focus{
-	    box-shadow:none;
-	}
-
-	@media (max-width:768px){
-
-	    .navbar-nav{
-	        margin-top:10px;
-	    }
-
-	    .navbar-nav .nav-link{
-	        margin:4px 0;
-	    }
-
-	}
-
-	</style>
-</style>
-
-<body>
-
-<nav class="navbar navbar-expand-sm navbar-dark bg-secondary"
-     th:fragment="navbar">
-
-    <a class="navbar-brand" href="/">
-        Watchlist App
-    </a>
-
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent">
-
-        <span class="navbar-toggler-icon"></span>
-
-    </button>
-
-    <div class="collapse navbar-collapse"
-         id="navbarSupportedContent">
-
-        <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    🏠 Home
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/watchlist">
-                    🎬 Watchlist
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/watchlistItemForm">
-                    ➕ Add Movie
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/about">
-                    ℹ️ About
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/contact">
-                    📞 Contact Us
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
-
-</nav>
-
-</body>
-</html>
-
---->
-
 <!DOCTYPE html>
 <nav xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
@@ -151,6 +18,23 @@
     font-size:26px;
     font-weight:700;
     color:#fff !important;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    padding: 10px 20px;
+    overflow-x: auto;
+}
+
+.navbar a,
+.navbar span,
+.navbar button {
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .navbar-brand:hover{
@@ -174,6 +58,19 @@
     background:#dc3545;
     color:#fff !important;
     border-radius:6px;
+}
+
+.navbar-brand {
+    white-space: nowrap;
+}
+
+.navbar .nav-link {
+    white-space: nowrap;
+    word-break: normal;
+}
+
+.navbar .nav-item {
+    white-space: nowrap;
 }
 
 /* Login Button */
@@ -233,90 +130,130 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary"
      th:fragment="navbar">
 
-    <a class="navbar-brand" href="/">
-        🎬 Watchlist App
-    </a>
+	 <a class="navbar-brand" href="/">
+	     🎬 Watchlist App
+	 </a>
+	 
 
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent">
 
-        <span class="navbar-toggler-icon"></span>
+	 <button class="navbar-toggler"
+	         type="button"
+	         data-toggle="collapse"
+	         data-target="#navbarSupportedContent">
 
-    </button>
+	     <span class="navbar-toggler-icon"></span>
 
-    <div class="collapse navbar-collapse"
-         id="navbarSupportedContent">
+	 </button>
+	 
+	 
 
-        <!-- Left Side -->
-        <ul class="navbar-nav mr-auto">
+	 
 
-            <li class="nav-item">
-                <a class="nav-link" href="/">🏠 Home</a>
-            </li>
+	 <div class="collapse navbar-collapse"
+	      id="navbarSupportedContent">
 
-            <li class="nav-item">
-                <a class="nav-link" href="/watchlist">🎬 Watchlist</a>
-            </li>
+	     <!-- Left Side -->
+	     <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item">
-                <a class="nav-link" href="/watchlistItemForm">➕ Add Movie</a>
-            </li>
+	         <!-- Home - Everyone -->
+	         <li class="nav-item">
+	             <a class="nav-link" href="/">
+	                 🏠 Home
+	             </a>
+	         </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/about">ℹ️ About</a>
-            </li>
+	         <!-- Watchlist - Visible to everyone
+	              Security will redirect anonymous users to login -->
+	         <li class="nav-item">
+	             <a class="nav-link" href="/watchlist">
+	                 🎬 Watchlist
+	             </a>
+	         </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/contact">📞 Contact Us</a>
-            </li>
+	         <!-- Add Movie - Visible to everyone
+	              Security will redirect anonymous users to login -->
+	         <li class="nav-item">
+	             <a class="nav-link" href="/watchlistItemForm">
+	                 ➕ Add Movie
+	             </a>
+	         </li>
 
-        </ul>
+	         <!-- About - Everyone -->
+	         <li class="nav-item">
+	             <a class="nav-link" href="/about">
+	                 ℹ️ About
+	             </a>
+	         </li>
 
-		<!-- Right Side -->
+	         <!-- Contact - Everyone -->
+	         <li class="nav-item">
+	             <a class="nav-link" href="/contact">
+	                 📞 Contact Us
+	             </a>
+	         </li>
 
-		<div class="d-flex align-items-center">
+	         <!-- Feedback - ONLY logged-in users -->
+	         <li class="nav-item" sec:authorize="isAuthenticated()">
+	             <a class="nav-link" href="/feedback">
+	                 💬 Feedback
+	             </a>
+	         </li>
 
-		    <!-- When NOT Logged In -->
-		    <div sec:authorize="isAnonymous()">
+	     </ul>
 
-		        <a href="/login"
-		           class="btn btn-outline-light mr-2">
-		            🔐 Login
-		        </a>
 
-		        <a href="/signup"
-		           class="btn btn-danger">
-		            🚀 Sign Up
-		        </a>
+	     <!-- Right Side -->
+	     <div class="d-flex align-items-center">
 
-		    </div>
+	         <!-- NOT LOGGED IN -->
+	         <div sec:authorize="isAnonymous()">
 
-		    <!-- When Logged In -->
-		    <div sec:authorize="isAuthenticated()"
-		         class="d-flex align-items-center">
+	             <a href="/login"
+	                class="btn btn-outline-light mr-2">
+	                 🔐 Login
+	             </a>
 
-		        <span class="text-white mr-3">
-		            👋 Welcome,
-		            <strong sec:authentication="principal.user.fullName"></strong>
-		        </span>
+	             <a href="/signup"
+	                class="btn btn-danger">
+	                 🚀 Sign Up
+	             </a>
 
-		        <form th:action="@{/logout}" method="post">
+	         </div>
 
-		            <button class="btn btn-warning">
-		                Logout
-		            </button>
 
-		        </form>
+	         <!-- LOGGED IN -->
+	         <div sec:authorize="isAuthenticated()"
+	              class="d-flex align-items-center">
 
-		    </div>
+				  
+				  <span class="text-white mr-3"
+				        th:if="${#authentication.authenticated}">
+				      👋 Hii,
+				      <strong th:text="${#strings.substringBefore(#authentication.principal.user.fullName, ' ')}">
+				          User
+				      </strong>
+				  </span>
+				  
 
-		</div>
+	             <form th:action="@{/logout}" method="post">
 
-    </div>
+	                 <button type="submit"
+	                         class="btn btn-warning">
+	                     🚪 Logout
+	                 </button>
+
+	             </form>
+
+	         </div>
+
+	     </div>
+
+	 </div>
+	
+	
 
 </nav>
+
 
 </body>
 

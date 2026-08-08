@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Help Us Improve | Movie Watchlist</title>
+
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
+    <style>
+
+        body {
+
+            background:
+                linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+                url('/Images/movie-bg.jpg');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+			/*
+            min-height: 100vh;
+
+            padding-bottom: 40px;
+			*/
+
+        }
+		
+
+        /* ========================= */
+        /* FEEDBACK CONTAINER */
+        /* ========================= */
+
+        .feedback-container {
+
+            max-width: 650px;
+
+            margin: 50px auto;
+
+            background: rgba(255,255,255,.94);
+
+            backdrop-filter: blur(10px);
+
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,.40);
+
+        }
+
+
+        /* ========================= */
+        /* TITLE */
+        /* ========================= */
+
+        .feedback-title {
+
+            text-align: center;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .feedback-subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 30px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ========================= */
+        /* FORM */
+        /* ========================= */
+
+        .form-control {
+
+            border-radius: 10px;
+
+            min-height: 48px;
+
+        }
+
+
+        textarea.form-control {
+
+            min-height: 140px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group label {
+
+            font-weight: 600;
+
+        }
+
+
+        /* ========================= */
+        /* STAR RATING */
+        /* ========================= */
+
+        .rating-section {
+
+            text-align: center;
+
+            margin: 25px 0;
+
+        }
+
+
+        .rating-section > label {
+
+            font-weight: 600;
+
+            display: block;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .rating-stars {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-direction: row-reverse;
+
+            gap: 5px;
+
+        }
+
+
+        .rating-stars input {
+
+            display: none;
+
+        }
+
+
+        .rating-stars label {
+
+            font-size: 38px;
+
+            color: #ccc;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+        }
+
+
+        .rating-stars label:hover,
+
+        .rating-stars label:hover ~ label,
+
+        .rating-stars input:checked ~ label {
+
+            color: #ffc107;
+
+        }
+
+
+        /* ========================= */
+        /* SUBMIT BUTTON */
+        /* ========================= */
+
+        .btn-submit {
+
+            width: 100%;
+
+            border-radius: 10px;
+
+            padding: 12px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* ========================= */
+        /* BACK HOME */
+        /* ========================= */
+
+        .back-home {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+        }
+
+
+        .back-home a {
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ========================= */
+        /* SUCCESS POPUP */
+        /* ========================= */
+
+        .success-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .success-title {
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .success-text {
+
+            color: #666;
+
+            line-height: 1.6;
+
+        }
+
+
+        .modal-content {
+
+            border-radius: 20px;
+
+            border: none;
+
+            box-shadow: 0 15px 50px rgba(0,0,0,.45);
+
+        }
+
+
+        .modal-header {
+
+            border-bottom: none;
+
+            padding-bottom: 0;
+
+        }
+
+
+        .modal-footer {
+
+            border-top: none;
+
+            justify-content: center;
+
+        }
+
+
+        .success-button {
+
+            border-radius: 10px;
+
+            padding: 10px 35px;
+
+            font-weight: bold;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ============================== -->
+<!-- FEEDBACK CONTAINER -->
+<!-- ============================== -->
+
+<div class="feedback-container">
+
+
+    <!-- Heading -->
+
+    <h2 class="feedback-title">
+
+        💬 Help Us Improve
+
+    </h2>
+
+
+    <p class="feedback-subtitle">
+
+        Your feedback and suggestions help us make
+        the Movie Watchlist better.
+
+        <br>
+
+        We genuinely appreciate your suggestions! ❤️
+
+    </p>
+
+
+    <!-- ============================== -->
+    <!-- FEEDBACK FORM -->
+    <!-- ============================== -->
+
+    <form th:action="@{/feedback}"
+          th:object="${feedback}"
+          method="post">
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+            <label for="category">
+
+                Feedback Category
+
+            </label>
+
+
+            <select id="category"
+                    th:field="*{category}"
+                    class="form-control"
+                    required>
+
+                <option value="">
+
+                    Select a category
+
+                </option>
+
+
+                <option value="Feature Suggestion">
+
+                    💡 Feature Suggestion
+
+                </option>
+
+
+                <option value="Bug Report">
+
+                    🐛 Bug Report
+
+                </option>
+
+
+                <option value="UI/Design">
+
+                    🎨 UI / Design
+
+                </option>
+
+
+                <option value="Performance">
+
+                    ⚡ Performance
+
+                </option>
+
+
+                <option value="Movie/Watchlist">
+
+                    🎬 Movie / Watchlist
+
+                </option>
+
+
+                <option value="Login/Account">
+
+                    🔐 Login / Account
+
+                </option>
+
+
+                <option value="Other">
+
+                    📌 Other
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ============================== -->
+        <!-- RATING -->
+        <!-- ============================== -->
+
+        <div class="rating-section">
+
+            <label>
+
+                How would you rate your experience?
+
+            </label>
+
+
+            <div class="rating-stars">
+
+
+                <!-- 5 -->
+
+                <input type="radio"
+                       id="star5"
+                       th:field="*{rating}"
+                       value="5"
+                       required>
+
+                <label for="star5">
+
+                    ★
+
+                </label>
+
+
+                <!-- 4 -->
+
+                <input type="radio"
+                       id="star4"
+                       th:field="*{rating}"
+                       value="4">
+
+                <label for="star4">
+
+                    ★
+
+                </label>
+
+
+                <!-- 3 -->
+
+                <input type="radio"
+                       id="star3"
+                       th:field="*{rating}"
+                       value="3">
+
+                <label for="star3">
+
+                    ★
+
+                </label>
+
+
+                <!-- 2 -->
+
+                <input type="radio"
+                       id="star2"
+                       th:field="*{rating}"
+                       value="2">
+
+                <label for="star2">
+
+                    ★
+
+                </label>
+
+
+                <!-- 1 -->
+
+                <input type="radio"
+                       id="star1"
+                       th:field="*{rating}"
+                       value="1">
+
+                <label for="star1">
+
+                    ★
+
+                </label>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================== -->
+        <!-- MESSAGE -->
+        <!-- ============================== -->
+
+        <div class="form-group">
+
+            <label for="message">
+
+                Your Feedback / Suggestion
+
+            </label>
+
+
+            <textarea id="message"
+                      th:field="*{message}"
+                      class="form-control"
+                      placeholder="Tell us what you liked, what could be improved, or what feature you would like to see..."
+                      maxlength="500"
+                      required></textarea>
+
+
+            <small class="form-text text-muted">
+
+                Maximum 500 characters.
+
+            </small>
+
+        </div>
+
+
+        <!-- ============================== -->
+        <!-- SUBMIT -->
+        <!-- ============================== -->
+
+        <button type="submit"
+                class="btn btn-primary btn-submit">
+
+            🚀 Submit Feedback
+
+        </button>
+
+
+    </form>
+
+
+    <!-- ============================== -->
+    <!-- BACK HOME -->
+    <!-- ============================== -->
+
+    <div class="back-home">
+
+        <a href="/">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- ================================================== -->
+<!-- SUCCESS POPUP -->
+<!-- ================================================== -->
+
+<div class="modal fade"
+     id="feedbackSuccessModal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true"
+     th:if="${success}">
+
+
+    <div class="modal-dialog modal-dialog-centered"
+         role="document">
+
+
+        <div class="modal-content">
+
+
+            <!-- Header -->
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    ✅ Feedback Submitted
+
+                </h5>
+
+
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+
+                    <span aria-hidden="true">
+
+                        &times;
+
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- Body -->
+
+            <div class="modal-body text-center">
+
+
+                <div class="success-icon">
+
+                    🎉
+
+                </div>
+
+
+                <h3 class="success-title">
+
+                    Thank You!
+
+                </h3>
+
+
+                <p class="success-text">
+
+                    Your feedback has been submitted successfully.
+
+                    <br>
+
+                    Your suggestions will help us improve
+                    the Movie Watchlist.
+
+                    <br><br>
+
+                    We really appreciate your time and support. ❤️
+
+                </p>
+
+            </div>
+
+
+            <!-- Footer -->
+
+            <div class="modal-footer">
+
+				<button type="button"
+				        class="btn btn-success"
+				        data-dismiss="modal"
+				        onclick="window.location.href='/'">
+
+				    👍 Great
+
+				</button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- ================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ================================================== -->
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+<!-- ================================================== -->
+<!-- OPEN POPUP ONLY AFTER SUCCESSFUL SUBMISSION -->
+<!-- ================================================== -->
+
+<script th:if="${success}">
+
+    $(document).ready(function () {
+
+        $('#feedbackSuccessModal').modal('show');
+
+    });
+
+</script>
+
+</html>
