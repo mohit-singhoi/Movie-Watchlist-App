@@ -1,108 +1,164 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<style>
-		footer{
-		    margin-top:60px;
-		    background:rgba(255,255,255,.10);
-		    backdrop-filter:blur(10px);
-		    border-radius:15px;
-		    padding:30px;
-		    color:white;
-		    text-align:center;
-		}
-		
-		footer .btn{
-		    margin:5px;
-		    min-width:130px;
-		    height:48px;
-		    border-radius:12px;
-		    font-size:18px;
-		    font-weight:600;
-		    display:inline-flex;
-		    align-items:center;
-		    justify-content:center;
-			padding:8px 18px;
-			border-radius:8px;
-			font-size:14px;
-		}
+	<div th:fragment="footer">
 
-		.hero-btn{
-		    border-radius:10px;
-		    font-weight:450;
-		    padding:12px 28px;
-		}
-		
-		footer h5{
-		    font-weight:bold;
-		    margin-bottom:15px;
-		}
+	    <style>
+	        .site-footer {
+	            margin-top: 50px;
+	            padding: 30px 20px;
+	            text-align: center;
+	            color: white;
+	            background: rgba(20, 20, 20, 0.85);
+	            backdrop-filter: blur(10px);
+	            border-radius: 15px;
+	        }
 
-		footer p{
-		    color:#ddd;
-		}
+	        .site-footer h5 {
+	            font-weight: bold;
+	            margin-bottom: 15px;
+	        }
 
-		footer .btn{
-		    margin:5px;
-		}
+	        .site-footer p {
+	            color: #ddd;
+	            margin-bottom: 18px;
+	        }
 
-		footer small{
-		    color:#bbb;
-		}
-	</style>
+			.quick-links {
+			    margin: 25px 0;
+			}
 
-<body>
+			.quick-links h5 {
+			    margin-bottom: 15px;
+			    font-weight: bold;
+			}
 
-<footer th:fragment="footer">
+			.quick-link-list {
+			    display: flex;
+			    justify-content: center;
+			    align-items: center;
+			    flex-wrap: wrap;
+			    gap: 12px;
+			}
 
-    <hr>
+			.quick-link-list a {
+			    color: #ddd;
+			    text-decoration: none;
+			    padding: 8px 14px;
+			    border-radius: 8px;
+			    transition: 0.3s;
+			    font-size: 15px;
+			}
 
-    <div class="text-center py-4">
+			.quick-link-list a:hover {
+			    background: rgba(255,255,255,0.12);
+			    color: white;
+			    transform: translateY(-2px);
+			    text-decoration: none;
+			}
 
-        <h5>🎬 Movie Watchlist App</h5>
+	        .footer-buttons {
+	            display: flex;
+	            justify-content: center;
+	            align-items: center;
+	            flex-wrap: wrap;
+	            gap: 10px;
+	            margin-bottom: 20px;
+	        }
 
-        <p>
-            Built with ❤️ using Java • Spring Boot • Spring MVC • Hibernate •
-            Thymeleaf • PostgreSQL • Bootstrap • Render
-        </p>
+	        .site-footer .footer-btn {
+	            min-width: 110px;
+	            padding: 8px 18px;
+	            border-radius: 8px;
+	            font-size: 14px;
+	            font-weight: 600;
+	            text-decoration: none;
+	        }
 
-        <div class="mb-3">
-			
+	        .site-footer .footer-btn:hover {
+	            opacity: 0.9;
+	            text-decoration: none;
+	        }
 
-			<a href="mailto:mohitsinghoi501@gmail.com"
-			   target="_blank"
-			   class="btn btn-danger btn-sm">
-			    Gmail
-			</a>
+	        .site-footer small {
+	            color: #bbb;
+	        }
+	    </style>
 
-            <a href="https://github.com/mohit-singhoi"
-               target="_blank"
-               class="btn btn-dark btn-sm">
 
-                GitHub
+	    <footer class="site-footer">
 
-            </a>
-			
+	        <h5>🎬 Movie Watchlist App</h5>
 
-            <a href="https://www.linkedin.com/in/mohit-kumar-0379gu/"
-               target="_blank"
-               class="btn btn-primary btn-sm">
+	        <p>
+	            Built with ❤️ using Java • Spring Boot • Spring MVC • Hibernate •
+	            Thymeleaf • PostgreSQL • Bootstrap • Render
+	        </p>
 
-                LinkedIn
 
-            </a>
+			<!-- Quick Links -->
+			<div class="quick-links">
 
-        </div>
+			    <h5>🔗 Quick Links</h5>
 
-        <small>
+			    <div class="quick-link-list">
 
-            © 2026 Mohit Kumar • All Rights Reserved
+			        <a href="/">
+			            🏠 Home
+			        </a>
 
-        </small>
+			        <a href="/watchlist">
+			            🎬 Watchlist
+			        </a>
 
-    </div>
+			        <a href="/watchlistItemForm">
+			            ➕ Add Movie
+			        </a>
 
-</footer>
+			        <a href="/about">
+			            ℹ️ About
+			        </a>
 
+			        <a href="/contact">
+			            📞 Contact Us
+			        </a>
+
+			    </div>
+
+			</div>
+
+
+	        <!-- Social Links -->
+	        <div class="footer-buttons">
+
+	            <a href="mailto:mohitsinghoi501@gmail.com"
+	               class="footer-btn btn-danger">
+	                📧 Gmail
+	            </a>
+
+	            <a href="https://github.com/mohit-singhoi"
+	               target="_blank"
+	               rel="noopener noreferrer"
+	               class="footer-btn btn-dark">
+	                💻 GitHub
+	            </a>
+
+	            <a href="https://www.linkedin.com/in/mohit-kumar-0379gu/"
+	               target="_blank"
+	               rel="noopener noreferrer"
+	               class="footer-btn btn-primary">
+	                💼 LinkedIn
+	            </a>
+
+	        </div>
+
+
+	        <small>
+	            © 2026 Mohit Kumar • All Rights Reserved
+	        </small>
+
+	    </footer>
+
+	</div>
 </body>
 
 </html>
