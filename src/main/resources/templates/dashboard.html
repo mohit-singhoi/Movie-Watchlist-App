@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Movie Watchlist</title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP 4.1.3
+         ===================================================== -->
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+         ===================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         DASHBOARD CSS
+         ===================================================== -->
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+           ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+			
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+
+            background:
+                linear-gradient(
+                    rgba(40, 0, 5, 0.82),
+                    rgba(40, 0, 5, 0.82)
+                ),
+                url('/Images/movie-bg.jpg');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: #292d32;
+			
+
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+           ===================================================== */
+
+        .dashboard-container {
+            width: 75%;
+            max-width: 1345px;
+            margin: 40px auto;
+			background: rgba(255,255,255,0.90);
+			backdrop-filter: blur(10px);
+			border-radius:20px;
+			padding:30px;
+			margin-top:30px;
+			box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+        }
+
+        /* =====================================================
+           DASHBOARD HEADER
+           ===================================================== */
+
+        .dashboard-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .dashboard-title h1 {
+            margin: 0;
+
+            font-size: 34px;
+
+            font-weight: 700;
+
+            color: #252a2f;
+        }
+
+
+        .dashboard-title p {
+            margin: 8px 0 0;
+
+            color: #666;
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           ADD MOVIE BUTTON
+           ===================================================== */
+
+        .add-movie-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 12px 20px;
+
+            background: #e63946;
+
+            color: #ffffff !important;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            text-decoration: none !important;
+
+            transition: all 0.2s ease;
+        }
+
+
+        .add-movie-btn:hover {
+            background: #c92f3b;
+
+            transform: translateY(-2px);
+
+            color: #ffffff !important;
+        }
+
+
+        /* =====================================================
+           STATISTICS
+           ===================================================== */
+
+        .stats-row {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .stat-card {
+            padding: 22px;
+
+            border-radius: 15px;
+
+            background: #ffffff;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.08);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 25px rgba(0, 0, 0, 0.13);
+        }
+
+
+        .stat-icon {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .stat-label {
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .stat-value {
+            font-size: 29px;
+
+            font-weight: 700;
+
+            color: #292d32;
+        }
+
+
+        .stat-description {
+            margin-top: 5px;
+
+            font-size: 12px;
+
+            color: #999;
+        }
+
+
+        /* =====================================================
+           MAIN DASHBOARD GRID
+           ===================================================== */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr;
+
+            gap: 22px;
+        }
+
+
+        /* =====================================================
+           COMMON CARD
+           ===================================================== */
+
+        .dashboard-card {
+            background: #ffffff;
+
+            border: 1px solid #eeeeee;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.07);
+        }
+
+
+        .dashboard-card-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid #eeeeee;
+        }
+
+
+        .dashboard-card-header h2 {
+            margin: 0;
+
+            font-size: 20px;
+
+            font-weight: 600;
+
+            color: #292d32;
+        }
+
+
+        .view-all {
+            font-size: 13px;
+
+            color: #e63946 !important;
+
+            text-decoration: none !important;
+
+            font-weight: 500;
+        }
+
+
+        .view-all:hover {
+            text-decoration: underline !important;
+        }
+
+
+        /* =====================================================
+           RECENT MOVIES
+           ===================================================== */
+
+        .movie-item {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #eeeeee;
+        }
+
+
+        .movie-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .movie-info {
+            min-width: 0;
+        }
+
+
+        .movie-name {
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #333;
+
+            margin-bottom: 4px;
+        }
+
+
+        .movie-meta {
+            font-size: 12px;
+
+            color: #888;
+        }
+
+
+        .movie-rating {
+            flex-shrink: 0;
+
+            padding: 5px 9px;
+
+            background: #fff3cd;
+
+            color: #856404;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           EMPTY MOVIE STATE
+           ===================================================== */
+
+        .empty-state {
+            text-align: center;
+
+            padding: 35px 15px;
+
+            color: #777;
+        }
+
+
+        .empty-state-icon {
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .empty-state h3 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+
+            color: #444;
+        }
+
+
+        .empty-state p {
+            font-size: 13px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .empty-state-btn {
+            display: inline-block;
+
+            padding: 9px 16px;
+
+            border-radius: 7px;
+
+            background: #e63946;
+
+            color: white !important;
+
+            text-decoration: none !important;
+
+            font-size: 13px;
+
+            font-weight: 500;
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+           ===================================================== */
+
+        .quick-actions {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+
+        .quick-action {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 14px;
+
+            background: #f7f7f7;
+
+            border-radius: 9px;
+
+            color: #333 !important;
+
+            text-decoration: none !important;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .quick-action:hover {
+            background: #eeeeee;
+
+            transform: translateX(3px);
+
+            color: #222 !important;
+        }
+
+
+        .quick-action-icon {
+            font-size: 21px;
+
+            width: 30px;
+
+            text-align: center;
+        }
+
+
+        .quick-action-text {
+            font-size: 14px;
+
+            font-weight: 500;
+        }
+
+
+        /* =====================================================
+           PRIORITY SECTION
+           ===================================================== */
+
+        .priority-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+
+        .priority-item {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 12px 14px;
+
+            background: #f8f8f8;
+
+            border-radius: 8px;
+        }
+
+
+        .priority-name {
+            font-size: 14px;
+
+            font-weight: 500;
+        }
+
+
+        .priority-badge {
+            padding: 4px 8px;
+
+            border-radius: 5px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .priority-high {
+            background: #f8d7da;
+
+            color: #721c24;
+        }
+
+
+        .priority-medium {
+            background: #fff3cd;
+
+            color: #856404;
+        }
+
+
+        .priority-low {
+            background: #d4edda;
+
+            color: #155724;
+        }
+
+
+        /* =====================================================
+           FEEDBACK BANNER
+           ===================================================== */
+
+        .feedback-banner {
+            margin-top: 22px;
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            background: #343a40;
+
+            color: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .feedback-content h3 {
+            margin: 0 0 5px;
+
+            font-size: 18px;
+        }
+
+
+        .feedback-content p {
+            margin: 0;
+
+            font-size: 13px;
+
+            color: #d8d8d8;
+        }
+
+
+        .feedback-btn {
+            flex-shrink: 0;
+
+            padding: 9px 16px;
+
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            color: #343a40 !important;
+
+            text-decoration: none !important;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .dashboard-footer {
+            margin-top: 25px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #dddddd;
+
+            text-align: center;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           TABLET
+           ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .dashboard-container {
+                width: 94%;
+            }
+
+
+            .stats-row {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .dashboard-container {
+                width: 94%;
+
+                margin: 20px auto;
+
+                padding: 15px;
+
+                border-radius: 17px;
+            }
+
+
+            .dashboard-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+
+            .dashboard-title h1 {
+                font-size: 26px;
+            }
+
+
+            .dashboard-title p {
+                font-size: 13px;
+            }
+
+
+            .add-movie-btn {
+                width: 100%;
+            }
+
+
+            .stats-row {
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+            }
+
+
+            .stat-card {
+                padding: 18px;
+            }
+
+
+            .stat-value {
+                font-size: 25px;
+            }
+
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+            }
+
+
+            .dashboard-card {
+                padding: 17px;
+            }
+
+
+            .dashboard-card-header h2 {
+                font-size: 18px;
+            }
+
+
+            .movie-item {
+                align-items: flex-start;
+            }
+
+
+            .feedback-banner {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .feedback-btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+           ===================================================== */
+
+        @media (max-width: 400px) {
+
+            .dashboard-container {
+                width: 96%;
+
+                padding: 12px;
+            }
+
+
+            .dashboard-title h1 {
+                font-size: 23px;
+            }
+
+
+            .dashboard-card {
+                padding: 14px;
+            }
+
+
+            .stat-card {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MAIN DASHBOARD CONTAINER
+     ===================================================== -->
+
+<div class="dashboard-container">
+
+
+    <!-- =================================================
+         NAVBAR
+         ================================================= -->
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+
+    <!-- =================================================
+         DASHBOARD HEADER
+         ================================================= -->
+
+    <section class="dashboard-header">
+		
+
+        <div class="dashboard-title">
+			<br>
+			<br>
+
+            <h1>
+                👋 Welcome to Your Dashboard
+            </h1>
+
+            <p>
+                Manage your movies, track your watchlist,
+                and discover your next favorite movie.
+            </p>
+
+        </div>
+
+
+        <a href="/watchlistItemForm"
+           class="add-movie-btn">
+
+            ➕ Add Movie
+
+        </a>
+
+    </section>
+
+
+    <!-- =================================================
+         STATISTICS
+         ================================================= -->
+
+    <section class="stats-row">
+
+
+        <!-- TOTAL MOVIES -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎬
+            </div>
+
+            <div class="stat-label">
+                Total Movies
+            </div>
+
+            <div class="stat-value">
+
+                <span th:text="${totalMovies != null ? totalMovies : 0}">
+                    0
+                </span>
+
+            </div>
+
+            <div class="stat-description">
+                Movies in your watchlist
+            </div>
+
+        </div>
+
+
+        <!-- AVERAGE RATING -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⭐
+            </div>
+
+            <div class="stat-label">
+                Average Rating
+            </div>
+
+            <div class="stat-value">
+
+                <span th:text="${averageRating != null ? averageRating : '0.0'}">
+                    0.0
+                </span>
+
+            </div>
+
+            <div class="stat-description">
+                Average IMDb rating
+            </div>
+
+        </div>
+
+
+        <!-- HIGH PRIORITY -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🔥
+            </div>
+
+            <div class="stat-label">
+                High Priority
+            </div>
+
+            <div class="stat-value">
+
+                <span th:text="${highPriorityMovies != null ? highPriorityMovies : 0}">
+                    0
+                </span>
+
+            </div>
+
+            <div class="stat-description">
+                Movies you want to watch soon
+            </div>
+
+        </div>
+
+
+        <!-- REVIEWS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📝
+            </div>
+
+            <div class="stat-label">
+                Reviews
+            </div>
+
+            <div class="stat-value">
+
+                <span th:text="${reviewCount != null ? reviewCount : 0}">
+                    0
+                </span>
+
+            </div>
+
+            <div class="stat-description">
+                Personalized movie reviews
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MAIN DASHBOARD CONTENT
+         ================================================= -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- =================================================
+             RECENT MOVIES
+             ================================================= -->
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-card-header">
+
+                <h2>
+                    🎬 Recent Movies
+                </h2>
+
+                <a href="/watchlist"
+                   class="view-all">
+
+                    View All →
+
+                </a>
+
+            </div>
+
+
+            <!-- Movie list -->
+
+            <div th:if="${recentMovies != null and !#lists.isEmpty(recentMovies)}">
+
+                <div class="movie-item"
+                     th:each="movie : ${recentMovies}">
+
+                    <div class="movie-info">
+
+                        <div class="movie-name"
+                             th:text="${movie.title}">
+
+                            Movie Title
+
+                        </div>
+
+                        <div class="movie-meta">
+
+                            Priority:
+                            <span th:text="${movie.priority}">
+                                -
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="movie-rating"
+                         th:if="${movie.rating != null}">
+
+                        ⭐
+                        <span th:text="${movie.rating}">
+                            0.0
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Empty state -->
+
+            <div class="empty-state"
+                 th:if="${recentMovies == null or #lists.isEmpty(recentMovies)}">
+
+                <div class="empty-state-icon">
+                    🎬
+                </div>
+
+                <h3>
+                    Your watchlist is empty
+                </h3>
+
+                <p>
+                    Start building your movie collection today.
+                </p>
+
+                <a href="/watchlistItemForm"
+                   class="empty-state-btn">
+
+                    ➕ Add Your First Movie
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT COLUMN
+             ================================================= -->
+
+        <div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <h2>
+                        ⚡ Quick Actions
+                    </h2>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+                    <a href="/watchlistItemForm"
+                       class="quick-action">
+
+                        <span class="quick-action-icon">
+                            ➕
+                        </span>
+
+                        <span class="quick-action-text">
+                            Add New Movie
+                        </span>
+
+                    </a>
+
+
+                    <a href="/watchlist"
+                       class="quick-action">
+
+                        <span class="quick-action-icon">
+                            🎬
+                        </span>
+
+                        <span class="quick-action-text">
+                            View Watchlist
+                        </span>
+
+                    </a>
+
+
+                    <a href="/about"
+                       class="quick-action">
+
+                        <span class="quick-action-icon">
+                            ℹ️
+                        </span>
+
+                        <span class="quick-action-text">
+                            About Watchlist
+                        </span>
+
+                    </a>
+
+
+                    <a href="/contact"
+                       class="quick-action">
+
+                        <span class="quick-action-icon">
+                            📞
+                        </span>
+
+                        <span class="quick-action-text">
+                            Contact Us
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRIORITIES -->
+
+            <div class="dashboard-card"
+                 style="margin-top: 22px;">
+
+                <div class="dashboard-card-header">
+
+                    <h2>
+                        🎯 Priority Guide
+                    </h2>
+
+                </div>
+
+
+                <div class="priority-list">
+
+
+                    <div class="priority-item">
+
+                        <span class="priority-name">
+                            🔥 High Priority
+                        </span>
+
+                        <span class="priority-badge priority-high">
+                            H
+                        </span>
+
+                    </div>
+
+
+                    <div class="priority-item">
+
+                        <span class="priority-name">
+                            ⭐ Medium Priority
+                        </span>
+
+                        <span class="priority-badge priority-medium">
+                            M
+                        </span>
+
+                    </div>
+
+
+                    <div class="priority-item">
+
+                        <span class="priority-name">
+                            💤 Low Priority
+                        </span>
+
+                        <span class="priority-badge priority-low">
+                            L
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FEEDBACK SECTION
+         ================================================= -->
+
+    <div sec:authorize="isAuthenticated()"
+         class="feedback-banner">
+
+        <div class="feedback-content">
+
+            <h3>
+                💬 Help Us Improve
+            </h3>
+
+            <p>
+                Have a suggestion or feedback?
+                We'd love to hear from you.
+            </p>
+
+        </div>
+
+
+        <a href="/feedback"
+           class="feedback-btn">
+
+            Give Feedback
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     BOOTSTRAP JS
+     ===================================================== -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+</script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">
+</script>
+
+<!-- =================================================
+     FOOTER
+     ================================================= -->
+	 
+	 <div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

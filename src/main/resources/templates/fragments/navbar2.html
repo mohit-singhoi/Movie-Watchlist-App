@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<nav th:fragment="navbar"
+     id="watchlistNavbar"
+     class="wl-navbar">
+	 
+	 <!-- =========================
+	      NAVBAR
+	      ========================= -->
+	 <nav class="navbar navbar-expand-lg navbar-dark wl-navbar">
+
+    <!-- =========================
+         NAVBAR HEADER
+         ========================= -->
+    <div class="wl-navbar-header">
+
+        <!-- BRAND -->
+        <a href="/"
+           class="wl-brand">
+            🎬 Watchlist App
+        </a>
+
+        <!-- MOBILE 3 LINE BUTTON -->
+        <button type="button"
+                id="wlMobileButton"
+                class="wl-mobile-button"
+                aria-label="Open menu"
+                aria-expanded="false">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         NAVBAR CONTENT
+         ========================= -->
+    <div id="wlNavbarContent"
+         class="wl-navbar-content">
+
+
+        <!-- =========================
+             LEFT NAVIGATION
+             ========================= -->
+        <div class="wl-navbar-links">
+
+            <a href="/" class="wl-nav-link">
+                🏠 Home
+            </a>
+
+            <a href="/watchlist" class="wl-nav-link">
+                🎬 Watchlist
+            </a>
+
+            <a href="/watchlistItemForm" class="wl-nav-link">
+                ➕ Add Movie
+            </a>
+
+            <a href="/about" class="wl-nav-link">
+                ℹ️ About
+            </a>
+
+            <a href="/contact" class="wl-nav-link">
+                📞 Contact Us
+            </a>
+
+            <!-- Feedback only after login -->
+            <a sec:authorize="isAuthenticated()"
+               href="/feedback"
+               class="wl-nav-link">
+
+                💬 Feedback
+
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             RIGHT SIDE
+             ========================= -->
+        <div class="wl-user-area">
+
+
+            <!-- =========================
+                 NOT LOGGED IN
+                 ========================= -->
+            <div sec:authorize="isAnonymous()"
+                 class="wl-guest-area">
+
+                <a href="/login"
+                   class="wl-login-button">
+
+                    🔐 Login
+
+                </a>
+
+                <a href="/signup"
+                   class="wl-signup-button">
+
+                    🚀 Sign Up
+
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 LOGGED IN
+                 ========================= -->
+            <div sec:authorize="isAuthenticated()"
+                 class="wl-user-dropdown">
+
+
+                <!-- USER BUTTON -->
+                <button type="button"
+                        id="wlUserButton"
+                        class="wl-user-button"
+                        aria-expanded="false">
+
+                    👋 Hello,
+
+                    <strong
+                        th:text="${#strings.substringBefore(
+                            #authentication.principal.user.fullName,
+                            ' '
+                        )}">
+
+                        User
+
+                    </strong>
+
+                    <span class="wl-arrow">
+                        ▼
+                    </span>
+
+                </button>
+
+
+                <!-- =========================
+                     DROPDOWN MENU
+                     ========================= -->
+                <div id="wlUserMenu"
+                     class="wl-user-menu">
+
+                    <a href="/dashboard"
+                       class="wl-dropdown-item">
+
+                        📊 Dashboard
+
+                    </a>
+
+
+                    <div class="wl-dropdown-divider"></div>
+
+
+                    <form th:action="@{/logout}"
+                          method="post"
+                          class="wl-logout-form">
+
+                        <button type="submit"
+                                class="wl-dropdown-item wl-logout-button">
+
+                            🚪 Logout
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+	</nav>
+
+
+    <!-- ==================================================
+         NAVBAR CSS
+         ================================================== -->
+    <style>
+
+        /* =========================================
+           MAIN NAVBAR
+           ========================================= */
+
+        #watchlistNavbar.wl-navbar {
+
+            width: 100% !important;
+
+            background: #6c757d !important;
+
+            color: #ffffff !important;
+
+            box-sizing: border-box !important;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+            position: relative !important;
+
+            z-index: 9999 !important;
+
+        }
+		
+	
+		/* ===== NAVBAR WIDTH FIX ===== */
+		.main-navbar {
+		    width: 100%;
+		    max-width: 100%;
+		    margin: 0;
+		    padding: 12px 18px;
+		    box-sizing: border-box;
+		}
+
+		/* Keep brand + menu + user button in ONE ROW */
+		.main-navbar .navbar-collapse {
+		    display: flex !important;
+		    align-items: center;
+		    flex-wrap: nowrap;
+		}
+
+		/* Left menu */
+		.main-navbar .navbar-nav {
+		    display: flex;
+		    align-items: center;
+		    flex-wrap: nowrap;
+		    white-space: nowrap;
+		}
+
+		/* Brand */
+		.main-navbar .navbar-brand {
+		    white-space: nowrap;
+		    margin-right: 20px;
+		}
+
+		/* Menu items */
+		.main-navbar .nav-item {
+		    white-space: nowrap;
+		}
+
+		/* Right user section */
+		.main-navbar .navbar-user {
+		    margin-left: auto;
+		    flex-shrink: 0;
+		    white-space: nowrap;
+		}
+
+		/* ===== MOBILE ===== */
+		@media (max-width: 991px) {
+
+		    .main-navbar .navbar-collapse {
+		        display: block !important;
+		    }
+
+		    .main-navbar .navbar-nav {
+		        display: block;
+		        margin-top: 10px;
+		    }
+
+		    .main-navbar .nav-item {
+		        display: block;
+		    }
+
+		    .main-navbar .navbar-user {
+		        margin-top: 10px;
+		        margin-left: 0;
+		    }
+
+		}
+	
+
+
+        /* =========================================
+           NAVBAR HEADER
+           ========================================= */
+
+        #watchlistNavbar .wl-navbar-header {
+
+            min-height: 64px !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            width: 100% !important;
+
+            box-sizing: border-box !important;
+
+            padding: 10px 18px !important;
+
+        }
+
+
+        /* =========================================
+           BRAND
+           ========================================= */
+
+        #watchlistNavbar .wl-brand {
+
+            color: #ffffff !important;
+
+            font-size: 24px !important;
+
+            font-weight: 600 !important;
+
+            text-decoration: none !important;
+
+            white-space: nowrap !important;
+
+            display: inline-block !important;
+
+            line-height: 1.2 !important;
+
+            margin: 0 !important;
+
+        }
+
+        #watchlistNavbar .wl-brand:hover {
+
+            color: #ffffff !important;
+
+            text-decoration: none !important;
+
+        }
+
+
+        /* =========================================
+           NAVBAR CONTENT
+           ========================================= */
+
+        #watchlistNavbar .wl-navbar-content {
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            justify-content: space-between !important;
+
+            width: 100% !important;
+
+            box-sizing: border-box !important;
+
+        }
+
+
+        /* =========================================
+           NAVIGATION LINKS
+           ========================================= */
+
+        #watchlistNavbar .wl-navbar-links {
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            flex-wrap: nowrap !important;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+        }
+
+
+        #watchlistNavbar .wl-nav-link {
+
+            display: inline-flex !important;
+
+            align-items: center !important;
+
+            color: #ffffff !important;
+
+            font-size: 16px !important;
+
+            font-weight: 400 !important;
+
+            text-decoration: none !important;
+
+            white-space: nowrap !important;
+
+            padding: 10px 9px !important;
+
+            margin: 0 !important;
+
+            border-radius: 5px !important;
+
+            line-height: 1.2 !important;
+
+            box-sizing: border-box !important;
+
+            transition: background 0.2s ease,
+                        color 0.2s ease !important;
+
+        }
+
+
+        #watchlistNavbar .wl-nav-link:hover {
+
+            color: #ffffff !important;
+
+            background: rgba(255,255,255,0.15) !important;
+
+            text-decoration: none !important;
+
+        }
+
+
+        /* =========================================
+           USER AREA
+           ========================================= */
+
+        #watchlistNavbar .wl-user-area {
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            margin-left: auto !important;
+
+            padding: 0 18px 0 12px !important;
+
+            box-sizing: border-box !important;
+
+        }
+
+
+        /* =========================================
+           LOGIN / SIGNUP
+           ========================================= */
+
+        #watchlistNavbar .wl-guest-area {
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            gap: 8px !important;
+
+        }
+
+
+        #watchlistNavbar .wl-login-button,
+        #watchlistNavbar .wl-signup-button {
+
+            display: inline-flex !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            min-height: 40px !important;
+
+            padding: 8px 15px !important;
+
+            border-radius: 7px !important;
+
+            font-size: 15px !important;
+
+            text-decoration: none !important;
+
+            white-space: nowrap !important;
+
+            box-sizing: border-box !important;
+
+        }
+
+
+        #watchlistNavbar .wl-login-button {
+
+            color: #ffffff !important;
+
+            background: transparent !important;
+
+            border: 1px solid #ffffff !important;
+
+        }
+
+
+        #watchlistNavbar .wl-login-button:hover {
+
+            color: #ffffff !important;
+
+            background: rgba(255,255,255,0.15) !important;
+
+            text-decoration: none !important;
+
+        }
+
+
+        #watchlistNavbar .wl-signup-button {
+
+            color: #ffffff !important;
+
+            background: #dc3545 !important;
+
+            border: 1px solid #dc3545 !important;
+
+        }
+
+
+        #watchlistNavbar .wl-signup-button:hover {
+
+            color: #ffffff !important;
+
+            background: #c82333 !important;
+
+            text-decoration: none !important;
+
+        }
+
+
+        /* =========================================
+           USER DROPDOWN
+           ========================================= */
+
+        #watchlistNavbar .wl-user-dropdown {
+
+            position: relative !important;
+
+        }
+
+
+        /* USER BUTTON */
+
+        #watchlistNavbar .wl-user-button {
+
+            display: inline-flex !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            min-height: 42px !important;
+
+            min-width: 100px !important;
+
+            padding: 8px 13px !important;
+
+            border: 1px solid rgba(255,255,255,0.85) !important;
+
+            border-radius: 7px !important;
+
+            background: transparent !important;
+
+            color: #ffffff !important;
+
+            font-size: 16px !important;
+
+            line-height: 1.2 !important;
+
+            white-space: nowrap !important;
+
+            cursor: pointer !important;
+
+            box-sizing: border-box !important;
+
+        }
+
+
+        #watchlistNavbar .wl-user-button:hover {
+
+            background: rgba(255,255,255,0.15) !important;
+
+        }
+
+
+        #watchlistNavbar .wl-user-button strong {
+
+            margin-left: 4px !important;
+
+            font-weight: 700 !important;
+
+        }
+
+
+        #watchlistNavbar .wl-arrow {
+
+            font-size: 10px !important;
+
+            margin-left: 7px !important;
+
+        }
+
+
+        /* =========================================
+           DROPDOWN MENU
+           ========================================= */
+
+        #watchlistNavbar .wl-user-menu {
+
+            display: none !important;
+
+            position: absolute !important;
+
+            top: calc(100% + 8px) !important;
+
+            right: 0 !important;
+
+            width: 190px !important;
+
+            background: #ffffff !important;
+
+            border-radius: 10px !important;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.30) !important;
+
+            overflow: hidden !important;
+
+            padding: 7px 0 !important;
+
+            margin: 0 !important;
+
+            z-index: 10000 !important;
+
+        }
+
+
+        #watchlistNavbar .wl-user-menu.wl-open {
+
+            display: block !important;
+
+        }
+
+
+        /* =========================================
+           DROPDOWN ITEMS
+           ========================================= */
+
+        #watchlistNavbar .wl-dropdown-item {
+
+            display: block !important;
+
+            width: 100% !important;
+
+            box-sizing: border-box !important;
+
+            padding: 12px 17px !important;
+
+            margin: 0 !important;
+
+            border: 0 !important;
+
+            background: #ffffff !important;
+
+            color: #333333 !important;
+
+            font-size: 15px !important;
+
+            font-weight: 400 !important;
+
+            text-align: left !important;
+
+            text-decoration: none !important;
+
+            cursor: pointer !important;
+
+            line-height: 1.4 !important;
+
+        }
+
+
+        #watchlistNavbar .wl-dropdown-item:hover {
+
+            background: #f1f1f1 !important;
+
+            color: #222222 !important;
+
+            text-decoration: none !important;
+
+        }
+
+
+        #watchlistNavbar .wl-dropdown-divider {
+
+            height: 1px !important;
+
+            background: #e5e5e5 !important;
+
+            margin: 4px 0 !important;
+
+        }
+
+
+        #watchlistNavbar .wl-logout-form {
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+        }
+
+
+        /* =========================================
+           MOBILE BUTTON
+           ========================================= */
+
+        #watchlistNavbar .wl-mobile-button {
+
+            display: none !important;
+
+            width: 44px !important;
+
+            height: 40px !important;
+
+            margin-left: auto !important;
+
+            padding: 7px !important;
+
+            border: 1px solid rgba(255,255,255,0.8) !important;
+
+            border-radius: 7px !important;
+
+            background: transparent !important;
+
+            cursor: pointer !important;
+
+            box-sizing: border-box !important;
+
+        }
+
+
+        #watchlistNavbar .wl-mobile-button span {
+
+            display: block !important;
+
+            width: 100% !important;
+
+            height: 2px !important;
+
+            background: #ffffff !important;
+
+            margin: 5px 0 !important;
+
+        }
+
+
+        /* =========================================
+           TABLET + MOBILE
+           ========================================= */
+
+        @media (max-width: 991px) {
+
+            #watchlistNavbar .wl-navbar-header {
+
+                min-height: 60px !important;
+
+                padding: 9px 14px !important;
+
+            }
+
+
+            #watchlistNavbar .wl-brand {
+
+                font-size: 21px !important;
+
+            }
+
+
+            #watchlistNavbar .wl-mobile-button {
+
+                display: block !important;
+
+            }
+
+
+            #watchlistNavbar .wl-navbar-content {
+
+                display: none !important;
+
+                width: 100% !important;
+
+                flex-direction: column !important;
+
+                align-items: stretch !important;
+
+                justify-content: flex-start !important;
+
+                padding: 8px 14px 14px 14px !important;
+
+                box-sizing: border-box !important;
+
+                border-top: 1px solid rgba(255,255,255,0.20) !important;
+
+            }
+
+
+            #watchlistNavbar .wl-navbar-content.wl-mobile-open {
+
+                display: flex !important;
+
+            }
+
+
+            #watchlistNavbar .wl-navbar-links {
+
+                display: flex !important;
+
+                width: 100% !important;
+
+                flex-direction: column !important;
+
+                align-items: stretch !important;
+
+            }
+
+
+            #watchlistNavbar .wl-nav-link {
+
+                width: 100% !important;
+
+                padding: 11px 8px !important;
+
+                font-size: 16px !important;
+
+            }
+
+
+            #watchlistNavbar .wl-user-area {
+
+                width: 100% !important;
+
+                margin: 8px 0 0 0 !important;
+
+                padding: 0 !important;
+
+            }
+
+
+            #watchlistNavbar .wl-guest-area {
+
+                width: 100% !important;
+
+                flex-direction: column !important;
+
+                align-items: stretch !important;
+
+            }
+
+
+            #watchlistNavbar .wl-login-button,
+            #watchlistNavbar .wl-signup-button {
+
+                width: 100% !important;
+
+            }
+
+
+            #watchlistNavbar .wl-user-dropdown {
+
+                width: 100% !important;
+
+            }
+
+
+            #watchlistNavbar .wl-user-button {
+
+                width: 100% !important;
+
+                justify-content: flex-start !important;
+
+            }
+
+
+            #watchlistNavbar .wl-user-menu {
+
+                position: static !important;
+
+                width: 100% !important;
+
+                margin-top: 6px !important;
+
+                box-shadow: none !important;
+
+                border: 1px solid #dddddd !important;
+
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 480px) {
+
+            #watchlistNavbar .wl-navbar-header {
+
+                padding: 8px 10px !important;
+
+            }
+
+
+            #watchlistNavbar .wl-brand {
+
+                font-size: 19px !important;
+
+            }
+
+
+            #watchlistNavbar .wl-mobile-button {
+
+                width: 42px !important;
+
+                height: 38px !important;
+
+            }
+
+        }
+
+    </style>
+
+
+    <!-- ==================================================
+         NAVBAR JAVASCRIPT
+         DOES NOT REQUIRE BOOTSTRAP JS
+         ================================================== -->
+
+    <script>
+
+        (function () {
+
+            const mobileButton =
+                document.getElementById("wlMobileButton");
+
+            const navbarContent =
+                document.getElementById("wlNavbarContent");
+
+            const userButton =
+                document.getElementById("wlUserButton");
+
+            const userMenu =
+                document.getElementById("wlUserMenu");
+
+
+            /* =========================================
+               MOBILE MENU
+               ========================================= */
+
+            if (mobileButton && navbarContent) {
+
+                mobileButton.addEventListener("click", function (event) {
+
+                    event.stopPropagation();
+
+                    const isOpen =
+                        navbarContent.classList.toggle("wl-mobile-open");
+
+                    mobileButton.setAttribute(
+                        "aria-expanded",
+                        isOpen ? "true" : "false"
+                    );
+
+                });
+
+            }
+
+
+            /* =========================================
+               USER DROPDOWN
+               ========================================= */
+
+            if (userButton && userMenu) {
+
+                userButton.addEventListener("click", function (event) {
+
+                    event.stopPropagation();
+
+                    const isOpen =
+                        userMenu.classList.toggle("wl-open");
+
+                    userButton.setAttribute(
+                        "aria-expanded",
+                        isOpen ? "true" : "false"
+                    );
+
+                });
+
+
+                /* Close dropdown outside */
+
+                document.addEventListener("click", function (event) {
+
+                    if (!userMenu.contains(event.target) &&
+                        !userButton.contains(event.target)) {
+
+                        userMenu.classList.remove("wl-open");
+
+                        userButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                });
+
+            }
+
+
+            /* =========================================
+               CLOSE MOBILE MENU WHEN LINK IS CLICKED
+               ========================================= */
+
+            if (navbarContent) {
+
+                const links =
+                    navbarContent.querySelectorAll(".wl-nav-link");
+
+                links.forEach(function (link) {
+
+                    link.addEventListener("click", function () {
+
+                        navbarContent.classList.remove(
+                            "wl-mobile-open"
+                        );
+
+                        if (mobileButton) {
+
+                            mobileButton.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+
+                    });
+
+                });
+
+            }
+
+        })();
+		
+
+    </script>
+
+</nav>
+
+</html>

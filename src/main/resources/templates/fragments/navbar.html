@@ -1,260 +1,972 @@
 <!DOCTYPE html>
-<nav xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-
-<style>
-
-.navbar{
-    background:rgba(108,117,125,.95) !important;
-    backdrop-filter:blur(12px);
-    border-radius:15px;
-    padding:12px 20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
-}
-
-.navbar-brand{
-    font-size:26px;
-    font-weight:700;
-    color:#fff !important;
-}
-
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    padding: 10px 20px;
-    overflow-x: auto;
-}
-
-.navbar a,
-.navbar span,
-.navbar button {
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.navbar-brand:hover{
-    color:#ffc107 !important;
-}
-
-.navbar-nav .nav-link{
-    color:#f8f9fa !important;
-    font-size:16px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.navbar-nav .nav-link:hover{
-    color:#ffc107 !important;
-    background:rgba(255,255,255,.12);
-    border-radius:6px;
-}
-
-.nav-item.active .nav-link{
-    background:#dc3545;
-    color:#fff !important;
-    border-radius:6px;
-}
-
-.navbar-brand {
-    white-space: nowrap;
-}
-
-.navbar .nav-link {
-    white-space: nowrap;
-    word-break: normal;
-}
-
-.navbar .nav-item {
-    white-space: nowrap;
-}
-
-/* Login Button */
-
-.login-btn{
-    border:2px solid #fff;
-    color:#fff !important;
-    border-radius:8px;
-    padding:7px 18px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.login-btn:hover{
-    background:#fff;
-    color:#343a40 !important;
-}
-
-/* Signup Button */
-
-.signup-btn{
-    border-radius:8px;
-    padding:8px 20px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.signup-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(220,53,69,.35);
-}
-
-.navbar-toggler{
-    border:none;
-}
-
-.navbar-toggler:focus{
-    box-shadow:none;
-}
-
-@media(max-width:991px){
-
-    .login-btn,
-    .signup-btn{
-        width:100%;
-        margin-top:10px;
-    }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary"
+<nav class="wl-navbar"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
      th:fragment="navbar">
 
-	 <a class="navbar-brand" href="/">
-	     🎬 Watchlist App
-	 </a>
-	 
+    <!-- =====================================================
+         BRAND
+         ===================================================== -->
+
+    <a href="/" class="wl-brand">
+        🎬 Watchlist App
+    </a>
 
 
-	 <button class="navbar-toggler"
-	         type="button"
-	         data-toggle="collapse"
-	         data-target="#navbarSupportedContent">
+    <!-- =====================================================
+         MOBILE 3-LINE BUTTON
+         ===================================================== -->
 
-	     <span class="navbar-toggler-icon"></span>
+    <button type="button"
+            id="wlMobileButton"
+            class="wl-mobile-button"
+            aria-label="Toggle navigation"
+            aria-expanded="false">
 
-	 </button>
-	 
-	 
+        <span></span>
+        <span></span>
+        <span></span>
 
-	 
-
-	 <div class="collapse navbar-collapse"
-	      id="navbarSupportedContent">
-
-	     <!-- Left Side -->
-	     <ul class="navbar-nav mr-auto">
-
-	         <!-- Home - Everyone -->
-	         <li class="nav-item">
-	             <a class="nav-link" href="/">
-	                 🏠 Home
-	             </a>
-	         </li>
-
-	         <!-- Watchlist - Visible to everyone
-	              Security will redirect anonymous users to login -->
-	         <li class="nav-item">
-	             <a class="nav-link" href="/watchlist">
-	                 🎬 Watchlist
-	             </a>
-	         </li>
-
-	         <!-- Add Movie - Visible to everyone
-	              Security will redirect anonymous users to login -->
-	         <li class="nav-item">
-	             <a class="nav-link" href="/watchlistItemForm">
-	                 ➕ Add Movie
-	             </a>
-	         </li>
-
-	         <!-- About - Everyone -->
-	         <li class="nav-item">
-	             <a class="nav-link" href="/about">
-	                 ℹ️ About
-	             </a>
-	         </li>
-
-	         <!-- Contact - Everyone -->
-	         <li class="nav-item">
-	             <a class="nav-link" href="/contact">
-	                 📞 Contact Us
-	             </a>
-	         </li>
-
-	         <!-- Feedback - ONLY logged-in users -->
-	         <li class="nav-item" sec:authorize="isAuthenticated()">
-	             <a class="nav-link" href="/feedback">
-	                 💬 Feedback
-	             </a>
-	         </li>
-
-	     </ul>
+    </button>
 
 
-	     <!-- Right Side -->
-	     <div class="d-flex align-items-center">
+    <!-- =====================================================
+         NAVBAR CONTENT
+         ===================================================== -->
 
-	         <!-- NOT LOGGED IN -->
-	         <div sec:authorize="isAnonymous()">
-
-	             <a href="/login"
-	                class="btn btn-outline-light mr-2">
-	                 🔐 Login
-	             </a>
-
-	             <a href="/signup"
-	                class="btn btn-danger">
-	                 🚀 Sign Up
-	             </a>
-
-	         </div>
+    <div id="wlNavbarContent"
+         class="wl-navbar-content">
 
 
-	         <!-- LOGGED IN -->
-	         <div sec:authorize="isAuthenticated()"
-	              class="d-flex align-items-center">
+        <!-- =================================================
+             LEFT NAVIGATION
+             ================================================= -->
 
-				  
-				  <span class="text-white mr-3"
-				        th:if="${#authentication.authenticated}">
-				      👋 Hello,
-				      <strong th:text="${#strings.substringBefore(#authentication.principal.user.fullName, ' ')}">
-				          User
-				      </strong>
-				  </span>
-				  
+        <div class="wl-navbar-links">
 
-	             <form th:action="@{/logout}" method="post">
+            <a href="/"
+               class="wl-nav-link">
+                🏠 Home
+            </a>
 
-	                 <button type="submit"
-	                         class="btn btn-warning">
-	                     🚪 Logout
-	                 </button>
+            <a href="/watchlist"
+               class="wl-nav-link">
+                🎬 Watchlist
+            </a>
 
-	             </form>
+            <a href="/watchlistItemForm"
+               class="wl-nav-link">
+                ➕ Add Movie
+            </a>
 
-	         </div>
+            <a href="/about"
+               class="wl-nav-link">
+                ℹ️ About
+            </a>
 
-	     </div>
+            <a href="/contact"
+               class="wl-nav-link">
+                📞 Contact Us
+            </a>
 
-	 </div>
-	
-	
+            <!-- Only logged-in users -->
+            <a sec:authorize="isAuthenticated()"
+               href="/feedback"
+               class="wl-nav-link">
+                💬 Feedback
+            </a>
 
-</nav>
+        </div>
 
 
-</body>
+        <!-- =================================================
+             RIGHT SIDE
+             ================================================= -->
+
+        <div class="wl-navbar-user">
+
+
+            <!-- =================================================
+                 NOT LOGGED IN
+                 ================================================= -->
+
+            <div sec:authorize="isAnonymous()"
+                 class="wl-auth-buttons">
+
+                <a href="/login"
+                   class="wl-login-btn">
+                    🔐 Login
+                </a>
+
+                <a href="/signup"
+                   class="wl-signup-btn">
+                    🚀 Sign Up
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGGED IN
+                 ================================================= -->
+
+            <div sec:authorize="isAuthenticated()"
+                 class="wl-user-dropdown">
+
+
+                <!-- USER BUTTON -->
+
+                <button type="button"
+                        id="wlUserButton"
+                        class="wl-user-button"
+                        aria-expanded="false">
+
+                    👋 Hello&nbsp;
+                    <span th:text="${#strings.substringBefore(
+                        #authentication.principal.user.fullName,
+                        ' '
+                    )}">
+                        User
+                    </span>
+                    ▼
+
+                </button>
+
+
+                <!-- USER DROPDOWN -->
+
+                <div id="wlUserMenu"
+                     class="wl-user-menu">
+
+                    <a href="/dashboard">
+                        📊 Dashboard
+                    </a>
+
+                    <div class="wl-dropdown-divider"></div>
+
+                    <form th:action="@{/logout}"
+                          method="post">
+
+                        <button type="submit">
+                            🚪 Logout
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVBAR CSS
+         ===================================================== -->
+
+    <style>
+
+        /* =====================================================
+           MAIN NAVBAR
+           ===================================================== */
+
+        .wl-navbar {
+            width: 100%;
+            min-height: 70px;
+			background: #6c757d;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 20px;
+
+            box-sizing: border-box;
+
+            background: #6c757d;
+
+            position: relative;
+            z-index: 1000;
+			
+			margin:0;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =====================================================
+           BRAND
+           ===================================================== */
+
+        .wl-brand {
+            display: inline-flex;
+            align-items: center;
+
+            flex-shrink: 0;
+
+            margin-right: 22px;
+
+            color: #ffffff !important;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            line-height: 1;
+
+            white-space: nowrap;
+
+            text-decoration: none !important;
+        }
+
+
+        .wl-brand:hover {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+
+
+        /* =====================================================
+           NAVBAR CONTENT
+           ===================================================== */
+
+        .wl-navbar-content {
+            flex: 1;
+
+            min-width: 0;
+
+            display: flex;
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        /* =====================================================
+           LEFT LINKS
+           ===================================================== */
+
+        .wl-navbar-links {
+            display: flex;
+            align-items: center;
+
+            gap: 2px;
+
+            min-width: 0;
+
+            white-space: nowrap;
+        }
+
+
+        .wl-nav-link {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 9px 8px;
+
+            color: #ffffff !important;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            line-height: 1.4;
+
+            white-space: nowrap;
+
+            border-radius: 6px;
+
+            text-decoration: none !important;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .wl-nav-link:hover {
+            color: #ffffff !important;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            text-decoration: none !important;
+        }
+
+
+        /* =====================================================
+           RIGHT SIDE
+           ===================================================== */
+
+        .wl-navbar-user {
+            display: flex;
+            align-items: center;
+
+            flex-shrink: 0;
+
+            margin-left: 12px;
+        }
+
+
+        /* =====================================================
+           LOGIN / SIGNUP
+           ===================================================== */
+
+        .wl-auth-buttons {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            white-space: nowrap;
+        }
+
+
+        .wl-login-btn,
+        .wl-signup-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            height: 42px;
+
+            padding: 0 13px;
+
+            box-sizing: border-box;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            text-decoration: none !important;
+        }
+
+
+        /* Login */
+
+        .wl-login-btn {
+            color: #ffffff !important;
+
+            background: transparent;
+
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+
+        .wl-login-btn:hover {
+            color: #ffffff !important;
+
+            background: rgba(255,255,255,0.15);
+
+            text-decoration: none !important;
+        }
+
+
+        /* Signup */
+
+        .wl-signup-btn {
+            color: #ffffff !important;
+
+            background: #dc3545;
+
+            border: 1px solid #dc3545;
+        }
+
+
+        .wl-signup-btn:hover {
+            color: #ffffff !important;
+
+            background: #c82333;
+
+            border-color: #c82333;
+
+            text-decoration: none !important;
+        }
+
+
+        /* =====================================================
+           USER DROPDOWN
+           ===================================================== */
+
+        .wl-user-dropdown {
+            position: relative;
+
+            flex-shrink: 0;
+        }
+
+
+        .wl-user-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            height: 42px;
+
+            padding: 0 13px;
+
+            border-radius: 7px;
+
+            border: 1px solid rgba(255,255,255,0.8);
+
+            background: transparent;
+
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            cursor: pointer;
+
+            outline: none;
+        }
+
+
+        .wl-user-button:hover,
+        .wl-user-button:focus {
+            color: #ffffff;
+
+            background: rgba(255,255,255,0.15);
+
+            outline: none;
+        }
+
+
+        /* =====================================================
+           DROPDOWN MENU
+           ===================================================== */
+
+        .wl-user-menu {
+            display: none;
+
+            position: absolute;
+
+            top: calc(100% + 8px);
+
+            right: 0;
+
+            width: 190px;
+
+            padding: 6px 0;
+
+            background: #ffffff;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.25);
+
+            overflow: hidden;
+
+            z-index: 10000;
+        }
+
+
+        .wl-user-menu.wl-open {
+            display: block;
+        }
+
+
+        .wl-user-menu a,
+        .wl-user-menu button {
+            display: block;
+
+            width: 100%;
+
+            padding: 11px 16px;
+
+            box-sizing: border-box;
+
+            border: none;
+
+            background: #ffffff;
+
+            color: #333333 !important;
+
+            font-size: 15px;
+
+            text-align: left;
+
+            text-decoration: none !important;
+
+            cursor: pointer;
+        }
+
+
+        .wl-user-menu a:hover,
+        .wl-user-menu button:hover {
+            background: #f1f1f1;
+
+            color: #222222 !important;
+
+            text-decoration: none !important;
+        }
+
+
+        .wl-user-menu form {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .wl-dropdown-divider {
+            height: 1px;
+
+            margin: 5px 0;
+
+            background: #eeeeee;
+        }
+
+
+        /* =====================================================
+           MOBILE BUTTON
+           ===================================================== */
+
+        .wl-mobile-button {
+            display: none;
+
+            flex-shrink: 0;
+
+            width: 42px;
+            height: 40px;
+
+            margin-left: auto;
+
+            padding: 6px;
+
+            border: 1px solid rgba(255,255,255,0.8);
+
+            border-radius: 6px;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            outline: none;
+        }
+
+
+        .wl-mobile-button:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+
+        .wl-mobile-button span {
+            display: block;
+
+            width: 100%;
+            height: 3px;
+
+            margin: 4px 0;
+
+            border-radius: 2px;
+
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           TABLET
+           ===================================================== */
+
+        @media (max-width: 1150px) {
+
+            .wl-navbar {
+                padding: 0 15px;
+            }
+
+
+            .wl-brand {
+                font-size: 21px;
+
+                margin-right: 12px;
+            }
+
+
+            .wl-nav-link {
+                font-size: 14px;
+
+                padding: 8px 5px;
+            }
+
+
+            .wl-login-btn,
+            .wl-signup-btn,
+            .wl-user-button {
+                font-size: 13px;
+
+                padding: 0 9px;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .wl-navbar {
+                min-height: 62px;
+
+                padding: 0 14px;
+
+                flex-wrap: wrap;
+				margin-top: 10px;
+            }
+
+
+            /* Brand */
+
+            .wl-brand {
+                font-size: 20px;
+				margin-top: 8px;
+
+                margin-right:0px;
+				box-sizing: border-box;
+				display: block;
+				
+            }
+
+
+            /* Show hamburger */
+
+            .wl-mobile-button {
+                display: block;
+				margin-top: 8px;
+				box-sizing: border-box;
+				border-radius: 2px solid black;
+            }
+
+
+            /* Hide content initially */
+
+            .wl-navbar-content {
+                display: none;
+
+                flex: none;
+
+                width: 100%;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                padding: 10px 0;
+            }
+
+
+            /* Open mobile menu */
+
+            .wl-navbar-content.wl-mobile-open {
+                display: flex;
+            }
+
+
+            /* Mobile navigation */
+
+            .wl-navbar-links {
+                width: 100%;
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 2px;
+            }
+
+
+            .wl-nav-link {
+                width: 100%;
+
+                padding: 11px 10px;
+
+                box-sizing: border-box;
+
+                font-size: 15px;
+            }
+
+
+            /* Mobile user area */
+
+            .wl-navbar-user {
+                width: 100%;
+
+                margin: 10px 0 0;
+
+                padding-top: 10px;
+
+                border-top:
+                    1px solid rgba(255,255,255,0.25);
+            }
+
+
+            /* Login/signup */
+
+            .wl-auth-buttons {
+                width: 100%;
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 7px;
+            }
+
+
+            .wl-login-btn,
+            .wl-signup-btn {
+                width: 100%;
+
+                height: 42px;
+
+                font-size: 14px;
+            }
+
+
+            /* Logged-in user */
+
+            .wl-user-dropdown {
+                width: 100%;
+            }
+
+
+            .wl-user-button {
+                width: 100%;
+
+                height: 42px;
+            }
+
+
+            /* Mobile dropdown */
+
+            .wl-user-menu {
+                position: static;
+
+                width: 100%;
+
+                margin-top: 7px;
+
+                box-shadow: none;
+
+                border-radius: 7px;
+            }
+
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+           ===================================================== */
+
+        @media (max-width: 400px) {
+
+            .wl-navbar {
+                padding: 0 10px;
+            }
+
+
+            .wl-brand {
+                font-size: 18px;
+            }
+
+
+            .wl-mobile-button {
+                width: 40px;
+                height: 38px;
+            }
+
+        }
+
+    </style>
+
+
+    <!-- =====================================================
+         NAVBAR JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        (function () {
+
+            const mobileButton =
+                document.getElementById("wlMobileButton");
+
+            const navbarContent =
+                document.getElementById("wlNavbarContent");
+
+            const userButton =
+                document.getElementById("wlUserButton");
+
+            const userMenu =
+                document.getElementById("wlUserMenu");
+
+
+            /* =================================================
+               MOBILE MENU
+               ================================================= */
+
+            if (mobileButton && navbarContent) {
+
+                mobileButton.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const isOpen =
+                            navbarContent.classList.toggle(
+                                "wl-mobile-open"
+                            );
+
+                        mobileButton.setAttribute(
+                            "aria-expanded",
+                            isOpen ? "true" : "false"
+                        );
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               USER DROPDOWN
+               ================================================= */
+
+            if (userButton && userMenu) {
+
+                userButton.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const isOpen =
+                            userMenu.classList.toggle(
+                                "wl-open"
+                            );
+
+                        userButton.setAttribute(
+                            "aria-expanded",
+                            isOpen ? "true" : "false"
+                        );
+
+                    }
+                );
+
+
+                /* Close user dropdown outside */
+
+                document.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (
+                            !userMenu.contains(event.target) &&
+                            !userButton.contains(event.target)
+                        ) {
+
+                            userMenu.classList.remove(
+                                "wl-open"
+                            );
+
+                            userButton.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               CLOSE MOBILE MENU AFTER LINK CLICK
+               ================================================= */
+
+            if (navbarContent) {
+
+                const navLinks =
+                    navbarContent.querySelectorAll(
+                        ".wl-nav-link"
+                    );
+
+
+                navLinks.forEach(function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            navbarContent.classList.remove(
+                                "wl-mobile-open"
+                            );
+
+                            if (mobileButton) {
+
+                                mobileButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                });
+
+            }
+
+
+            /* =================================================
+               CLOSE MENU ON DESKTOP RESIZE
+               ================================================= */
+
+            window.addEventListener(
+                "resize",
+                function () {
+
+                    if (window.innerWidth > 850) {
+
+                        if (navbarContent) {
+
+                            navbarContent.classList.remove(
+                                "wl-mobile-open"
+                            );
+
+                        }
+
+                        if (mobileButton) {
+
+                            mobileButton.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+        })();
+
+    </script>
 
 </nav>
