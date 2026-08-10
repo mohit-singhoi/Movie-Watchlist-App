@@ -1,4 +1,4 @@
-<p align ="center"> # 🎬 Movie Watchlist App </p>
+# 🎬 Movie Watchlist App 
 <p align="center">
 
 <img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk&logoColor=white">
