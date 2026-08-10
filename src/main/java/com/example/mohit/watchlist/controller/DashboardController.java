@@ -1,44 +1,73 @@
 package com.example.mohit.watchlist.controller;
 
-import java.util.List;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.mohit.watchlist.entity.Movie;
 import com.example.mohit.watchlist.entity.User;
+import com.example.mohit.watchlist.repository.UserRepo;
 import com.example.mohit.watchlist.service.DashboardService;
 
 @Controller
 public class DashboardController {
 
     private final DashboardService dashboardService;
+    private final UserRepo userRepo;
 
-    public DashboardController(DashboardService dashboardService) {
+    public DashboardController(DashboardService dashboardService,
+                               UserRepo userRepo) {
         this.dashboardService = dashboardService;
+        this.userRepo = userRepo;
     }
 
     @GetMapping("/dashboard")
-    public String showDashboard(Authentication authentication, Model model) {
+    public String showDashboard(Model model,
+                                Authentication authentication) {
 
-        // Get logged-in user's principal
-        Object principal = authentication.getPrincipal();
+        // Get logged-in user's email
+        String email = authentication.getName();
 
-        // Get User object from your custom UserDetails
-        User user = ((com.example.mohit.watchlist.security.CustomUserDetails) principal).getUser();
+        // Find user from database
+        User user = userRepo.findByEmail(email);
 
-        // Get user's dashboard data
-        long totalMovies = dashboardService.getTotalMovies(user);
+        // User not found
+        if (user == null) {
+            return "redirect:/login";
+        }
 
-        List<Movie> recentMovies =
-                dashboardService.getRecentMovies(user);
+        // ==============================
+        // DASHBOARD STATISTICS
+        // ==============================
 
-        // Send data to dashboard.html
-        model.addAttribute("user", user);
-        model.addAttribute("totalMovies", totalMovies);
-        model.addAttribute("recentMovies", recentMovies);
+        model.addAttribute(
+                "totalMovies",
+                dashboardService.getTotalMovies(user)
+        );
+
+        model.addAttribute(
+                "averageRating",
+                dashboardService.getAverageRating(user)
+        );
+
+        model.addAttribute(
+                "highPriorityMovies",
+                dashboardService.getHighPriorityMovies(user)
+        );
+
+        model.addAttribute(
+                "reviewCount",
+                dashboardService.getReviewCount(user)
+        );
+
+        // ==============================
+        // RECENT MOVIES
+        // ==============================
+
+        model.addAttribute(
+                "recentMovies",
+                dashboardService.getRecentMovies(user)
+        );
 
         return "dashboard";
     }

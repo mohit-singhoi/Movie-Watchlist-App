@@ -1,6 +1,8 @@
 package com.example.mohit.watchlist.security;
 
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.mohit.watchlist.entity.User;
@@ -19,9 +21,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        User user = userRepo.findByEmail(email)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
+        User user = userRepo.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException(
+                    "User not found with email: " + email
+            );
+        }
 
         return new CustomUserDetails(user);
     }

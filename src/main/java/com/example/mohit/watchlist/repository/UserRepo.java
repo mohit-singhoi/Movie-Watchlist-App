@@ -1,15 +1,12 @@
 package com.example.mohit.watchlist.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.example.mohit.watchlist.entity.User;
 
-public interface UserRepo extends JpaRepository<User, Long> {
+@Repository
+public interface UserRepo extends JpaRepository<User, Integer> {
 
-    Optional<User> findByEmail(String email);
-
-    boolean existsByEmail(String email);
-
+    User findByEmail(String email);
 }

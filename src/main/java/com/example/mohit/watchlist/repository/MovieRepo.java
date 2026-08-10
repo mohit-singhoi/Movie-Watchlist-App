@@ -12,5 +12,4 @@ import com.example.mohit.watchlist.entity.User;
 public interface MovieRepo extends JpaRepository<Movie, Integer> {
 
     List<Movie> findByUser(User user);
-
 }
