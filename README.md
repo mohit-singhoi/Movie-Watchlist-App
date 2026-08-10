@@ -796,17 +796,12 @@ The dashboard calculates statistics from the logged-in user's movies.
 
 ---
 
-## 📌 Project Documentation
+
+## 📚 Project Documentation
 
 Additional project documentation is maintained separately.
 
-```text
-README.md
-WORKING.md
-STRUCTURE.md
-```
-
-### `README.md`
+📖 [README.md](README.md) — Project overview and setup
 
 Provides:
 
@@ -818,11 +813,13 @@ Provides:
 - Application workflow
 - Package responsibilities
 
-### `WORKING.md`
+
+⚙️ [WORKING.md](WORKING.md) — Step-by-step application workflow
 
 Explains **how the complete application works step-by-step**, from registration/login through movie management, dashboard, API integration, database operations, and feedback.
 
-### `STRUCTURE.md`
+
+🏗️ [STRUCTURE.md](STRUCTURE.md) — Project structure and package explanation
 
 Explains the **project structure and purpose of packages/files** without describing the complete application workflow.
 
