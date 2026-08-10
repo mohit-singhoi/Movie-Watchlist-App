@@ -1,66 +1,166 @@
 # 🎬 Movie Watchlist App
 
-<div align="center">
+A **full-stack Movie Watchlist Management System** built using **Java, Spring Boot, Spring MVC, Spring Security, Thymeleaf, Spring Data JPA, Hibernate, PostgreSQL/H2 Database, and OMDb API**.
 
-![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-success?style=for-the-badge&logo=springboot)
-![Thymeleaf](https://img.shields.io/badge/Thymeleaf-Template-green?style=for-the-badge)
-![Hibernate](https://img.shields.io/badge/Hibernate-ORM-brown?style=for-the-badge)
-![Spring Data JPA](https://img.shields.io/badge/Spring%20Data-JPA-blue?style=for-the-badge)
-![H2 Database](https://img.shields.io/badge/H2-Database-blue?style=for-the-badge)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-4-purple?style=for-the-badge&logo=bootstrap)
-![Maven](https://img.shields.io/badge/Maven-Build-red?style=for-the-badge)
-
-A **full-stack Movie Watchlist Management System** built using **Spring Boot, Spring MVC, Thymeleaf, Spring Data JPA, Hibernate, H2 Database, and OMDb API**.
-
-</div>
+The application allows users to securely register and log in, maintain their personal movie watchlist, automatically fetch IMDb ratings, manage movie priorities, add reviews/comments, view dashboard statistics, and submit feedback.
 
 ---
 
 # 📖 Overview
 
-Movie Watchlist App is a full-stack web application that enables users to create and manage a personal movie collection efficiently.
+**Movie Watchlist App** is a full-stack Java web application designed to help users manage and organize their personal movie collections.
 
-The application integrates with the **OMDb API** to automatically fetch IMDb ratings for movies. If a movie is unavailable on IMDb, users can manually enter the rating and priority, ensuring flexibility while maintaining a smooth user experience.
+The application provides secure user authentication and ensures that each logged-in user can manage their own movies.
 
-The project follows the **MVC (Model-View-Controller)** architecture and demonstrates best practices in Java Full Stack Development using Spring Boot.
+It integrates with the **OMDb API** to automatically retrieve IMDb ratings when a movie is available. If a movie cannot be found through OMDb, the user can manually provide the rating and other movie information.
+
+The application follows the **MVC (Model-View-Controller)** architecture and uses Spring Boot with Spring Data JPA and Hibernate for backend development.
 
 ---
 
 # ✨ Key Features
 
-### 🎥 Movie Management
+## 🔐 User Authentication
 
-- Add new movies
-- Update movie information
-- Delete movies
-- View complete watchlist
+The application provides user authentication using **Spring Security**.
 
----
+Features include:
 
-### ⭐ Automatic IMDb Integration
+- User Registration
+- User Login
+- Secure Password Handling
+- Logout
+- Authentication-based page access
+- User-specific movie watchlists
+- Custom `UserDetailsService`
+- Custom `UserDetails` implementation
 
-- Fetch IMDb Rating automatically
-- Uses OMDb REST API
-- No manual rating required for available movies
-
----
-
-### ✍ Manual Movie Support
-
-If the movie is unavailable on IMDb:
-
-- Manual Rating
-- Manual Priority
-- Manual Comments
-
-can be added by the user.
+Users must be authenticated to access protected functionality.
 
 ---
 
-### 🚦 Smart Priority Management
+## 👤 User Management
 
-Automatic Priority Assignment
+Each user has their own account and movie collection.
+
+The application stores user information using the `User` entity and `UserRepo`.
+
+User-related functionality is handled through:
+
+```text
+UserController
+UserService
+UserRepo
+CustomUserDetails
+CustomUserDetailsService
+```
+
+---
+
+# 🎥 Movie Management
+
+Users can manage their personal movie watchlist.
+
+Supported operations:
+
+- ➕ Add Movie
+- 👀 View Movies
+- ✏️ Update Movie
+- ❌ Delete Movie
+- ⭐ Manage Rating
+- 🚦 Manage Priority
+- 📝 Add Comments/Reviews
+- 🔗 Store Movie Source
+
+The movie data is associated with the logged-in user.
+
+---
+
+# ⭐ Automatic IMDb Rating
+
+The application integrates with the **OMDb REST API**.
+
+When a user adds a movie, the application attempts to retrieve its IMDb rating automatically.
+
+```text
+User
+  ↓
+MovieController
+  ↓
+DatabaseService
+  ↓
+RatingService
+  ↓
+OMDb API
+  ↓
+IMDb Rating
+```
+
+If the movie is found:
+
+```text
+OMDb Rating → Movie Rating
+```
+
+If the movie is not found:
+
+```text
+Manual Rating → Movie Rating
+```
+
+This provides flexibility while maintaining automatic IMDb integration whenever possible.
+
+---
+
+# ✍️ Manual Movie Support
+
+If a movie is unavailable through OMDb, users can manually provide movie information.
+
+Supported manual information includes:
+
+- Movie Title
+- Rating
+- Priority
+- Comments
+- Source
+
+This prevents users from being blocked when a movie cannot be found through the external API.
+
+---
+
+# 🚦 Smart Priority Management
+
+Movies can have three priority levels:
+
+| Priority | Meaning |
+|----------|---------|
+| 🔥 H | High |
+| ⭐ M | Medium |
+| 💤 L | Low |
+
+Priority values are normalized automatically.
+
+Supported input values include:
+
+```text
+H
+High
+
+M
+Med
+Medium
+
+L
+Low
+```
+
+The application internally normalizes these values for consistent storage and validation.
+
+---
+
+# ⭐ Automatic Priority Assignment
+
+For movies where IMDb rating is available, priority can be determined from the rating.
 
 | IMDb Rating | Priority |
 |-------------|----------|
@@ -68,223 +168,437 @@ Automatic Priority Assignment
 | 3 - 6.9 | Medium |
 | 7 - 10 | High |
 
-Manual Priority Input Supported
-
-```
-L
-Low
-M
-Med
-Medium
-H
-High
-```
-
-The application automatically normalizes these values.
+This makes it easier to organize movies according to their ratings.
 
 ---
 
-### ✅ Custom Validation
+# 📊 Dashboard
 
-Custom Bean Validation is implemented using Jakarta Validation.
+The application includes a personalized dashboard for authenticated users.
 
-Validation includes:
+The dashboard displays:
 
+### 🎬 Total Movies
+
+Shows the total number of movies in the logged-in user's watchlist.
+
+### ⭐ Average Rating
+
+Calculates the average rating of movies that have a rating.
+
+### 🔥 High Priority Movies
+
+Displays the number of movies marked with high priority.
+
+### 📝 Reviews
+
+Counts movies that contain a user comment/review.
+
+### 🎬 Recent Movies
+
+Displays the latest movies from the user's watchlist.
+
+### ⚡ Quick Actions
+
+The dashboard provides quick access to:
+
+- Add New Movie
+- View Watchlist
+- About
+- Contact
+
+---
+
+# 💬 Feedback & Suggestions
+
+Authenticated users can access the **Help Us Improve** section.
+
+Users can submit:
+
+- Feedback
+- Suggestions
+- Comments about the application
+
+The feedback functionality is protected using authentication.
+
+A successful submission displays a confirmation message.
+
+---
+
+# 🧩 Reusable Thymeleaf Fragments
+
+The application uses reusable Thymeleaf fragments for common UI components.
+
+## Navbar
+
+```html
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+```
+
+## Footer
+
+```html
+<div th:replace="~{fragments/footer :: footer}"></div>
+```
+
+This keeps the navigation and footer consistent across application pages.
+
+---
+
+# ✅ Custom Validation
+
+The application uses **Jakarta Bean Validation** along with custom validation annotations.
+
+Custom validation package:
+
+```text
+validations/
+```
+
+Contains:
+
+```text
+Priority.java
+PriorityAnnotationLogic.java
+
+Rating.java
+RatingAnnotationLogic.java
+```
+
+Validation is used for:
+
+- Movie Rating
+- Movie Priority
 - Movie Title
-- Rating
-- Priority
-- Comment Length
-
-Custom Validators
-
-- Priority Annotation
-- Rating Annotation
+- Comment length
+- User input validation
 
 ---
 
-### 📊 CRUD Operations
+# 📦 DTO Layer
 
-The application supports complete CRUD functionality.
+The application uses DTOs for handling authentication-related form data.
 
-- Create
-- Read
-- Update
-- Delete
+DTO package:
 
-using Spring Data JPA Repository.
-
----
-
-# 📸 Application Modules
-
-## 🏠 Home Module
-
-### Purpose
-
-Landing page of the application.
-
-Provides navigation to:
-
-- Watchlist
-- Submit Movie
-
----
-
-## 🎬 Watchlist Module
-
-Displays all movies stored inside the H2 Database.
-
-Shows
-
-- Movie Title
-- IMDb Rating
-- Source Link
-- Priority
-- Comments
-
-Actions
-
-- Update Movie
-- Delete Movie
-
----
-
-## ➕ Submit Movie Module
-
-Allows users to
-
-- Add new movie
-- Fetch IMDb Rating automatically
-- Add manual rating if unavailable
-- Add priority
-- Add comments
-
----
-
-## ✏ Update Movie Module
-
-Users can
-
-- Edit movie details
-- Update comments
-- Modify source link
-- Update rating
-- Update priority
-
----
-
-## ❌ Delete Module
-
-Removes a movie permanently from the watchlist.
-
----
-
-# 🏗 Project Architecture
-
-The application follows the **MVC Architecture**.
-
+```text
+dto/
 ```
-                User
-                  │
-                  ▼
-          Thymeleaf Views
-                  │
-                  ▼
-          MovieController
-                  │
-                  ▼
-          DatabaseService
-                  │
-         ┌────────┴────────┐
-         ▼                 ▼
- RatingService        MovieRepository
-         │                 │
-         ▼                 ▼
-     OMDb API         H2 Database
+
+Contains:
+
+```text
+LoginRequest.java
+SignupRequest.java
+```
+
+Using DTOs helps keep request/form data separate from entity objects.
+
+---
+
+# 🏗️ Application Architecture
+
+The application follows the **MVC architecture** with separate layers for controllers, services, repositories, entities, DTOs, security, and validation.
+
+```text
+                         User
+                          │
+                          ▼
+                  Thymeleaf Views
+                          │
+                          ▼
+                     Controller
+                          │
+             ┌────────────┼────────────┐
+             ▼            ▼            ▼
+          Service      Security       DTO
+             │            │
+             ▼            ▼
+        Repository   UserDetailsService
+             │
+             ▼
+        JPA / Hibernate
+             │
+             ▼
+       Database
+```
+
+For movie rating:
+
+```text
+MovieController
+      │
+      ▼
+DatabaseService
+      │
+      ▼
+RatingService
+      │
+      ▼
+OMDb API
+```
+
+For dashboard:
+
+```text
+DashboardController
+      │
+      ▼
+DashboardService
+      │
+      ▼
+MovieRepo
+      │
+      ▼
+User's Movies
 ```
 
 ---
 
 # 📂 Project Structure
 
-```
-src
+```text
+Movie-Watchlist-App/
 │
-├── main
+├── src/
+│   │
+│   ├── main/
+│   │   │
+│   │   ├── java/
+│   │   │   └── com/example/mohit/watchlist/
+│   │   │
+│   │   │       ├── WatchlistApplication.java
+│   │   │       │
+│   │   │       ├── config/
+│   │   │       │   ├── SecurityConfig.java
+│   │   │       │   └── PasswordConfig.java
+│   │   │       │
+│   │   │       ├── controller/
+│   │   │       │   ├── HomeController.java
+│   │   │       │   ├── AuthController.java
+│   │   │       │   ├── UserController.java
+│   │   │       │   ├── MovieController.java
+│   │   │       │   ├── DashboardController.java
+│   │   │       │   └── FeedbackController.java
+│   │   │       │
+│   │   │       ├── dto/
+│   │   │       │   ├── LoginRequest.java
+│   │   │       │   └── SignupRequest.java
+│   │   │       │
+│   │   │       ├── entity/
+│   │   │       │   ├── User.java
+│   │   │       │   ├── Movie.java
+│   │   │       │   └── Feedback.java
+│   │   │       │
+│   │   │       ├── repository/
+│   │   │       │   ├── UserRepo.java
+│   │   │       │   ├── MovieRepo.java
+│   │   │       │   └── FeedbackRepo.java
+│   │   │       │
+│   │   │       ├── service/
+│   │   │       │   ├── DatabaseService.java
+│   │   │       │   ├── DashboardService.java
+│   │   │       │   ├── RatingService.java
+│   │   │       │   └── UserService.java
+│   │   │       │
+│   │   │       ├── security/
+│   │   │       │   ├── CustomUserDetails.java
+│   │   │       │   └── CustomUserDetailsService.java
+│   │   │       │
+│   │   │       └── validations/
+│   │   │           ├── Priority.java
+│   │   │           ├── PriorityAnnotationLogic.java
+│   │   │           ├── Rating.java
+│   │   │           └── RatingAnnotationLogic.java
+│   │   │
+│   │   └── resources/
+│   │       │
+│   │       ├── static/
+│   │       │   ├── css/
+│   │       │   ├── js/
+│   │       │   └── Images/
+│   │       │
+│   │       ├── templates/
+│   │       │   ├── fragments/
+│   │       │   │   ├── navbar.html
+│   │       │   │   └── footer.html
+│   │       │   │
+│   │       │   ├── login.html
+│   │       │   ├── signup.html
+│   │       │   ├── dashboard.html
+│   │       │   ├── watchlist.html
+│   │       │   ├── watchlistItemForm.html
+│   │       │   ├── watchlistItem.html
+│   │       │   ├── about.html
+│   │       │   ├── contact.html
+│   │       │   └── feedback.html
+│   │       │
+│   │       └── application.properties
+│   │
+│   └── test/
 │
-├── java
-│   ├── controller
-│   │      MovieController.java
-│   │
-│   ├── service
-│   │      DatabaseService.java
-│   │      RatingService.java
-│   │
-│   ├── repository
-│   │      MovieRepo.java
-│   │
-│   ├── entity
-│   │      Movie.java
-│   │
-│   └── entity.validations
-│          Priority.java
-│          PriorityAnnotationLogic.java
-│          Rating.java
-│          RatingAnnotationLogic.java
-│
-├── resources
-│   ├── templates
-│   │      index.html
-│   │      watchlist.html
-│   │      watchlistItem.html
-│   │
-│   ├── static
-│   └── application.properties
-│
-└── pom.xml
+├── pom.xml
+├── README.md
+├── WORKING.md
+└── STRUCTURE.md
 ```
 
 ---
 
-# 🛠 Technology Stack
+# 📁 Package Responsibilities
+
+## `config`
+
+Contains application configuration classes.
+
+```text
+SecurityConfig.java
+PasswordConfig.java
+```
+
+Responsible for:
+
+- Spring Security configuration
+- Authentication rules
+- Password encoding
+- Protected routes
+- Login/logout configuration
+
+---
+
+## `controller`
+
+Handles HTTP requests and connects the frontend with the service layer.
+
+```text
+HomeController.java
+AuthController.java
+UserController.java
+MovieController.java
+DashboardController.java
+FeedbackController.java
+```
+
+---
+
+## `dto`
+
+Contains Data Transfer Objects used for handling request data.
+
+```text
+LoginRequest.java
+SignupRequest.java
+```
+
+---
+
+## `entity`
+
+Contains JPA entity classes representing database tables.
+
+```text
+User.java
+Movie.java
+Feedback.java
+```
+
+---
+
+## `repository`
+
+Contains Spring Data JPA repositories responsible for database operations.
+
+```text
+UserRepo.java
+MovieRepo.java
+FeedbackRepo.java
+```
+
+---
+
+## `service`
+
+Contains business logic.
+
+```text
+DatabaseService.java
+DashboardService.java
+RatingService.java
+UserService.java
+```
+
+Responsibilities include:
+
+- Movie CRUD operations
+- Dashboard calculations
+- IMDb rating retrieval
+- User management
+- Database operations
+
+---
+
+## `security`
+
+Contains custom Spring Security components.
+
+```text
+CustomUserDetails.java
+CustomUserDetailsService.java
+```
+
+`CustomUserDetailsService` loads users from the database during authentication.
+
+---
+
+## `validations`
+
+Contains custom validation annotations and their validation logic.
+
+```text
+Priority.java
+PriorityAnnotationLogic.java
+Rating.java
+RatingAnnotationLogic.java
+```
+
+---
+
+# 🛠️ Technology Stack
 
 ## Backend
 
-- Java 21
+- Java
 - Spring Boot
 - Spring MVC
+- Spring Security
 - Spring Data JPA
 - Hibernate ORM
+- Jakarta Validation
 
 ---
 
 ## Frontend
 
-- Thymeleaf
 - HTML5
 - CSS3
+- Thymeleaf
 - Bootstrap 4
+- JavaScript
 
 ---
 
 ## Database
 
-- H2 Database Development Phase
-- MySQL (Development)
-- PostgreSQL (Production Ready) 
+- H2 Database
+- PostgreSQL
+- Spring Data JPA
+- Hibernate
 
 ---
 
-## API
+## External API
 
 - OMDb REST API
-
----
-
-## Validation
-
-- Jakarta Bean Validation
-- Custom Validation Annotation
 
 ---
 
@@ -294,195 +608,394 @@ src
 
 ---
 
-## IDE
+## Development Tools
 
 - Eclipse IDE
+- Git
+- GitHub
 
 ---
 
 # 🔄 Application Workflow
 
-```
-User
-   │
-   ▼
-Submit Movie
-   │
-   ▼
-MovieController
-   │
-   ▼
-RatingService
-   │
-   ▼
-OMDb API
+## 1️⃣ User Registration
 
-Movie Found?
+```text
+Signup Page
+     │
+     ▼
+SignupRequest DTO
+     │
+     ▼
+AuthController
+     │
+     ▼
+UserService
+     │
+     ▼
+PasswordEncoder
+     │
+     ▼
+UserRepo
+     │
+     ▼
+Database
+```
+
+---
+
+## 2️⃣ User Login
+
+```text
+Login Page
+     │
+     ▼
+Spring Security
+     │
+     ▼
+CustomUserDetailsService
+     │
+     ▼
+UserRepo
+     │
+     ▼
+CustomUserDetails
+     │
+     ▼
+Authentication Successful
+     │
+     ▼
+Dashboard
+```
+
+---
+
+## 3️⃣ Add Movie
+
+```text
+Add Movie Form
       │
- ┌────┴────┐
- │         │
-Yes        No
- │         │
- ▼         ▼
-Auto Rating  Manual Rating
- │         │
- ▼         ▼
-Priority Generated
- │
- ▼
+      ▼
+MovieController
+      │
+      ▼
 DatabaseService
- │
- ▼
-H2 Database
- │
- ▼
-Watchlist Page
+      │
+      ▼
+RatingService
+      │
+      ▼
+OMDb API
+      │
+      ▼
+Rating / Manual Rating
+      │
+      ▼
+Priority
+      │
+      ▼
+MovieRepo
+      │
+      ▼
+Database
 ```
 
 ---
 
-# 🗄 Database
+## 4️⃣ Dashboard
 
-The project uses **H2 In-Memory Database**.
-
-Advantages
-
-- Lightweight
-- No installation
-- Fast
-- Ideal for development
-- Easy testing
-
----
-
-## H2 Console
-
-```
-http://localhost:8080/h2-console
-```
-
-Configuration
-
-```
-Driver Class
-
-org.h2.Driver
-
-JDBC URL
-
-jdbc:h2:mem:watchdb
-
-Username
-
-sa
-
-Password
-
-Leave Blank
+```text
+Login
+  │
+  ▼
+DashboardController
+  │
+  ▼
+DashboardService
+  │
+  ▼
+MovieRepo
+  │
+  ├── Total Movies
+  ├── Average Rating
+  ├── High Priority Movies
+  ├── Review Count
+  └── Recent Movies
 ```
 
 ---
 
-# 🌐 REST API Used
+## 5️⃣ Feedback
 
-### OMDb API
-
-Automatically retrieves IMDb ratings.
-
-Example
-
-```
-https://www.omdbapi.com/?apikey=YOUR_API_KEY&t=Avatar
+```text
+Authenticated User
+       │
+       ▼
+Feedback Page
+       │
+       ▼
+FeedbackController
+       │
+       ▼
+FeedbackRepo
+       │
+       ▼
+Database
 ```
 
 ---
 
-# 📦 Maven Dependencies
+# 🗄️ Database
 
-- Spring Boot Starter Web
-- Spring Boot Starter Thymeleaf
-- Spring Boot Starter Validation
-- Spring Boot Starter Data JPA
-- H2 Database
-- Jackson
-- Maven
+The application uses **Spring Data JPA and Hibernate** for database interaction.
 
----
+The application can be configured to use:
 
-# 🚀 Installation
+- H2 Database for development/testing
+- PostgreSQL for persistent database storage
 
-Clone Repository
+Database entities include:
 
-```bash
-git clone https://github.com/yourusername/Movie-Watchlist-App.git
+```text
+User
+Movie
+Feedback
 ```
 
-Open Project
-
-```
-Eclipse / IntelliJ IDEA
-```
-
-Run
-
-```
-WatchlistApplication.java
-```
-
-or
-
-```bash
-mvn spring-boot:run
-```
+The `Movie` entity is associated with a user so that each authenticated user can manage their own watchlist.
 
 ---
 
 # 🌐 Application URLs
 
-Application
+## Home
 
-```
+```text
 http://localhost:8080/
 ```
 
-Watchlist
+## Login
 
+```text
+http://localhost:8080/login
 ```
+
+## Signup
+
+```text
+http://localhost:8080/signup
+```
+
+## Dashboard
+
+```text
+http://localhost:8080/dashboard
+```
+
+## Watchlist
+
+```text
 http://localhost:8080/watchlist
 ```
 
-Submit Movie
+## Add Movie
 
-```
+```text
 http://localhost:8080/watchlistItemForm
 ```
 
-H2 Console
+## About
 
+```text
+http://localhost:8080/about
 ```
-http://localhost:8080/h2-console
+
+## Contact
+
+```text
+http://localhost:8080/contact
+```
+
+## Feedback
+
+```text
+http://localhost:8080/feedback
 ```
 
 ---
 
-# 📌 Future Enhancements
+# 🌐 OMDb API
 
-- 🔐 User Authentication
+The application uses the **OMDb API** to retrieve movie information and IMDb ratings.
+
+Example request:
+
+```text
+https://www.omdbapi.com/?apikey=YOUR_API_KEY&t=Avatar
+```
+
+> Replace `YOUR_API_KEY` with your own OMDb API key.
+
+For security, API keys should not be hard-coded into publicly shared source code.
+
+---
+
+# 📦 Maven Dependencies
+
+The project uses Maven for dependency management.
+
+Main dependencies include:
+
+- Spring Boot Starter Web
+- Spring Boot Starter Thymeleaf
+- Spring Boot Starter Security
+- Spring Boot Starter Validation
+- Spring Boot Starter Data JPA
+- Hibernate
+- H2 Database
+- PostgreSQL Driver
+- Thymeleaf Extras Spring Security
+- Jackson
+
+---
+
+# 🚀 Installation & Setup
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/mohit-singhoi/Movie-Watchlist-App.git
+```
+
+## 2. Open the Project
+
+Open the project using:
+
+```text
+Eclipse
+IntelliJ IDEA
+VS Code
+```
+
+## 3. Configure Database
+
+Update the database configuration inside:
+
+```text
+src/main/resources/application.properties
+```
+
+Configure your database URL, username, and password.
+
+## 4. Configure OMDb API
+
+Add your OMDb API key to the application configuration.
+
+Do not expose private API keys in GitHub.
+
+## 5. Run the Application
+
+Using the main class:
+
+```text
+WatchlistApplication.java
+```
+
+Or using Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+## 6. Open the Application
+
+```text
+http://localhost:8080/
+```
+
+---
+
+# 🔒 Security
+
+The application uses **Spring Security** for authentication and authorization.
+
+Security features include:
+
+- Login authentication
+- User registration
+- Password encoding
+- Protected dashboard
+- Authenticated feedback
+- User-specific movie data
+- Custom `UserDetailsService`
+
+---
+
+# 📊 Dashboard Statistics
+
+The dashboard calculates statistics from the logged-in user's movies.
+
+| Statistic | Description |
+|-----------|-------------|
+| 🎬 Total Movies | Total movies in user's watchlist |
+| ⭐ Average Rating | Average rating of rated movies |
+| 🔥 High Priority | Number of high-priority movies |
+| 📝 Reviews | Number of movies containing comments |
+| 🎬 Recent Movies | Latest movies in watchlist |
+
+---
+
+# 📌 Project Documentation
+
+Additional project documentation is maintained separately.
+
+```text
+README.md
+WORKING.md
+STRUCTURE.md
+```
+
+### `README.md`
+
+Provides:
+
+- Project overview
+- Features
+- Architecture
+- Technology stack
+- Installation
+- Application workflow
+- Package responsibilities
+
+### `WORKING.md`
+
+Explains **how the complete application works step-by-step**, from registration/login through movie management, dashboard, API integration, database operations, and feedback.
+
+### `STRUCTURE.md`
+
+Explains the **project structure and purpose of packages/files** without describing the complete application workflow.
+
+---
+
+# 🔮 Future Enhancements
+
+Possible future improvements:
+
 - ❤️ Favorite Movies
 - 🎭 Movie Genres
-- 🔎 Search Movies
+- 🔎 Advanced Movie Search
 - 📄 Pagination
-- 📊 Sorting
-- 🌙 Dark Mode
+- 📊 Advanced Sorting
 - 🎬 Movie Posters
 - 🎥 Trailer Integration
-- ⭐ User Reviews
-- ☁ MySQL Integration
-- PostgreSQL Support
-- Docker Deployment
-- REST API Version
-- Spring Security
-- JWT Authentication
+- ⭐ Detailed User Reviews
+- 🔔 Notifications
+- ☁ Cloud Deployment
+- 🐳 Docker Support
+- 🌐 REST API Version
+- 📱 Mobile-Friendly Improvements
+- 📈 Advanced Dashboard Analytics
+- 🎞️ Movie Recommendation System
 
 ---
 
@@ -492,24 +1005,32 @@ http://localhost:8080/h2-console
 
 **MCA Student | Java Full Stack Developer | Spring Boot Developer**
 
+📧 Email: **mohitsinghoi501@gmail.com**
 
-📧 Email: *mohitsinghoi501@gmail.com*
+🔗 LinkedIn: **https://www.linkedin.com/in/mohit-kumar-0379gu**
 
-🔗 LinkedIn: *https://www.linkedin.com/in/mohit-kumar-0379gu*
+---
 
-### Skills
+## 💻 Skills
 
 - Java
+- Core Java
 - Spring Boot
 - Spring MVC
+- Spring Security
 - Spring Data JPA
 - Hibernate
+- REST APIs
 - SQL
+- PostgreSQL
+- H2 Database
+- Thymeleaf
 - HTML
 - CSS
 - Bootstrap
-- REST APIs
-- Git & GitHub
+- JavaScript
+- Git
+- GitHub
 
 ---
 
@@ -523,6 +1044,6 @@ This project is licensed under the **MIT License**.
 
 If you like this project, consider giving it a ⭐ on GitHub.
 
-It motivates me to build more open-source Java and Spring Boot projects.
+Your support motivates me to continue building and improving Java, Spring Boot, and full-stack development projects.
 
-Happy Coding.....! 🚀
+**Happy Coding! 🚀**
