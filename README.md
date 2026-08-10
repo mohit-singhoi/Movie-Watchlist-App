@@ -1,6 +1,30 @@
 # 🎬 Movie Watchlist App
 
+<p align="center">
+
+<img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk&logoColor=white">
+
+<img src="https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=springboot&logoColor=white">
+
+<img src="https://img.shields.io/badge/Spring%20MVC-Web-blue?style=for-the-badge&logo=spring">
+
+<img src="https://img.shields.io/badge/Thymeleaf-Template%20Engine-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white">
+
+<img src="https://img.shields.io/badge/Hibernate-ORM-brown?style=for-the-badge&logo=hibernate&logoColor=white">
+
+<img src="https://img.shields.io/badge/Spring%20Data-JPA-blue?style=for-the-badge">
+
+<img src="https://img.shields.io/badge/H2-Database-blue?style=for-the-badge">
+
+<img src="https://img.shields.io/badge/Bootstrap-4-purple?style=for-the-badge&logo=bootstrap&logoColor=white">
+
+<img src="https://img.shields.io/badge/Maven-Build-red?style=for-the-badge&logo=apachemaven&logoColor=white">
+
+</p>
+
+</p>
 A **full-stack Movie Watchlist Management System** built using **Java, Spring Boot, Spring MVC, Spring Security, Thymeleaf, Spring Data JPA, Hibernate, PostgreSQL/H2 Database, and OMDb API**.
+</p>
 
 The application allows users to securely register and log in, maintain their personal movie watchlist, automatically fetch IMDb ratings, manage movie priorities, add reviews/comments, view dashboard statistics, and submit feedback.
 
