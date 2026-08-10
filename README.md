@@ -235,9 +235,7 @@ Custom Validators
 
 - Priority.java
 - PriorityAnnotationLogic.java
-
 - Rating.java
--
 - RatingAnnotationLogic.java
 
 ---
