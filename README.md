@@ -324,6 +324,62 @@ Removes a movie permanently from the watchlist.
 
 ---
 
+## 📸 Application Screenshots
+
+The following screenshots demonstrate the main pages and features of the Movie Watchlist Application.
+
+---
+
+### 🏠 Home Pages
+
+| Before Login | After Login |
+|---|---|
+| <img src="screenshots/Homepage.png" width="450"> | <img src="screenshots/Homepage1.png" width="450"> |
+| **Public Home Page** | **Authenticated Home Page** |
+
+---
+
+### 🔐 Authentication
+
+| Login | Signup |
+|---|---|
+| <img src="screenshots/Login.png" width="450"> | <img src="screenshots/Signup.png" width="450"> |
+| **Login Page** | **Signup Page** |
+
+---
+
+### 🎬 Movie Management
+
+| Watchlist | Submit Movie |
+|---|---|
+| <img src="screenshots/Watchlist.png" width="450"> | <img src="screenshots/SubmitMovie.png" width="450"> |
+| **Movie Watchlist** | **Add / Submit Movie** |
+
+---
+
+### 📊 Dashboard
+
+<img src="screenshots/Dashboard.png" width="900">
+
+**User Dashboard**
+
+---
+
+### 📄 Information & Support
+
+| About | Contact Us |
+|---|---|
+| <img src="screenshots/About.png" width="450"> | <img src="screenshots/ContactUs.png" width="450"> |
+| **About Page** | **Contact Page** |
+
+| Feedback | Footer |
+|---|---|
+| <img src="screenshots/Feedback.png" width="450"> | <img src="screenshots/Footer.png" width="450"> |
+| **Feedback & Suggestions** | **Application Footer** |
+
+---
+
+
 ## 🏗️ Application Architecture
 
 The application follows the **MVC architecture** with separate layers for controllers, services, repositories, entities, DTOs, security, and validation.
