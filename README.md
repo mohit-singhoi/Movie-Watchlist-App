@@ -806,7 +806,7 @@ WORKING.md
 STRUCTURE.md
 ```
 
-### `README.md`
+### `- 📖 [README.md](README.md)`
 
 Provides:
 
@@ -827,6 +827,12 @@ Explains **how the complete application works step-by-step**, from registration/
 Explains the **project structure and purpose of packages/files** without describing the complete application workflow.
 
 ---
+
+## 📚 Project Documentation
+
+- 📖 [README.md](README.md) — Project overview and setup
+- ⚙️ [WORKING.md](WORKING.md) — Step-by-step application workflow
+- 🏗️ [STRUCTURE.md](STRUCTURE.md) — Project structure and package explanation
 
 ## 🔮 Future Enhancements
 
