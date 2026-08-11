@@ -15,6 +15,7 @@ public class UserService {
 
     public UserService(UserRepo userRepository,
                        PasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -24,12 +25,16 @@ public class UserService {
         User user = new User();
 
         user.setFullName(request.getFullName());
+
         user.setEmail(request.getEmail());
 
-        // Encrypt password
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        // Encrypt password using BCrypt
+        user.setPassword(
+            passwordEncoder.encode(request.getPassword())
+        );
 
-        user.setRole("USER");
+        // Every registered account is a normal USER
+        user.setRole("ROLE_USER");
 
         return userRepository.save(user);
     }

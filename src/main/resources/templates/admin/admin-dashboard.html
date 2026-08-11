@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Admin Dashboard | Movie Watchlist</title>
+
+    <!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!-- Admin Dashboard CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-dashboard.css}">
+		  
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+</head>
+
+
+<body>
+
+
+	<!-- Navbar -->
+	<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     DASHBOARD
+     ===================================================== -->
+
+<main class="admin-dashboard">
+
+
+    <!-- HEADER -->
+
+    <section class="dashboard-header">
+
+        <div>
+
+            <h1>👑 Admin Dashboard</h1>
+
+            <p>
+                Welcome to the Movie Watchlist administration panel.
+            </p>
+
+        </div>
+
+        <div class="admin-badge">
+
+            🔐 ROLE_ADMIN
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STATISTICS
+         ================================================= -->
+
+    <section class="dashboard-stats">
+
+
+        <!-- TOTAL USERS -->
+
+        <div class="stat-card users-card">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div class="stat-content">
+
+                <h3>Total Users</h3>
+
+                <span th:text="${totalUsers ?: 0}">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOTAL MOVIES -->
+
+        <div class="stat-card movies-card">
+
+            <div class="stat-icon">
+                🎬
+            </div>
+
+            <div class="stat-content">
+
+                <h3>Total Movies</h3>
+
+                <span th:text="${totalMovies ?: 0}">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOTAL FEEDBACK -->
+
+        <div class="stat-card feedback-card">
+
+            <div class="stat-icon">
+                💬
+            </div>
+
+            <div class="stat-content">
+
+                <h3>Total Feedback</h3>
+
+                <span th:text="${totalFeedback ?: 0}">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACTIVE USERS -->
+
+        <div class="stat-card active-card">
+
+            <div class="stat-icon">
+                🟢
+            </div>
+
+            <div class="stat-content">
+
+                <h3>Active Users</h3>
+
+                <span th:text="${activeUsers ?: 0}">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         MANAGEMENT
+         ================================================= -->
+
+    <section class="management-section">
+
+
+        <div class="section-title">
+
+            <h2>Management</h2>
+
+            <p>
+                Manage users, movies, feedback and application activity.
+            </p>
+
+        </div>
+
+
+
+        <div class="management-grid">
+
+
+            <!-- USERS -->
+
+            <a href="/admin/users"
+               class="management-card">
+
+                <div class="management-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <h3>User Management</h3>
+
+                    <p>
+                        View and manage registered users.
+                    </p>
+
+                </div>
+
+                <span class="card-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- MOVIES -->
+
+            <a href="/admin/movies"
+               class="management-card">
+
+                <div class="management-icon">
+                    🎬
+                </div>
+
+                <div>
+
+                    <h3>Movie Management</h3>
+
+                    <p>
+                        View and manage movies in the application.
+                    </p>
+
+                </div>
+
+                <span class="card-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- FEEDBACK -->
+
+            <a href="/admin/feedback"
+               class="management-card">
+
+                <div class="management-icon">
+                    💬
+                </div>
+
+                <div>
+
+                    <h3>Feedback Management</h3>
+
+                    <p>
+                        Review user feedback and suggestions.
+                    </p>
+
+                </div>
+
+                <span class="card-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- ACTIVITIES -->
+
+            <a href="/admin/activities"
+               class="management-card">
+
+                <div class="management-icon">
+                    📈
+                </div>
+
+                <div>
+
+                    <h3>Activity Monitoring</h3>
+
+                    <p>
+                        Monitor application and user activities.
+                    </p>
+
+                </div>
+
+                <span class="card-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- Footer -->
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+
+</body>
+
+</html>

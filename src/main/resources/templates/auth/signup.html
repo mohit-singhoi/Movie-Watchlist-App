@@ -1,212 +1,721 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Sign Up | Movie Watchlist</title>
 
+
+    <!-- =====================================================
+         BOOTSTRAP 4.1.3
+         ===================================================== -->
+
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+
+    <!-- =====================================================
+         GOOGLE FONT
+         ===================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         SIGNUP PAGE CSS
+         ===================================================== -->
+
     <style>
 
-        body{
-            background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
-                       url('/Images/movie-bg.jpg');
-            background-size:cover;
-            background-position:center;
-            background-attachment:fixed;
-            min-height:100vh;
+        /* =====================================================
+           GLOBAL
+           ===================================================== */
+
+        * {
+            box-sizing: border-box;
         }
 
-        .container-box{
-            max-width:520px;
-            margin:50px auto;
-            background:rgba(255,255,255,.92);
-            backdrop-filter:blur(10px);
-            border-radius:20px;
-            padding:40px;
-            box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
         }
 
-        h2{
-            text-align:center;
-            font-weight:bold;
-            margin-bottom:10px;
+
+        body {
+
+            font-family: 'Poppins', sans-serif;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.65)
+                ),
+                url('/Images/movie-bg.jpg');
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            min-height: 100vh;
+
+            color: #292d32;
+
         }
 
-        .subtitle{
-            text-align:center;
-            color:#666;
-            margin-bottom:30px;
+
+        /* =====================================================
+           SIGNUP CONTAINER
+           ===================================================== */
+
+        .container-box {
+
+            width: 92%;
+
+            max-width: 520px;
+
+            margin: 50px auto;
+
+            background: rgba(255, 255, 255, 0.93);
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.35);
+
+            animation:
+                signupFadeIn 0.5s ease;
+
         }
 
-        .form-control{
-            height:48px;
-            border-radius:10px;
+
+        /* =====================================================
+           ANIMATION
+           ===================================================== */
+
+        @keyframes signupFadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
         }
 
-        .btn-signup{
-            width:100%;
-            border-radius:10px;
-            padding:12px;
-            font-size:17px;
-            font-weight:bold;
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        h2 {
+
+            text-align: center;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+            color: #292d32;
+
         }
 
-        .login-link{
-            text-align:center;
-            margin-top:20px;
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
         }
 
-        .login-link a{
-            font-weight:bold;
-            text-decoration:none;
+
+        /* =====================================================
+           USER ROLE INFORMATION
+           ===================================================== */
+
+        .user-role-info {
+
+            margin-bottom: 22px;
+
+            padding: 12px 15px;
+
+            border-radius: 9px;
+
+            background: #e8f5e9;
+
+            color: #256029;
+
+            font-size: 13px;
+
+            text-align: center;
+
+            border: 1px solid #c8e6c9;
+
         }
 
-        .login-link a:hover{
-            text-decoration:underline;
+
+        .user-role-info strong {
+
+            font-weight: 700;
+
         }
 
-        .back-home{
-            text-align:center;
-            margin-top:20px;
+
+        /* =====================================================
+           FORM
+           ===================================================== */
+
+        .form-group {
+
+            margin-bottom: 18px;
+
         }
 
-        .back-home a{
-            text-decoration:none;
+
+        .form-group label {
+
+            font-weight: 600;
+
+            color: #333;
+
+            margin-bottom: 7px;
+
         }
 
-        .text-danger{
-            font-size:14px;
+
+        .form-control {
+
+            height: 48px;
+
+            border-radius: 10px;
+
+            border: 1px solid #ddd;
+
+            padding:
+                10px 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .form-control:focus {
+
+            border-color: #28a745;
+
+            box-shadow:
+                0 0 0 0.15rem
+                rgba(40, 167, 69, 0.15);
+
+        }
+
+
+        .form-control::placeholder {
+
+            color: #aaa;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           VALIDATION
+           ===================================================== */
+
+        .text-danger {
+
+            display: block;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+            color: #dc3545 !important;
+
+        }
+
+
+        /* =====================================================
+           SIGNUP BUTTON
+           ===================================================== */
+
+        .btn-signup {
+
+            width: 100%;
+
+            border-radius: 10px;
+
+            padding: 12px;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            border: none;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .btn-signup:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 6px 15px
+                rgba(0, 0, 0, 0.20);
+
+        }
+
+
+        .btn-signup:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =====================================================
+           LOGIN LINK
+           ===================================================== */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #666;
+
+            font-size: 14px;
+
+        }
+
+
+        .login-link a {
+
+            font-weight: 700;
+
+            color: #28a745;
+
+            text-decoration: none;
+
+        }
+
+
+        .login-link a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           BACK HOME
+           ===================================================== */
+
+        .back-home {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+        }
+
+
+        .back-home a {
+
+            color: #555;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+        }
+
+
+        .back-home a:hover {
+
+            color: #28a745;
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+		   .auth-footer {
+		       text-align: center;
+		       color: #ffffff;
+		       font-size: 13px;
+		       padding: 20px 10px;
+		       margin-top: 20px;
+		   }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 576px) {
+
+            .container-box {
+
+                width: 94%;
+
+                margin: 25px auto;
+
+                padding: 28px 20px;
+
+                border-radius: 17px;
+
+            }
+
+
+            h2 {
+
+                font-size: 25px;
+
+            }
+
+
+            .subtitle {
+
+                font-size: 13px;
+
+            }
+
+
+            .form-control {
+
+                height: 46px;
+
+            }
+
+
+            .btn-signup {
+
+                font-size: 16px;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+           ===================================================== */
+
+        @media (max-width: 400px) {
+
+            .container-box {
+
+                width: 96%;
+
+                padding:
+                    24px 16px;
+
+            }
+
+
+            h2 {
+
+                font-size: 22px;
+
+            }
+
+
+            .user-role-info {
+
+                font-size: 12px;
+
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-<div class="container">
 
-    <div class="container-box">
+<!-- =========================================================
+     SIGNUP CONTAINER
+     ========================================================= -->
 
-        <h2>🚀 Create Your Account</h2>
+<div class="container-box">
 
-        <p class="subtitle">
-            Join Movie Watchlist and organize your favorite movies.
-        </p>
 
-        <form th:action="@{/signup}"
-              th:object="${signupRequest}"
-              method="post">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-            <!-- Full Name -->
+    <h2>
 
-            <div class="form-group">
+        🚀 Create Your Account
 
-                <label>Full Name</label>
+    </h2>
 
-                <input type="text"
-                       th:field="*{fullName}"
-                       class="form-control"
-                       placeholder="Enter your full name">
 
-                <small class="text-danger"
-                       th:errors="*{fullName}">
-                </small>
+    <p class="subtitle">
 
-            </div>
+        Join Movie Watchlist and organize
+        your favorite movies.
 
-            <!-- Email -->
+    </p>
 
-            <div class="form-group">
 
-                <label>Email Address</label>
+    <!-- =====================================================
+         ROLE INFORMATION
+         ===================================================== -->
 
-                <input type="email"
-                       th:field="*{email}"
-                       class="form-control"
-                       placeholder="Enter your email">
+    <div class="user-role-info">
 
-                <small class="text-danger"
-                       th:errors="*{email}">
-                </small>
-
-            </div>
-
-            <!-- Password -->
-
-            <div class="form-group">
-
-                <label>Password</label>
-
-                <input type="password"
-                       th:field="*{password}"
-                       class="form-control"
-                       placeholder="Minimum 6 characters">
-
-                <small class="text-danger"
-                       th:errors="*{password}">
-                </small>
-
-            </div>
-
-            <!-- Confirm Password -->
-
-            <div class="form-group">
-
-                <label>Confirm Password</label>
-
-                <input type="password"
-                       name="confirmPassword"
-                       class="form-control"
-                       placeholder="Re-enter password">
-
-            </div>
-
-            <button type="submit"
-                    class="btn btn-success btn-signup">
-
-                🚀 Create Account
-
-            </button>
-
-        </form>
-
-        <div class="login-link">
-
-            Already have an account?
-
-            <a href="/login">
-
-                Login Here
-
-            </a>
-
-        </div>
-
-        <div class="back-home">
-
-            <a href="/">
-
-                ← Back to Home
-
-            </a>
-
-        </div>
+        👤 New accounts are created as
+        <strong>Regular Users</strong>.
 
     </div>
 
+
+    <!-- =====================================================
+         SIGNUP FORM
+         ===================================================== -->
+
+    <form th:action="@{/signup}"
+          th:object="${signupRequest}"
+          method="post">
+
+
+        <!-- =================================================
+             FULL NAME
+             ================================================= -->
+
+        <div class="form-group">
+
+            <label for="fullName">
+
+                Full Name
+
+            </label>
+
+
+            <input type="text"
+                   id="fullName"
+                   th:field="*{fullName}"
+                   class="form-control"
+                   placeholder="Enter your full name"
+                   autocomplete="name"
+                   required>
+
+
+            <small class="text-danger"
+                   th:errors="*{fullName}">
+
+            </small>
+
+        </div>
+
+
+        <!-- =================================================
+             EMAIL
+             ================================================= -->
+
+        <div class="form-group">
+
+            <label for="email">
+
+                Email Address
+
+            </label>
+
+
+            <input type="email"
+                   id="email"
+                   th:field="*{email}"
+                   class="form-control"
+                   placeholder="Enter your email"
+                   autocomplete="email"
+                   required>
+
+
+            <small class="text-danger"
+                   th:errors="*{email}">
+
+            </small>
+
+        </div>
+
+
+        <!-- =================================================
+             PASSWORD
+             ================================================= -->
+
+        <div class="form-group">
+
+            <label for="password">
+
+                Password
+
+            </label>
+
+
+            <input type="password"
+                   id="password"
+                   th:field="*{password}"
+                   class="form-control"
+                   placeholder="Minimum 6 characters"
+                   autocomplete="new-password"
+                   required>
+
+
+            <small class="text-danger"
+                   th:errors="*{password}">
+
+            </small>
+
+        </div>
+
+
+        <!-- =================================================
+             CONFIRM PASSWORD
+             ================================================= -->
+
+        <div class="form-group">
+
+            <label for="confirmPassword">
+
+                Confirm Password
+
+            </label>
+
+
+            <input type="password"
+                   id="confirmPassword"
+                   name="confirmPassword"
+                   class="form-control"
+                   placeholder="Re-enter your password"
+                   autocomplete="new-password"
+                   required>
+
+        </div>
+
+
+        <!-- =================================================
+             SIGNUP BUTTON
+             ================================================= -->
+
+        <button type="submit"
+                class="btn btn-success btn-signup">
+
+            🚀 Create Account
+
+        </button>
+
+
+    </form>
+
+
+    <!-- =====================================================
+         LOGIN LINK
+         ===================================================== -->
+
+    <div class="login-link">
+
+        Already have an account?
+
+        <a href="/login">
+
+            Login Here
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         BACK HOME
+         ===================================================== -->
+
+    <div class="back-home">
+
+        <a href="/">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<!-- =========================================================
+     FOOTER FRAGMENT
+     ========================================================= -->
+
+	 <footer class="auth-footer">
+	     <p>
+	         © 2026 Movie Watchlist App. All Rights Reserved.
+	     </p>
+	 </footer>
+
 
 </body>
 

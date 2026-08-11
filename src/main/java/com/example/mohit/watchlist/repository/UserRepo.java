@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.mohit.watchlist.entity.User;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
+public interface UserRepo extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
 }

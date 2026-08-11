@@ -1,0 +1,213 @@
+
+/* =========================================================
+   ADMIN FOOTER
+   ========================================================= */
+
+.admin-footer {
+
+    width: 100%;
+
+    background: #292d32;
+
+    color: #ffffff;
+
+    margin-top: 50px;
+
+    border-top: 3px solid #dc3545;
+
+    box-shadow:
+        0 -3px 12px rgba(0, 0, 0, 0.15);
+
+}
+
+
+/* MAIN FOOTER ROW */
+
+.admin-footer-inner {
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    min-height: 75px;
+
+    padding: 18px 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+}
+
+
+/* BRAND */
+
+.admin-footer-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+.admin-footer-brand small {
+
+    color: #aaaaaa;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    padding-left: 4px;
+
+}
+
+
+/* CENTER */
+
+.admin-footer-center {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #c8c8c8;
+
+    font-size: 13px;
+
+    text-align: center;
+
+}
+
+
+.footer-divider {
+
+    color: #555b62;
+
+}
+
+
+/* COPYRIGHT */
+
+.admin-footer-copy {
+
+    color: #b5b5b5;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+}
+
+
+/* BOTTOM */
+
+.admin-footer-bottom {
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    padding: 10px 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #888f96;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .admin-footer-inner {
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 12px;
+
+        padding: 22px 15px;
+
+    }
+
+
+    .admin-footer-brand {
+
+        justify-content: center;
+
+    }
+
+
+    .admin-footer-center {
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .admin-footer-copy {
+
+        white-space: normal;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .admin-footer-center {
+
+        flex-direction: column;
+
+        gap: 5px;
+
+    }
+
+
+    .footer-divider {
+
+        display: none;
+
+    }
+
+
+    .admin-footer-bottom {
+
+        flex-wrap: wrap;
+
+        text-align: center;
+
+    }
+
+}

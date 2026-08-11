@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<nav class="admin-navbar"
+     th:fragment="adminNavbar">
+
+    <!-- BRAND -->
+    <a th:href="@{/admin/dashboard}"
+       class="admin-brand">
+        👑 Admin Dashboard
+    </a>
+
+
+    <!-- MOBILE BUTTON -->
+    <button class="admin-menu-btn"
+            type="button"
+            onclick="toggleAdminMenu()">
+        ☰
+    </button>
+
+
+    <!-- NAVIGATION -->
+    <ul class="admin-nav-links"
+        id="adminNavLinks">
+
+        <li>
+            <a th:href="@{/admin/dashboard}">
+                📊 Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/users}">
+                👥 Users
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/movies}">
+                🎬 Movies
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/feedback}">
+                💬 Feedback
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/activities}">
+                📈 Activities
+            </a>
+        </li>
+
+        <li>
+            <form th:action="@{/logout}"
+                  method="post">
+
+                <button type="submit"
+                        class="admin-logout">
+                    🚪 Logout
+                </button>
+
+            </form>
+        </li>
+
+    </ul>
+
+</nav>
+
+</body>
+</html>
