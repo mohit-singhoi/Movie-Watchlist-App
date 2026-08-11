@@ -1,68 +1,165 @@
-/* =========================================
+/* =========================================================
+   MOVIE WATCHLIST - ADMIN NAVBAR
+   Responsive Desktop / Tablet / Mobile
+   ========================================================= */
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+.admin-navbar,
+.admin-navbar *,
+.admin-navbar *::before,
+.admin-navbar *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
    ADMIN NAVBAR
-   ========================================= */
+   ========================================================= */
 
 .admin-navbar {
-    background: #292d32;
+    width: 100%;
+
     min-height: 65px;
-    padding: 0 25px;
+
+    background: #292d32;
+
+    padding: 0 35px;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.20);
+
+    position: relative;
+
+    z-index: 1000;
 }
 
 
-/* =========================================
+/* =========================================================
    BRAND
-   ========================================= */
+   ========================================================= */
 
 .admin-brand {
-    color: white;
+    color: #ffffff;
+
     font-size: 21px;
-    font-weight: bold;
+    font-weight: 700;
 
     text-decoration: none;
 
     display: flex;
     align-items: center;
+
     gap: 8px;
+
+    white-space: nowrap;
+
+    flex-shrink: 0;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
 }
+
 
 .admin-brand:hover {
-    color: white;
+    color: #ffffff;
+
     text-decoration: none;
+
+    opacity: 0.9;
 }
 
 
-/* =========================================
-   NAVIGATION
-   ========================================= */
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
+
+.admin-menu-btn {
+    display: none;
+
+    margin-left: auto;
+
+    padding: 5px 8px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.admin-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.10);
+
+    color: #ffffff;
+}
+
+
+.admin-menu-btn:focus {
+    outline: none;
+}
+
+
+/* =========================================================
+   NAVIGATION CONTAINER
+   ========================================================= */
 
 .admin-nav-links {
     display: flex;
+
     align-items: center;
 
-    gap: 5px;
+    gap: 8px;
 
-    margin: 0;
+    margin: 0 0 0 40px;
+
     padding: 0;
-	
-	margin-left: auto;
 
     list-style: none;
+
+    flex: 1;
+
+    min-width: 0;
 }
+
+
+/* =========================================================
+   NAVIGATION LIST ITEMS
+   ========================================================= */
 
 .admin-nav-links li {
     margin: 0;
+
+    padding: 0;
+
+    flex-shrink: 0;
 }
 
 
-/* =========================================
-   NAV LINKS
-   ========================================= */
+/* =========================================================
+   NAVIGATION LINKS
+   ========================================================= */
 
 .admin-nav-links a {
     color: #e8e8e8;
@@ -74,112 +171,390 @@
     border-radius: 7px;
 
     font-size: 15px;
+
     font-weight: 600;
 
     display: block;
 
-    transition: 0.2s ease;
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
+
 
 .admin-nav-links a:hover {
     background: rgba(255, 255, 255, 0.12);
 
-    color: white;
+    color: #ffffff;
 
     text-decoration: none;
 }
 
 
-/* =========================================
-   LOGOUT
-   ========================================= */
+/* =========================================================
+   LOGOUT POSITION - DESKTOP
+   Push Logout completely to the right
+   ========================================================= */
+
+.admin-nav-links li:last-child {
+    margin-left: auto;
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
 
 .admin-logout {
     background: #dc3545;
 
-    color: white;
+    color: #ffffff !important;
 
     border: none;
 
-    padding: 10px 13px;
+    padding: 10px 18px;
 
     border-radius: 7px;
 
     font-size: 15px;
+
     font-weight: 600;
 
     cursor: pointer;
 
-    margin-left: 5px;
+    white-space: nowrap;
 
-    transition: 0.2s ease;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .admin-logout:hover {
-    background: #c82333;
+    background: #c82333 !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
 }
 
 
-/* =========================================
-   MOBILE BUTTON
-   ========================================= */
-
-.admin-menu-btn {
-    display: none;
-
-    border: none;
-
-    background: transparent;
-
-    color: white;
-
-    font-size: 28px;
-
-    cursor: pointer;
+.admin-logout:focus {
+    outline: none;
 }
 
 
-/* =========================================
-   MOBILE
-   ========================================= */
+/* =========================================================
+   LARGE LAPTOP / DESKTOP
+   1200px+
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .admin-navbar {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .admin-nav-links {
+        margin-left: 50px;
+
+        gap: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   NORMAL LAPTOP / TABLET LANDSCAPE
+   901px - 1199px
+   ========================================================= */
+
+@media (min-width: 901px) and (max-width: 1199px) {
+
+    .admin-navbar {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .admin-brand {
+        font-size: 19px;
+    }
+
+    .admin-nav-links {
+        margin-left: 25px;
+
+        gap: 3px;
+    }
+
+    .admin-nav-links a {
+        padding: 9px 10px;
+
+        font-size: 14px;
+    }
+
+    .admin-logout {
+        padding: 9px 14px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   900px AND BELOW
+   ========================================================= */
 
 @media (max-width: 900px) {
 
+    /* -----------------------------------------
+       NAVBAR
+       ----------------------------------------- */
+
     .admin-navbar {
+        min-height: 65px;
+
+        padding: 12px 20px;
+
+        display: flex;
+
+        align-items: center;
+
         flex-wrap: wrap;
 
-        padding: 10px 18px;
+        gap: 0;
     }
+
+
+    /* -----------------------------------------
+       BRAND
+       ----------------------------------------- */
+
+    .admin-brand {
+        font-size: 21px;
+
+        margin: 0;
+
+        flex-shrink: 0;
+    }
+
+
+    /* -----------------------------------------
+       THREE LINE MENU
+       ----------------------------------------- */
 
     .admin-menu-btn {
         display: block;
+
+        margin-left: auto;
+
+        flex-shrink: 0;
     }
+
+
+    /* -----------------------------------------
+       NAVIGATION
+       Hidden by default
+       ----------------------------------------- */
 
     .admin-nav-links {
         display: none;
 
         width: 100%;
 
+        flex: none;
+
         flex-direction: column;
 
         align-items: stretch;
 
-        padding-top: 10px;
+        gap: 3px;
+
+        margin: 12px 0 0 0;
+
+        padding: 10px 0 0 0;
+
+        /* Thin line below Admin Dashboard */
+
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
     }
+
+
+    /* -----------------------------------------
+       WHEN MENU IS OPEN
+       ----------------------------------------- */
 
     .admin-nav-links.show {
         display: flex;
     }
 
+
+    /* -----------------------------------------
+       MOBILE LIST ITEMS
+       ----------------------------------------- */
+
+    .admin-nav-links li {
+        width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+    }
+
+
+    /* -----------------------------------------
+       MOBILE LINKS
+       ----------------------------------------- */
+
     .admin-nav-links a {
         width: 100%;
+
         padding: 12px 15px;
+
+        border-radius: 6px;
+
+        font-size: 15px;
+
+        white-space: normal;
     }
+
+
+    .admin-nav-links a:hover {
+        background: rgba(255, 255, 255, 0.10);
+    }
+
+
+    /* -----------------------------------------
+       RESET DESKTOP LOGOUT POSITION
+       ----------------------------------------- */
+
+    .admin-nav-links li:last-child {
+        margin-left: 0;
+    }
+
+
+    /* -----------------------------------------
+       MOBILE LOGOUT
+       ----------------------------------------- */
 
     .admin-logout {
         width: 100%;
 
-        margin-left: 0;
-        margin-top: 5px;
+        margin: 3px 0 0 0;
+
+        padding: 12px 15px;
+
+        text-align: center;
+
+        border-radius: 6px;
     }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   600px AND BELOW
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .admin-navbar {
+        padding: 11px 16px;
+    }
+
+
+    .admin-brand {
+        font-size: 19px;
+    }
+
+
+    .admin-menu-btn {
+        font-size: 28px;
+
+        padding: 5px 7px;
+    }
+
+
+    .admin-nav-links {
+        margin-top: 10px;
+
+        padding-top: 9px;
+    }
+
+
+    .admin-nav-links a {
+        padding: 11px 13px;
+
+        font-size: 14px;
+    }
+
+
+    .admin-logout {
+        padding: 11px 13px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   400px AND BELOW
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .admin-navbar {
+        padding: 10px 12px;
+    }
+
+
+    .admin-brand {
+        font-size: 17px;
+    }
+
+
+    .admin-menu-btn {
+        font-size: 26px;
+    }
+
+
+    .admin-nav-links a {
+        padding: 10px 12px;
+
+        font-size: 14px;
+    }
+
+
+    .admin-logout {
+        padding: 10px 12px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.admin-navbar a:focus-visible,
+.admin-navbar button:focus-visible {
+    outline: 2px solid #ffffff;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   PREVENT HORIZONTAL OVERFLOW
+   ========================================================= */
+
+.admin-navbar {
+    overflow-x: hidden;
 }

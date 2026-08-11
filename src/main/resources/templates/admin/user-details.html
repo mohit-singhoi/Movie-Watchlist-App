@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>User Details | Admin</title>
+
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+	
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+		  <!------ User Details CSS ------>
+	 <link rel="stylesheet" th:href="@{/css/user-details.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     USER DETAILS
+     ===================================================== -->
+
+<main class="user-details-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <h1>
+            👤 User Details
+        </h1>
+
+        <p>
+            View information about the selected user.
+        </p>
+
+    </div>
+
+
+    <!-- USER CARD -->
+
+    <div class="user-card">
+
+
+        <!-- USER HEADER -->
+
+        <div class="user-header">
+
+            <div class="user-avatar">
+                👤
+            </div>
+
+            <div>
+
+                <h2 th:text="${user.fullName}">
+                    Mohit Kumar
+                </h2>
+
+                <p th:text="${user.email}">
+                    example@gmail.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- USER INFORMATION -->
+
+        <div class="user-info">
+
+
+            <!-- USER ID -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    User ID
+                </span>
+
+                <span class="info-value"
+                      th:text="${user.id}">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- FULL NAME -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Full Name
+                </span>
+
+                <span class="info-value"
+                      th:text="${user.fullName}">
+                    Mohit Kumar
+                </span>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Email Address
+                </span>
+
+                <span class="info-value"
+                      th:text="${user.email}">
+                    example@gmail.com
+                </span>
+
+            </div>
+
+
+            <!-- ROLE -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Role
+                </span>
+
+                <span class="role-badge"
+                      th:text="${user.role}">
+                    ROLE_USER
+                </span>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Account Status
+                </span>
+
+                <span class="active-status">
+                    🟢 Active
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="user-actions">
+
+            <a th:href="@{/admin/users}"
+               class="back-btn">
+
+                ← Back to Users
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+
+</body>
+
+</html>

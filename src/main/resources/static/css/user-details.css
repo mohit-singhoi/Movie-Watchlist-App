@@ -1,0 +1,253 @@
+        /* =========================================
+           PAGE
+           ========================================= */
+
+        body {
+            margin: 0;
+            background: #f4f6f8;
+            font-family: Arial, sans-serif;
+            color: #292d32;
+        }
+
+        .user-details-page {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+
+        /* =========================================
+           HEADER
+           ========================================= */
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .page-header p {
+            margin-top: 8px;
+            color: #777;
+        }
+
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .user-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* =========================================
+           USER HEADER
+           ========================================= */
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .user-avatar {
+            width: 75px;
+            height: 75px;
+
+            border-radius: 50%;
+
+            background: #292d32;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 35px;
+        }
+
+        .user-header h2 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .user-header p {
+            margin: 6px 0 0;
+            color: #777;
+        }
+
+
+        /* =========================================
+           INFORMATION GRID
+           ========================================= */
+
+        .user-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+
+            border-radius: 10px;
+
+            padding: 18px;
+        }
+
+        .info-label {
+            display: block;
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-bottom: 7px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-size: 17px;
+
+            font-weight: 600;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================================
+           ROLE
+           ========================================= */
+
+        .role-badge {
+            display: inline-block;
+
+            padding: 7px 14px;
+
+            background: #292d32;
+
+            color: white;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           STATUS
+           ========================================= */
+
+        .active-status {
+            color: #198754;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           ACTIONS
+           ========================================= */
+
+        .user-actions {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .back-btn {
+            display: inline-block;
+
+            padding: 11px 20px;
+
+            background: #292d32;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #1d2023;
+
+            color: white;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .user-details-page {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .user-card {
+                padding: 20px;
+            }
+
+            .user-header {
+                align-items: flex-start;
+            }
+
+            .user-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .user-header h2 {
+                font-size: 21px;
+            }
+
+            .user-info {
+                grid-template-columns: 1fr;
+            }
+
+            .user-actions {
+                flex-direction: column;
+            }
+
+            .back-btn {
+                text-align: center;
+            }
+        }
+
+    

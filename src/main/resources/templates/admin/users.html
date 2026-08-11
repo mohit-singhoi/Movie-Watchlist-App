@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users | Admin Panel</title>
+	
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+    <!-- Admin Users CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/admin-users.css}">
+	
+</head>
+
+<body>
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+     ===================================================== -->
+
+<main class="admin-users-container">
+
+    <!-- PAGE HEADER -->
+
+    <section class="users-header">
+
+        <div>
+            <h1>👥 User Management</h1>
+
+            <p>
+                View and manage registered users.
+            </p>
+        </div>
+
+        <div class="user-count">
+            <span>👤</span>
+            <div>
+                <small>Total Users</small>
+                <strong th:text="${users != null ? #lists.size(users) : 0}">
+                    0
+                </strong>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         USERS TABLE
+         ================================================= -->
+
+    <section class="users-card">
+
+        <div class="table-header">
+
+            <h2>Registered Users</h2>
+
+            <input type="text"
+                   id="userSearch"
+                   placeholder="🔍 Search users..."
+                   onkeyup="searchUsers()">
+
+        </div>
+
+
+        <!-- DESKTOP TABLE -->
+
+        <div class="table-wrapper">
+
+            <table id="usersTable">
+
+                <thead>
+
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                <!-- USERS -->
+
+                <tr th:each="user, stat : ${users}">
+
+                    <td th:text="${stat.count}">
+                        1
+                    </td>
+
+                    <td>
+
+                        <div class="user-name">
+
+                            <div class="user-avatar">
+                                👤
+                            </div>
+
+                            <span th:text="${user.fullName}">
+                                User Name
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td th:text="${user.email}">
+                        user@email.com
+                    </td>
+
+
+                    <td>
+
+                        <span class="role-badge"
+                              th:text="${user.role}">
+                            USER
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status-badge active">
+                            ● Active
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="action-buttons">
+
+							<a th:href="@{/admin/users/{id}(id=${user.id})}"
+							   class="view-btn">
+							    View
+							</a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- EMPTY STATE -->
+
+                <tr th:if="${users == null or #lists.isEmpty(users)}">
+
+                    <td colspan="6">
+
+                        <div class="empty-users">
+
+                            <div class="empty-icon">
+                                👥
+                            </div>
+
+                            <h3>No Users Found</h3>
+
+                            <p>
+                                There are currently no registered users.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- =====================================================
+     SEARCH SCRIPT
+     ===================================================== -->
+
+<script>
+
+function searchUsers() {
+
+    const input =
+        document.getElementById("userSearch");
+
+    const filter =
+        input.value.toLowerCase();
+
+    const rows =
+        document.querySelectorAll("#usersTable tbody tr");
+
+    rows.forEach(function(row) {
+
+        const text =
+            row.textContent.toLowerCase();
+
+        row.style.display =
+            text.includes(filter) ? "" : "none";
+
+    });
+
+}
+
+</script>
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+</body>
+</html>

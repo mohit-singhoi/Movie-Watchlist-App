@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.mohit.watchlist.dto.SignupRequest;
 import com.example.mohit.watchlist.entity.User;
 import com.example.mohit.watchlist.repository.UserRepo;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -25,17 +26,36 @@ public class UserService {
         User user = new User();
 
         user.setFullName(request.getFullName());
-
         user.setEmail(request.getEmail());
 
-        // Encrypt password using BCrypt
         user.setPassword(
             passwordEncoder.encode(request.getPassword())
         );
 
-        // Every registered account is a normal USER
         user.setRole("ROLE_USER");
 
         return userRepository.save(user);
+    }
+
+    // ==============================
+    // GET ALL USERS
+    // ==============================
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+    
+    public long getTotalUsers() {
+        return userRepository.count();
+    }
+    
+    // ==============================
+    // GET USER BY ID
+    // ==============================
+
+    public User getUserById(Long id) {
+
+        return userRepository.findById(id)
+                .orElse(null);
     }
 }
