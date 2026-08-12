@@ -1,5 +1,7 @@
 package com.example.mohit.watchlist.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.mohit.watchlist.entity.Feedback;
@@ -14,7 +16,22 @@ public class FeedbackService {
         this.feedbackRepo = feedbackRepo;
     }
 
+    // Save feedback from user
     public Feedback saveFeedback(Feedback feedback) {
         return feedbackRepo.save(feedback);
+    }
+
+    // Get all feedback for admin
+    public List<Feedback> getAllFeedback() {
+        return feedbackRepo.findAll();
+    }
+
+    // Total feedback for admin dashboard
+    public long getTotalFeedback() {
+        return feedbackRepo.count();
+    }
+    
+    public Feedback getFeedbackById(Long id) {
+        return feedbackRepo.findById(id).orElse(null);
     }
 }

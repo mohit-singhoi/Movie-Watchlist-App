@@ -115,7 +115,7 @@ public class MovieController {
             movie.setSource("N/A");
 
             if (movie.getId() == null) {
-                databaseService.save(movie);      // or repository.save(movie)
+                databaseService.create(movie);      // or repository.save(movie)
             } else {
                 databaseService.update(movie, movie.getId());
             }

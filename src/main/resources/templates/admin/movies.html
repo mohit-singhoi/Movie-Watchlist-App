@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Movie Management | Admin</title>
+
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+    <!-- Movies Page CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/admin-movies.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     MOVIES PAGE
+     ===================================================== -->
+
+<main class="movies-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="movies-header">
+
+        <div>
+
+            <h1>
+                🎬 Movie Management
+            </h1>
+
+            <p>
+                View and manage all movies added by users.
+            </p>
+
+        </div>
+
+        <div class="movie-count">
+
+            <span>
+                Total Movies
+            </span>
+
+            <strong th:text="${totalMovies ?: 0}">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         MOVIES TABLE
+         ================================================= -->
+
+    <div class="movies-card">
+
+        <div class="table-wrapper">
+
+            <table class="movies-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Title
+                        </th>
+
+                        <th>
+                            Rating
+                        </th>
+
+                        <th>
+                            Source
+                        </th>
+
+                        <th>
+                            Priority
+                        </th>
+
+                        <th>
+                            User
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- MOVIES -->
+
+                    <tr th:each="movie : ${movies}">
+
+
+                        <!-- ID -->
+
+                        <td th:text="${movie.id}">
+                            1
+                        </td>
+
+
+                        <!-- TITLE -->
+
+                        <td>
+
+                            <strong
+                                th:text="${movie.title}">
+                                Movie Title
+                            </strong>
+
+                        </td>
+
+
+                        <!-- RATING -->
+
+                        <td>
+
+                            <span class="rating-badge"
+                                  th:text="${movie.rating}">
+                                8.5
+                            </span>
+
+                        </td>
+
+
+                        <!-- SOURCE -->
+
+						<td>
+						    <a th:href="${movie.source}"
+						       th:text="${movie.source}"
+						       target="_blank"
+						       rel="noopener noreferrer"
+						       class="source-link">
+						        Source
+						    </a>
+						</td>
+
+
+                        <!-- PRIORITY -->
+
+                        <td>
+
+                            <span class="priority-badge"
+                                  th:text="${movie.priority}">
+                                H
+                            </span>
+
+                        </td>
+
+
+                        <!-- USER -->
+
+                        <td>
+
+                            <span th:if="${movie.user != null}"
+                                  th:text="${movie.user.fullName}">
+                                Mohit Kumar
+                            </span>
+
+                            <span th:if="${movie.user == null}">
+                                Unknown
+                            </span>
+
+                        </td>
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+                            <a th:href="@{/admin/movies/{id}(id=${movie.id})}"
+                               class="view-btn">
+
+                                View
+
+                            </a>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    <!-- NO MOVIES -->
+
+                    <tr th:if="${#lists.isEmpty(movies)}">
+
+                        <td colspan="7"
+                            class="no-movies">
+
+                            🎬 No movies found.
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+</body>
+
+</html>

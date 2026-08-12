@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.mohit.watchlist.entity.User;
 import com.example.mohit.watchlist.security.CustomUserDetails;
-
+import com.example.mohit.watchlist.entity.Activity;
 import com.example.mohit.watchlist.entity.Movie;
 import com.example.mohit.watchlist.repository.MovieRepo;
+import com.example.mohit.watchlist.service.*;
 
 import jakarta.validation.Valid;
 
@@ -27,6 +27,9 @@ public class MovieServices {
 	
 	@Autowired
 	RatingService ratingService;
+	
+	@Autowired
+	ActivityService activityService;
 	
 	// Old Version
 //	public void create(Movie movie) {
@@ -131,8 +134,18 @@ public class MovieServices {
 	    // Associate the movie with the logged-in user
 	    movie.setUser(user);
 
-	    // Save the movie
+	 // Save the movie
 	    movieRepo.save(movie);
+
+	    // Save activity
+	    activityService.saveActivity(
+	        new Activity(
+	            "🎬",
+	            "Movie Added",
+	            user.getFullName()
+	                + " added \"" + movie.getTitle() + "\" to the watchlist."
+	        )
+	    );
 	}
 	
 	
@@ -161,7 +174,7 @@ public class MovieServices {
 	}
 	
 	public Movie getMovieById(Integer id) {
-		return movieRepo.findById(id).get();
+	    return movieRepo.findById(id).orElse(null);
 	}
 	
 	
@@ -228,37 +241,57 @@ public class MovieServices {
 	    }
 
 	    movieRepo.save(toBeUpdated);
+
+	    activityService.saveActivity(
+	        new Activity(
+	            "✏️",
+	            "Movie Updated",
+	            customUser.getUser().getFullName()
+	                + " updated \"" + toBeUpdated.getTitle() + "\"."
+	        )
+	    );
 	}
 	
 	
+	
+	// Delete Movie by id 
 	
 	public void deleteMovieById(Integer id) {
-	  
-		//  movieRepo.deleteById(id);
-		
-		Movie movie = getMovieById(id);
 
-		Authentication authentication =
-		        SecurityContextHolder.getContext().getAuthentication();
+	    Movie movie = getMovieById(id);
 
-		CustomUserDetails customUser =
-		        (CustomUserDetails) authentication.getPrincipal();
+	    if (movie == null) {
+	        throw new RuntimeException("Movie not found");
+	    }
 
-		if (!movie.getUser().getId()
-		        .equals(customUser.getUser().getId())) {
+	    Authentication authentication =
+	            SecurityContextHolder.getContext().getAuthentication();
 
-		    throw new RuntimeException("Access Denied");
-		}
+	    CustomUserDetails customUser =
+	            (CustomUserDetails) authentication.getPrincipal();
 
-		movieRepo.delete(movie);
-	}
-	
-	
-	public void save(@Valid Movie movie) {
-		// TODO Auto-generated method stub
-		
-		movieRepo.save(movie);
-		
+	    User user = customUser.getUser();
+
+	    // Check ownership
+	    if (!movie.getUser().getId().equals(user.getId())) {
+	        throw new RuntimeException("Access Denied");
+	    }
+
+	    // Store title before deleting
+	    String movieTitle = movie.getTitle();
+
+	    // Delete movie
+	    movieRepo.delete(movie);
+
+	    // Create activity
+	    activityService.saveActivity(
+	        new Activity(
+	            "🗑️",
+	            "Movie Deleted",
+	            user.getFullName()
+	                + " deleted \"" + movieTitle + "\"."
+	        )
+	    );
 	}
 	
 	private String normalizePriority(String priority) {
@@ -288,5 +321,13 @@ public class MovieServices {
 	            return "Low";
 	    }
 	}
+	
+	public List<Movie> getAllMovies1() {
+	    return movieRepo.findAll();
+	}
 
+	public long getTotalMovies() {
+	    return movieRepo.count();
+	}
+		
 }

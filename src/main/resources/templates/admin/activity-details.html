@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Activity Details</title>
+
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+		<!--  Activity-details CSS -->
+			<link rel="stylesheet"
+			 th:href="@{/css/activity-details.css}">			
+			
+</head>
+
+<body>
+	
+
+	<!-- Navbar -->
+	<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+<div class="details-container">
+
+    <div class="details-card">
+
+        <div class="activity-icon"
+             th:text="${activity.icon}">
+            🎬
+        </div>
+
+        <h1>Activity Details</h1>
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Activity ID
+            </span>
+
+            <span class="detail-value"
+                  th:text="${activity.id}">
+                1
+            </span>
+
+        </div>
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Action
+            </span>
+
+            <span class="detail-value"
+                  th:text="${activity.action}">
+                Movie Added
+            </span>
+
+        </div>
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Description
+            </span>
+
+            <span class="detail-value"
+                  th:text="${activity.description}">
+                Mohit added a movie.
+            </span>
+
+        </div>
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Date & Time
+            </span>
+
+            <span class="detail-value"
+                  th:text="${activity.createdAt}">
+                2026-08-12
+            </span>
+
+        </div>
+
+        <a th:href="@{/admin/activities}"
+           class="back-btn">
+            ← Back to Activities
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+</body>
+
+</html>

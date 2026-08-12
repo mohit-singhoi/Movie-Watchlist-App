@@ -1,0 +1,319 @@
+/* =========================================
+   MOVIE DETAILS PAGE
+   ========================================= */
+
+.movie-details-page {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0;
+
+    font-size: 30px;
+
+    color: #292d32;
+}
+
+.page-header p {
+    margin-top: 8px;
+
+    color: #777;
+}
+
+
+/* =========================================
+   MOVIE CARD
+   ========================================= */
+
+.movie-card {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, .08);
+}
+
+
+/* =========================================
+   MOVIE HEADER
+   ========================================= */
+
+.movie-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.movie-icon {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 15px;
+
+    background: #292d32;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 35px;
+}
+
+.movie-header h2 {
+    margin: 0;
+
+    font-size: 25px;
+
+    color: #292d32;
+}
+
+.movie-header p {
+    margin: 6px 0 0;
+
+    color: #777;
+}
+
+
+/* =========================================
+   INFORMATION GRID
+   ========================================= */
+
+.movie-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.info-box {
+    background: #f8f9fa;
+
+    border-radius: 10px;
+
+    padding: 18px;
+}
+
+.info-label {
+    display: block;
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+}
+
+.info-value {
+    font-size: 17px;
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* =========================================
+   RATING
+   ========================================= */
+
+.rating-value {
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    background: #fff3cd;
+
+    color: #856404;
+
+    border-radius: 20px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   PRIORITY
+   ========================================= */
+
+.priority-value {
+    display: inline-flex;
+
+    width: 32px;
+    height: 32px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #292d32;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   SOURCE
+   ========================================= */
+
+.source-link {
+    display: inline-block;
+
+    color: #007bff;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.source-link:hover {
+    color: #0056b3;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   COMMENT
+   ========================================= */
+
+.comment-box {
+    grid-column: 1 / -1;
+}
+
+.comment-value {
+    margin: 0;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    color: #333;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================================
+   ACTIONS
+   ========================================= */
+
+.movie-actions {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e5e5;
+}
+
+.back-btn {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    background: #292d32;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: #1d2023;
+
+    color: white;
+
+    text-decoration: none;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .movie-details-page {
+        margin: 25px auto;
+
+        padding: 0 15px;
+    }
+
+    .movie-card {
+        padding: 20px;
+    }
+
+    .movie-header {
+        align-items: flex-start;
+    }
+
+    .movie-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 28px;
+    }
+
+    .movie-header h2 {
+        font-size: 21px;
+    }
+
+    .movie-info {
+        grid-template-columns: 1fr;
+    }
+
+    .comment-box {
+        grid-column: auto;
+    }
+
+    .movie-actions {
+        flex-direction: column;
+    }
+
+    .back-btn {
+        text-align: center;
+    }
+}

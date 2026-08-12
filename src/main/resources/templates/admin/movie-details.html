@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Movie Details | Admin</title>
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+    <!-- Movie Details CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/movie-details.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     MOVIE DETAILS
+     ===================================================== -->
+
+<main class="movie-details-page">
+
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <h1>
+            🎬 Movie Details
+        </h1>
+
+        <p>
+            View information about the selected movie.
+        </p>
+
+    </div>
+
+
+    <!-- MOVIE CARD -->
+
+    <div class="movie-card">
+
+
+        <!-- MOVIE HEADER -->
+
+        <div class="movie-header">
+
+            <div class="movie-icon">
+                🎬
+            </div>
+
+            <div>
+
+                <h2 th:text="${movie.title}">
+                    Movie Title
+                </h2>
+
+                <p>
+                    Movie information
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOVIE INFORMATION -->
+
+        <div class="movie-info">
+
+
+            <!-- MOVIE ID -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Movie ID
+                </span>
+
+                <span class="info-value"
+                      th:text="${movie.id}">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Movie Title
+                </span>
+
+                <span class="info-value"
+                      th:text="${movie.title}">
+                    Movie Title
+                </span>
+
+            </div>
+
+
+            <!-- RATING -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Rating
+                </span>
+
+                <span class="rating-value"
+                      th:text="${movie.rating}">
+                    8.5
+                </span>
+
+            </div>
+
+
+            <!-- PRIORITY -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Priority
+                </span>
+
+                <span class="priority-value"
+                      th:text="${movie.priority}">
+                    H
+                </span>
+
+            </div>
+
+
+            <!-- SOURCE -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Source
+                </span>
+
+                <a th:href="${movie.source}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="source-link">
+
+                    🔗 Open Movie Source
+
+                </a>
+
+            </div>
+
+
+            <!-- USER -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Added By
+                </span>
+
+                <span class="info-value"
+                      th:if="${movie.user != null}"
+                      th:text="${movie.user.fullName}">
+
+                    User Name
+
+                </span>
+
+                <span class="info-value"
+                      th:unless="${movie.user != null}">
+
+                    Unknown User
+
+                </span>
+
+            </div>
+
+
+            <!-- COMMENT -->
+
+            <div class="info-box comment-box">
+
+                <span class="info-label">
+                    Comment
+                </span>
+
+                <p class="comment-value"
+                   th:text="${movie.comment}">
+                    No comment available.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="movie-actions">
+
+            <a th:href="@{/admin/movies}"
+               class="back-btn">
+
+                ← Back to Movies
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+<!-------Java Script -->
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+</body>
+
+</html>

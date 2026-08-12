@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Activities | Admin</title>
+
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+    <!-- Activities CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/admin-activities.css}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     ACTIVITIES PAGE
+     ===================================================== -->
+
+<main class="activities-page">
+
+
+    <!-- HEADER -->
+
+    <div class="activities-header">
+
+        <div>
+
+            <h1>📈 Activities</h1>
+
+            <p>
+                Monitor recent activity in your Movie Watchlist application.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         ACTIVITY CARD
+         ================================================= -->
+
+    <div class="activities-card">
+
+
+        <div class="card-title">
+
+            <h2>Recent Activities</h2>
+
+        </div>
+
+
+        <!-- ACTIVITY LIST -->
+
+        <div class="activity-list"
+             th:if="${activities != null and !#lists.isEmpty(activities)}">
+
+
+            <div class="activity-item"
+                 th:each="activity : ${activities}">
+
+                <div class="activity-icon">
+
+                    <span th:text="${activity.icon}">
+                        📌
+                    </span>
+
+                </div>
+
+
+                <div class="activity-content">
+
+                    <h3 th:text="${activity.action}">
+                        User registered
+                    </h3>
+
+                    <p th:text="${activity.description}">
+                        A new user registered on the platform.
+                    </p>
+
+                    <small th:text="${activity.createdAt}">
+                        12 Aug 2026
+                    </small>
+
+                </div>
+				
+				<div class="activity-action">
+				       <a th:href="@{/admin/activities/{id}(id=${activity.id})}"
+				          class="view-btn">
+				           View
+				       </a>
+				   </div>
+            </div>
+
+
+        </div>
+
+
+        <!-- NO ACTIVITIES -->
+
+        <div class="no-activities"
+             th:if="${activities == null or #lists.isEmpty(activities)}">
+
+            <div class="empty-icon">
+                📊
+            </div>
+
+            <h3>No activities found</h3>
+
+            <p>
+                There are no recorded activities yet.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+
+</body>
+
+</html>

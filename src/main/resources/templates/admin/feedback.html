@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Feedback Management | Admin</title>
+
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+    <!-- Feedback CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/admin-feedback.css}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     FEEDBACK PAGE
+     ===================================================== -->
+
+<main class="feedback-page">
+
+
+    <!-- HEADER -->
+
+    <div class="feedback-header">
+
+        <div>
+
+            <h1>💬 Feedback Management</h1>
+
+            <p>
+                View and manage feedback submitted by users.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         STAT CARDS
+         ================================================= -->
+
+    <div class="feedback-stats">
+
+
+        <div class="feedback-stat-card">
+
+            <div class="feedback-stat-icon">
+                💬
+            </div>
+
+            <div>
+
+                <h3>Total Feedback</h3>
+
+                <span th:text="${totalFeedback ?: 0}">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="feedback-stat-card">
+
+            <div class="feedback-stat-icon">
+                🆕
+            </div>
+
+            <div>
+
+                <h3>Recent Feedback</h3>
+
+                <span th:text="${recentFeedback ?: 0}">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         FEEDBACK TABLE
+         ================================================= -->
+
+    <div class="feedback-card">
+
+        <div class="feedback-card-header">
+
+            <h2>All Feedback</h2>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table class="feedback-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>User</th>
+
+                        <th>Email</th>
+
+                        <th>Message</th>
+
+                        <th>Date</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+				<tbody>
+
+				    <tr th:each="feedback : ${feedbacks}">
+
+				        <!-- ID -->
+				        <td th:text="${feedback.id}">
+				            1
+				        </td>
+
+				        <!-- USER -->
+				        <td th:text="${feedback.user.fullName}">
+				            User Name
+				        </td>
+
+				        <!-- EMAIL -->
+				        <td th:text="${feedback.user.email}">
+				            user@email.com
+				        </td>
+
+				        <!-- CATEGORY -->
+				        <td th:text="${feedback.category}">
+				            Suggestion
+				        </td>
+
+				        <!-- RATING -->
+				        <td>
+				            <span class="rating-badge"
+				                  th:text="${feedback.rating}">
+				                5
+				            </span>
+				        </td>
+
+				        <!-- MESSAGE -->
+				        <td class="message-cell"
+				            th:text="${feedback.message}">
+				            Great application!
+				        </td>
+
+				        <!-- VIEW -->
+				        <td>
+
+				            <a th:href="@{/admin/feedback/{id}(id=${feedback.id})}"
+				               class="view-feedback-btn">
+
+				                View
+
+				            </a>
+
+				        </td>
+
+				    </tr>
+
+
+				    <!-- NO FEEDBACK -->
+
+				    <tr th:if="${#lists.isEmpty(feedbacks)}">
+
+				        <td colspan="7"
+				            class="no-feedback">
+
+				            💬 No feedback found.
+
+				        </td>
+
+				    </tr>
+
+				</tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+</body>
+
+</html>

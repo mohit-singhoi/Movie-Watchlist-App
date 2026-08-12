@@ -1,0 +1,250 @@
+/* =========================================
+   ACTIVITY DETAILS PAGE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #292d32;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.details-container {
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+
+/* =========================================
+   DETAILS CARD
+========================================= */
+
+.details-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 35px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================
+   ACTIVITY ICON
+========================================= */
+
+.activity-icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    background: #f0f2f4;
+    border-radius: 50%;
+
+    font-size: 38px;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.details-card h1 {
+    margin: 0 0 25px 0;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #292d32;
+}
+
+
+/* =========================================
+   DETAIL ROW
+========================================= */
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.detail-row:last-of-type {
+    border-bottom: none;
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.detail-label {
+    min-width: 150px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #555;
+}
+
+
+/* =========================================
+   VALUE
+========================================= */
+
+.detail-value {
+    flex: 1;
+
+    text-align: right;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    color: #222;
+
+    word-break: break-word;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.back-btn {
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 11px 20px;
+
+    background: #292d32;
+    color: #ffffff;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #1f2327;
+    color: #ffffff;
+
+    text-decoration: none;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .details-container {
+        width: 100%;
+
+        margin: 20px auto;
+        padding: 12px;
+    }
+
+    .details-card {
+        padding: 22px 18px;
+
+        border-radius: 12px;
+    }
+
+    .activity-icon {
+        width: 65px;
+        height: 65px;
+
+        font-size: 32px;
+    }
+
+    .details-card h1 {
+        font-size: 23px;
+        margin-bottom: 20px;
+    }
+
+    .detail-row {
+        flex-direction: column;
+
+        gap: 6px;
+
+        padding: 14px 0;
+    }
+
+    .detail-label {
+        min-width: auto;
+
+        font-size: 14px;
+    }
+
+    .detail-value {
+        width: 100%;
+
+        text-align: left;
+
+        font-size: 14px;
+    }
+
+    .back-btn {
+        width: 100%;
+
+        text-align: center;
+
+        margin-top: 20px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .details-container {
+        padding: 8px;
+    }
+
+    .details-card {
+        padding: 18px 15px;
+    }
+
+    .details-card h1 {
+        font-size: 21px;
+    }
+
+    .activity-icon {
+        width: 58px;
+        height: 58px;
+
+        font-size: 28px;
+    }
+}

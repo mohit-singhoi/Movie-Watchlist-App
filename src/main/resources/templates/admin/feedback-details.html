@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Feedback Details | Admin</title>
+
+	<!-- Admin Navbar CSS -->
+	<link rel="stylesheet"
+	      th:href="@{/css/admin-navbar.css}">
+
+		  <!--  Admin Footer CSS -->
+		  <link rel="stylesheet"
+		        th:href="@{/css/admin-footer.css}">
+
+    <!-- Feedback Details CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/feedback-details.css}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN NAVBAR
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!-- =====================================================
+     FEEDBACK DETAILS
+     ===================================================== -->
+
+<main class="feedback-details-page">
+
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <h1>💬 Feedback Details</h1>
+
+        <p>
+            View complete feedback submitted by the user.
+        </p>
+
+    </div>
+
+
+    <!-- FEEDBACK CARD -->
+
+    <div class="feedback-details-card">
+
+
+        <!-- HEADER -->
+
+        <div class="feedback-details-header">
+
+            <div class="feedback-icon">
+                💬
+            </div>
+
+            <div>
+
+                <h2 th:text="${feedback.category}">
+                    Feedback Category
+                </h2>
+
+                <p>
+                    Feedback ID:
+                    <strong th:text="${feedback.id}">
+                        1
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="feedback-info">
+
+
+            <!-- FEEDBACK ID -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Feedback ID
+                </span>
+
+                <span class="info-value"
+                      th:text="${feedback.id}">
+                    1
+                </span>
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Category
+                </span>
+
+                <span class="category-value"
+                      th:text="${feedback.category}">
+                    Suggestion
+                </span>
+
+            </div>
+
+
+            <!-- RATING -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Rating
+                </span>
+
+                <span class="rating-value"
+                      th:text="${feedback.rating}">
+                    5
+                </span>
+
+            </div>
+
+
+            <!-- USER -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Submitted By
+                </span>
+
+                <span class="info-value"
+                      th:if="${feedback.user != null}"
+                      th:text="${feedback.user.fullName}">
+                    User Name
+                </span>
+
+                <span class="info-value"
+                      th:unless="${feedback.user != null}">
+                    Unknown User
+                </span>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    User Email
+                </span>
+
+                <span class="info-value"
+                      th:if="${feedback.user != null}"
+                      th:text="${feedback.user.email}">
+                    user@email.com
+                </span>
+
+                <span class="info-value"
+                      th:unless="${feedback.user != null}">
+                    Not Available
+                </span>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="info-box message-box">
+
+                <span class="info-label">
+                    Message
+                </span>
+
+                <p class="message-value"
+                   th:text="${feedback.message}">
+                    Feedback message goes here.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACTION -->
+
+        <div class="feedback-actions">
+
+            <a th:href="@{/admin/feedback}"
+               class="back-btn">
+
+                ← Back to Feedback
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     ADMIN FOOTER
+     ===================================================== -->
+
+<div th:replace="~{admin/admin-footer :: adminFooter}"></div>
+
+
+<!-- Navbar JavaScript -->
+<script th:src="@{/js/admin-navbar.js}"></script>
+
+
+</body>
+
+</html>

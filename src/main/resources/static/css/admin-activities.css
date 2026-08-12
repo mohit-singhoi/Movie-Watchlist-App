@@ -1,0 +1,256 @@
+/* =========================================
+   ACTIVITIES PAGE
+   ========================================= */
+
+.activities-page {
+    max-width: 1100px;
+
+    margin: 40px auto;
+
+    padding: 0 20px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.activities-header {
+    margin-bottom: 25px;
+}
+
+.activities-header h1 {
+    margin: 0;
+
+    color: #292d32;
+
+    font-size: 30px;
+}
+
+.activities-header p {
+    margin-top: 8px;
+
+    color: #777;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   MAIN CARD
+   ========================================= */
+
+.activities-card {
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, .08);
+}
+
+
+/* =========================================
+   CARD TITLE
+   ========================================= */
+
+.card-title {
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #eee;
+
+    margin-bottom: 5px;
+}
+
+.card-title h2 {
+    margin: 0;
+
+    font-size: 21px;
+
+    color: #292d32;
+}
+
+
+/* =========================================
+   ACTIVITY ITEM
+   ========================================= */
+
+.activity-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    padding: 20px 5px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================
+   ACTIVITY ICON
+   ========================================= */
+
+.activity-icon {
+    width: 50px;
+
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 12px;
+
+    background: #f1f3f5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+/* =========================================
+   CONTENT
+   ========================================= */
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-content h3 {
+    margin: 0 0 5px;
+
+    font-size: 16px;
+
+    color: #292d32;
+}
+
+.activity-content p {
+    margin: 0 0 7px;
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.activity-content small {
+    color: #999;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+	   VIEW BUTTON
+	   ========================================= */
+
+	.view-btn {
+	    display: inline-block;
+
+	    padding: 8px 15px;
+
+	    background: #292d32;
+	    color: white;
+
+	    border-radius: 7px;
+
+	    text-decoration: none;
+
+	    font-size: 13px;
+	    font-weight: 600;
+
+	    transition: .2s ease;
+	}
+
+	.view-btn:hover {
+	    background: #111418;
+
+	    color: white;
+
+	    text-decoration: none;
+	}
+	
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.no-activities {
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 50px;
+
+    margin-bottom: 15px;
+}
+
+.no-activities h3 {
+    margin: 0 0 8px;
+
+    color: #292d32;
+}
+
+.no-activities p {
+    margin: 0;
+
+    color: #888;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .activities-page {
+        margin: 25px auto;
+
+        padding: 0 15px;
+    }
+
+    .activities-card {
+        padding: 18px;
+    }
+
+    .activity-item {
+        gap: 12px;
+
+        padding: 16px 0;
+    }
+
+    .activity-icon {
+        width: 42px;
+
+        height: 42px;
+
+        min-width: 42px;
+
+        font-size: 19px;
+    }
+
+    .activity-content h3 {
+        font-size: 15px;
+    }
+
+    .activity-content p {
+        font-size: 13px;
+    }
+	
+	
+}
