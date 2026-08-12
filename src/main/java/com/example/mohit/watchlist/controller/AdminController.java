@@ -4,12 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import com.example.mohit.watchlist.service.*;
 import com.example.mohit.watchlist.entity.Activity;
 import com.example.mohit.watchlist.entity.Feedback;
 import com.example.mohit.watchlist.entity.Movie;
 import com.example.mohit.watchlist.entity.User;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 
 @Controller
@@ -83,6 +85,8 @@ public class AdminController {
     // ==============================
     // VIEW SINGLE USER
     // ==============================
+    
+    
 
     @GetMapping("/admin/users/{id}")
     public String viewUser(
@@ -96,6 +100,21 @@ public class AdminController {
         }
 
         model.addAttribute("user", user);
+
+        model.addAttribute(
+            "movies",
+            movieServices.getMoviesByUser(user)
+        );
+
+        model.addAttribute(
+            "feedbacks",
+            feedbackService.getFeedbackByUser(user)
+        );
+        
+        model.addAttribute(
+        	    "activities",
+        	    activityService.getActivitiesByUser(user)
+        	);
 
         return "admin/user-details";
     }
@@ -206,5 +225,81 @@ public class AdminController {
 
         return "admin/activity-details";
     }
+    
+ // ==============================
+ // DELETE USER All Movies
+ // ==============================
+
+    @PostMapping("/admin/users/{id}/delete-movies")
+    public String deleteUserMovies(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        User user = userService.getUserById(id);
+
+        if (user == null) {
+            return "redirect:/admin/users";
+        }
+
+        movieServices.deleteMoviesByUser(user);
+
+        redirectAttributes.addFlashAttribute(
+            "successMessage",
+            "All movies of " + user.getFullName() + " have been deleted successfully."
+        );
+
+        return "redirect:/admin/users/" + id;
+    }
+    
+    // ==============================
+    // DELETE USER All Feedback
+    // ==============================
+    
+    @PostMapping("/admin/users/{id}/delete-feedback")
+    public String deleteUserFeedback(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        User user = userService.getUserById(id);
+
+        if (user == null) {
+            return "redirect:/admin/users";
+        }
+
+        feedbackService.deleteFeedbackByUser(user);
+
+        redirectAttributes.addFlashAttribute(
+            "successMessage",
+            "All feedback of " + user.getFullName() + " has been deleted successfully."
+        );
+
+        return "redirect:/admin/users/" + id;
+    }
+    
+    // ==============================
+    // DELETE USER All Activities 
+    // ==============================
+    
+    @PostMapping("/admin/users/{id}/delete-activities")
+    public String deleteUserActivities(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        User user = userService.getUserById(id);
+
+        if (user == null) {
+            return "redirect:/admin/users";
+        }
+
+        activityService.deleteActivitiesByUser(user);
+
+        redirectAttributes.addFlashAttribute(
+            "successMessage",
+            "All activities of " + user.getFullName() + " have been deleted successfully."
+        );
+
+        return "redirect:/admin/users/" + id;
+    }
+    
     
 }

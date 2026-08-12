@@ -23,12 +23,21 @@
 </head>
 
 <body>
+	
 
 <!-- =====================================================
      ADMIN NAVBAR
      ===================================================== -->
 
 <div th:replace="~{admin/admin-navbar :: adminNavbar}"></div>
+
+
+<!----- User  Delete Popup ---->
+<div th:if="${success}"
+     class="success-message"
+     th:text="${success}">
+    User successfully deleted.
+</div>
 
 
 <!-- =====================================================

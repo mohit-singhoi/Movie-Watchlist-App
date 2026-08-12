@@ -143,7 +143,7 @@ public class MovieServices {
 	            "🎬",
 	            "Movie Added",
 	            user.getFullName()
-	                + " added \"" + movie.getTitle() + "\" to the watchlist."
+	                + " added \"" + movie.getTitle() + "\" to the watchlist.",user
 	        )
 	    );
 	}
@@ -197,22 +197,23 @@ public class MovieServices {
 	// New version to Automate Priority and ratings.
 	public void update(Movie movie, Integer id) {
 
-	  //  Movie toBeUpdated = getMovieById(id)
+	    Movie toBeUpdated = getMovieById(id);
 
-		Movie toBeUpdated = getMovieById(id);
+	    Authentication authentication =
+	            SecurityContextHolder.getContext().getAuthentication();
 
-		Authentication authentication =
-		        SecurityContextHolder.getContext().getAuthentication();
+	    CustomUserDetails customUser =
+	            (CustomUserDetails) authentication.getPrincipal();
 
-		CustomUserDetails customUser =
-		        (CustomUserDetails) authentication.getPrincipal();
+	    // Get logged-in user
+	    User user = customUser.getUser();
 
-		if (!toBeUpdated.getUser().getId()
-		        .equals(customUser.getUser().getId())) {
+	    // Check movie ownership
+	    if (!toBeUpdated.getUser().getId()
+	            .equals(user.getId())) {
 
-		    throw new RuntimeException("Access Denied");
-		}
-		
+	        throw new RuntimeException("Access Denied");
+	    }
 
 	    toBeUpdated.setTitle(movie.getTitle());
 	    toBeUpdated.setSource(movie.getSource());
@@ -223,12 +224,15 @@ public class MovieServices {
 	    if (rating != null && !rating.isBlank()) {
 
 	        float imdbRating = Float.parseFloat(rating);
+
 	        toBeUpdated.setRating(imdbRating);
 
 	        if (imdbRating < 3) {
 	            toBeUpdated.setPriority("Low");
+
 	        } else if (imdbRating < 7) {
 	            toBeUpdated.setPriority("Medium");
+
 	        } else {
 	            toBeUpdated.setPriority("High");
 	        }
@@ -237,25 +241,32 @@ public class MovieServices {
 
 	        // Movie not found on IMDb
 	        toBeUpdated.setRating(movie.getRating());
-	        toBeUpdated.setPriority(normalizePriority(movie.getPriority()));
+
+	        toBeUpdated.setPriority(
+	            normalizePriority(movie.getPriority())
+	        );
 	    }
 
+	    // Save updated movie
 	    movieRepo.save(toBeUpdated);
 
+	    // Save activity
 	    activityService.saveActivity(
 	        new Activity(
 	            "✏️",
 	            "Movie Updated",
-	            customUser.getUser().getFullName()
-	                + " updated \"" + toBeUpdated.getTitle() + "\"."
+	            user.getFullName()
+	                + " updated \""
+	                + toBeUpdated.getTitle()
+	                + "\".",
+	            user
 	        )
 	    );
 	}
 	
 	
 	
-	// Delete Movie by id 
-	
+	// Delete Movie by id
 	public void deleteMovieById(Integer id) {
 
 	    Movie movie = getMovieById(id);
@@ -283,13 +294,14 @@ public class MovieServices {
 	    // Delete movie
 	    movieRepo.delete(movie);
 
-	    // Create activity
+	    // Create activity and associate it with the user
 	    activityService.saveActivity(
 	        new Activity(
 	            "🗑️",
 	            "Movie Deleted",
 	            user.getFullName()
-	                + " deleted \"" + movieTitle + "\"."
+	                + " deleted \"" + movieTitle + "\".",
+	            user
 	        )
 	    );
 	}
@@ -328,6 +340,15 @@ public class MovieServices {
 
 	public long getTotalMovies() {
 	    return movieRepo.count();
+	}
+	
+	public List<Movie> getMoviesByUser(User user) {
+	    return movieRepo.findByUser(user);
+	}
+	
+	// Delete all movies belonging to a specific user
+	public void deleteMoviesByUser(User user) {
+	    movieRepo.deleteAll(movieRepo.findByUser(user));
 	}
 		
 }

@@ -56,7 +56,8 @@ public class FeedbackController {
         	    new Activity(
         	        "💬",
         	        "New Feedback Submitted",
-        	        "A user submitted new feedback."
+        	        user.getFullName() + " submitted new feedback.",
+        	        user
         	    )
         	);
 

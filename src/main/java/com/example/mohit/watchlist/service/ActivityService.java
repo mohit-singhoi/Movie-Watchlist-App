@@ -3,7 +3,7 @@ package com.example.mohit.watchlist.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+import com.example.mohit.watchlist.entity.User;
 import com.example.mohit.watchlist.entity.Activity;
 import com.example.mohit.watchlist.repository.ActivityRepo;
 
@@ -32,4 +32,13 @@ public class ActivityService {
         return activityRepo.count();
     }
 
+    
+    public List<Activity> getActivitiesByUser(User user) {
+        return activityRepo.findByUserOrderByCreatedAtDesc(user);
+    }
+    
+ // Delete all activities of a specific user
+    public void deleteActivitiesByUser(User user) {
+        activityRepo.deleteAll(activityRepo.findByUserOrderByCreatedAtDesc(user));
+    }
 }

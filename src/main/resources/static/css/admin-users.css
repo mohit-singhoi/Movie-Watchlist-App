@@ -24,6 +24,38 @@ body {
     margin: 35px auto 60px;
 }
 
+ /* User Deleted Success Poipup */
+ 
+.success-message {
+    position: fixed;
+    top: 90px;
+    right: 30px;
+    z-index: 9999;
+
+    padding: 15px 22px;
+    border-radius: 10px;
+
+    background: #d1fae5;
+    color: #065f46;
+
+    font-weight: 600;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 
 /* =====================================================
    HEADER

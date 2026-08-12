@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.mohit.watchlist.entity.Feedback;
+import com.example.mohit.watchlist.entity.User;
 import com.example.mohit.watchlist.repository.FeedbackRepo;
 
 @Service
@@ -30,8 +31,19 @@ public class FeedbackService {
     public long getTotalFeedback() {
         return feedbackRepo.count();
     }
-    
+
+    // Get feedback by ID
     public Feedback getFeedbackById(Long id) {
         return feedbackRepo.findById(id).orElse(null);
+    }
+
+    // Get feedback submitted by a specific user
+    public List<Feedback> getFeedbackByUser(User user) {
+        return feedbackRepo.findByUser(user);
+    }
+    
+ // Delete all feedback submitted by a specific user
+    public void deleteFeedbackByUser(User user) {
+        feedbackRepo.deleteAll(feedbackRepo.findByUser(user));
     }
 }

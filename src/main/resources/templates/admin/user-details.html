@@ -11,21 +11,32 @@
 
     <title>User Details | Admin</title>
 
-	<!-- Admin Navbar CSS -->
-	<link rel="stylesheet"
-	      th:href="@{/css/admin-navbar.css}">
-	
-		  <!--  Admin Footer CSS -->
-		  <link rel="stylesheet"
-		        th:href="@{/css/admin-footer.css}">
+    <!-- Admin Navbar CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/admin-navbar.css}">
 
-		  <!------ User Details CSS ------>
-	 <link rel="stylesheet" th:href="@{/css/user-details.css}">
+    <!-- Admin Footer CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/admin-footer.css}">
+
+    <!-- User Details CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/user-details.css}">
 
 </head>
 
 
 <body>
+	
+	<!-- =====================================================
+	     SUCCESS MESSAGE
+	     ===================================================== -->
+
+	<div th:if="${successMessage}"
+	     class="success-popup"
+	     th:text="${successMessage}">
+	    ✅ Operation completed successfully.
+	</div>
 
 
 <!-- =====================================================
@@ -51,13 +62,15 @@
         </h1>
 
         <p>
-            View information about the selected user.
+            View information and activity of the selected user.
         </p>
 
     </div>
 
 
-    <!-- USER CARD -->
+    <!-- =================================================
+         USER CARD
+         ================================================= -->
 
     <div class="user-card">
 
@@ -70,17 +83,18 @@
                 👤
             </div>
 
-            <div>
+			<div>
 
-                <h2 th:text="${user.fullName}">
-                    Mohit Kumar
-                </h2>
+			    <h2 th:text="${user.fullName}"
+			        data-user-name>
+			        Mohit Kumar
+			    </h2>
 
-                <p th:text="${user.email}">
-                    example@gmail.com
-                </p>
+			    <p th:text="${user.email}">
+			        example@gmail.com
+			    </p>
 
-            </div>
+			</div>
 
         </div>
 
@@ -172,21 +186,377 @@
         </div>
 
 
-        <!-- ACTIONS -->
+		<!-- =================================================
+		     USER MOVIES
+		     ================================================= -->
 
-        <div class="user-actions">
+		<div class="user-section">
 
-            <a th:href="@{/admin/users}"
-               class="back-btn">
+		    <div class="section-header">
 
-                ← Back to Users
+		        <h2>🎬 User Movies</h2>
 
-            </a>
+		        <span class="movie-count"
+		              th:text="${movies != null ? #lists.size(movies) : 0}">
+		            0
+		        </span>
 
-        </div>
+		    </div>
+
+
+		    <!-- MOVIES FOUND -->
+
+		    <div class="movies-list"
+		         th:if="${movies != null and !#lists.isEmpty(movies)}">
+
+		        <div class="movie-item"
+		             th:each="movie : ${movies}">
+
+
+		            <!-- MOVIE INFORMATION -->
+
+		            <div class="movie-info">
+
+		                <h3 th:text="${movie.title}">
+		                    Interstellar
+		                </h3>
+
+
+		                <div class="movie-meta">
+
+		                    <span>
+		                        ⭐ Rating:
+		                        <strong th:text="${movie.rating}">
+		                            8.6
+		                        </strong>
+		                    </span>
+
+		                    <span>
+		                        📌 Priority:
+		                        <strong th:text="${movie.priority}">
+		                            High
+		                        </strong>
+		                    </span>
+
+		                </div>
+
+
+		                <!-- SOURCE -->
+
+		                <div class="movie-source">
+
+		                    📺 Source:
+
+		                    <a th:href="${movie.source}"
+		                       th:text="${movie.source}"
+		                       target="_blank"
+		                       rel="noopener noreferrer"
+		                       class="source-link">
+		                        Watch Movie
+		                    </a>
+
+		                </div>
+
+		            </div>
+
+
+		            <!-- VIEW MOVIE BUTTON -->
+
+		            <div class="movie-action">
+
+		                <a th:href="@{/admin/movies/{id}(id=${movie.id})}"
+		                   class="view-movie-btn">
+
+		                    👁 View Movie
+
+		                </a>
+
+		            </div>
+
+
+		        </div>
+
+		    </div>
+
+
+		    <!-- NO MOVIES -->
+
+		    <div class="no-movies"
+		         th:if="${movies == null or #lists.isEmpty(movies)}">
+
+		        <div class="empty-icon">
+		            🎬
+		        </div>
+
+		        <h3>
+		            No Movies Found
+		        </h3>
+
+		        <p>
+		            This user has not added any movies yet.
+		        </p>
+
+		    </div>
+			
+			<!-- DELETE ALL MOVIES -->
+
+			<div class="section-delete-action"
+			     th:if="${movies != null and !#lists.isEmpty(movies)}">
+
+			    <form th:action="@{/admin/users/{id}/delete-movies(id=${user.id})}"
+			          method="post"
+			          onsubmit="return confirmDeleteMovies();">
+
+			        <button type="submit" class="delete-section-btn">
+			            🗑️ Delete All Movies
+			        </button>
+
+			    </form>
+
+			</div>
+
+		</div>
+		
+		
+		<!-- =================================================
+		     USER FEEDBACK
+		     ================================================= -->
+
+		<div class="user-section">
+
+		    <div class="section-header">
+
+		        <h2>💬 User Feedback</h2>
+
+		        <span class="movie-count"
+		              th:text="${feedbacks != null ? #lists.size(feedbacks) : 0}">
+		            0
+		        </span>
+
+		    </div>
+
+
+		    <!-- FEEDBACK FOUND -->
+
+		    <div class="feedback-list"
+		         th:if="${feedbacks != null and !#lists.isEmpty(feedbacks)}">
+
+		        <div class="feedback-item"
+		             th:each="feedback : ${feedbacks}">
+
+
+		            <div class="feedback-info">
+
+		                <h3 th:text="${feedback.category}">
+		                    General Feedback
+		                </h3>
+
+
+		                <div class="feedback-rating">
+
+		                    ⭐ Rating:
+
+		                    <strong th:text="${feedback.rating}">
+		                        5
+		                    </strong>
+
+		                    / 5
+
+		                </div>
+
+
+		                <p class="feedback-message"
+		                   th:text="${feedback.message}">
+		                    Great application. I really like the watchlist
+		                    features.
+		                </p>
+
+		            </div>
+
+
+		            <div class="feedback-action">
+
+		                <a th:href="@{/admin/feedback/{id}(id=${feedback.id})}"
+		                   class="view-movie-btn">
+
+		                    👁 View Feedback
+
+		                </a>
+
+		            </div>
+
+
+		        </div>
+
+		    </div>
+
+
+		    <!-- NO FEEDBACK -->
+
+		    <div class="no-movies"
+		         th:if="${feedbacks == null or #lists.isEmpty(feedbacks)}">
+
+		        <div class="empty-icon">
+		            💬
+		        </div>
+
+		        <h3>
+		            No Feedback Found
+		        </h3>
+
+		        <p>
+		            This user has not submitted any feedback yet.
+		        </p>
+
+		    </div>
+			
+			<div class="section-delete-action"
+			     th:if="${feedbacks != null and !#lists.isEmpty(feedbacks)}">
+
+			    <form th:action="@{/admin/users/{id}/delete-feedback(id=${user.id})}"
+			          method="post"
+			          onsubmit="return confirmDeleteFeedback();">
+
+			        <button type="submit" class="delete-section-btn">
+			            🗑️ Delete All Feedback
+			        </button>
+
+			    </form>
+			</div>
+
+		</div>
+		
+		<!-- =================================================
+		     USER ACTIVITIES
+		     ================================================= -->
+
+		<div class="user-section">
+
+		    <div class="section-header">
+
+		        <h2>📈 User Activities</h2>
+
+		        <span class="movie-count"
+		              th:text="${activities != null ? #lists.size(activities) : 0}">
+		            0
+		        </span>
+
+		    </div>
+
+
+		    <!-- ACTIVITIES FOUND -->
+
+		    <div class="activity-list"
+		         th:if="${activities != null and !#lists.isEmpty(activities)}">
+
+		        <div class="user-activity-item"
+		             th:each="activity : ${activities}">
+
+		            <div class="user-activity-icon"
+		                 th:text="${activity.icon}">
+		                🎬
+		            </div>
+
+
+		            <div class="user-activity-content">
+
+		                <h3 th:text="${activity.action}">
+		                    Movie Added
+		                </h3>
+
+		                <p th:text="${activity.description}">
+		                    User added a movie.
+		                </p>
+
+		                <small th:text="${activity.createdAt}">
+		                    12 Aug 2026
+		                </small>
+
+		            </div>
+
+
+		            <div class="activity-action">
+
+		                <a th:href="@{/admin/activities/{id}(id=${activity.id})}"
+		                   class="view-movie-btn">
+
+		                    👁 View
+
+		                </a>
+
+		            </div>
+
+		        </div>
+
+		    </div>
+
+
+		    <!-- NO ACTIVITIES -->
+
+		    <div class="no-movies"
+		         th:if="${activities == null or #lists.isEmpty(activities)}">
+
+		        <div class="empty-icon">
+		            📈
+		        </div>
+
+		        <h3>
+		            No Activities Found
+		        </h3>
+
+		        <p>
+		            This user has no recorded activities yet.
+		        </p>
+
+		    </div>
+			
+			<div class="section-delete-action"
+			     th:if="${activities != null and !#lists.isEmpty(activities)}">
+
+			    <form th:action="@{/admin/users/{id}/delete-activities(id=${user.id})}"
+			          method="post"
+			          onsubmit="return confirmDeleteActivities();">
+
+			        <button type="submit" class="delete-section-btn">
+			            🗑️ Delete All Activities
+			        </button>
+
+			    </form>
+			</div>
+
+		</div>
+		
+		
+
+		<!-- =====================================================
+		     USER ACTIONS
+		     ===================================================== -->
+
+			 <div class="user-actions">
+
+			     <!-- Back -->
+			     <a th:href="@{/admin/users}"
+			        class="back-btn">
+			         ← Back to Users
+			     </a>
+
+
+			     <!-- Delete User -->
+				 <form th:action="@{/admin/users/{id}/delete(id=${user.id})}"
+				       method="post"
+				       onsubmit="return confirmDeleteUser();">
+
+				     <button type="submit" class="delete-user-btn">
+				         🗑️ Delete User
+				     </button>
+
+				 </form>
+
+			 </div>
 
 
     </div>
+
 
 </main>
 
@@ -199,7 +569,12 @@
 
 
 <!-- Navbar JavaScript -->
+
 <script th:src="@{/js/admin-navbar.js}"></script>
+
+<!------ User Details Js -------->
+
+<script th:src="@{/js/user-details.js}"></script>
 
 
 </body>
