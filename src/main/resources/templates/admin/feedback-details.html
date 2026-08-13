@@ -27,6 +27,21 @@
 
 <body>
 
+	<!-- =====================================================
+	     RESPONSE MESSAGE
+	     ===================================================== -->
+
+		 <div th:if="${successMessage}"
+		      class="response-popup success-popup"
+		      th:text="${successMessage}">
+		     ✅ Response successfully sent to the User.
+		 </div>
+
+		 <div th:if="${errorMessage}"
+		      class="response-popup error-popup"
+		      th:text="${errorMessage}">
+		     ❌ Something went wrong.
+		 </div>
 
 <!-- =====================================================
      ADMIN NAVBAR
@@ -202,18 +217,58 @@
         </div>
 
 
-        <!-- ACTION -->
+		<!-- =====================================================
+		     FEEDBACK ACTIONS
+		     ===================================================== -->
 
-        <div class="feedback-actions">
+		<div class="feedback-actions">
 
-            <a th:href="@{/admin/feedback}"
-               class="back-btn">
+		    <!-- BACK BUTTON -->
 
-                ← Back to Feedback
+		    <a th:href="@{/admin/feedback}"
+		       class="back-btn">
 
-            </a>
+		        ← Back to Feedback
 
-        </div>
+		    </a>
+
+
+		    <!-- EMAIL RESPONSE -->
+
+		    <div class="response-section"
+		         th:if="${feedback.user != null
+		                 and feedback.user.email != null}">
+
+		        <h3>📧 Respond to User</h3>
+
+		        <p class="response-help">
+		            Send a formal response directly to
+		            <strong th:text="${feedback.user.email}">
+		                user@email.com
+		            </strong>
+		        </p>
+
+		        <form th:action="@{/admin/feedback/{id}/respond(id=${feedback.id})}"
+		              method="post"
+		              class="response-form">
+
+		            <textarea name="adminResponse"
+		                      class="response-textarea"
+		                      placeholder="Write your response to the user..."
+		                      required></textarea>
+
+		            <button type="submit"
+		                    class="send-response-btn">
+
+		                📧 Send Response
+
+		            </button>
+
+		        </form>
+
+		    </div>
+
+		</div>
 
 
     </div>
@@ -230,6 +285,9 @@
 
 <!-- Navbar JavaScript -->
 <script th:src="@{/js/admin-navbar.js}"></script>
+
+<!----Feedback details  ------>
+<script th:src="@{/js/feedback-details.js}"></script>
 
 
 </body>

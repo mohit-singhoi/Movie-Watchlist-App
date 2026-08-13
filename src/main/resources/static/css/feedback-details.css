@@ -246,6 +246,186 @@
     text-decoration: none;
 }
 
+/* =====================================================
+   RESPOND TO USER
+   ===================================================== */
+
+.response-section {
+    width: 100%;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.response-section h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #111827;
+}
+
+.response-help {
+    margin: 0 0 18px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.response-help strong {
+    color: #374151;
+}
+
+
+/* =====================================================
+   RESPONSE FORM
+   ===================================================== */
+
+.response-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.response-textarea {
+    width: 100%;
+    min-height: 150px;
+
+    padding: 14px 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #111827;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.response-textarea:focus {
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.10);
+}
+
+.response-textarea::placeholder {
+    color: #9ca3af;
+}
+
+
+/* =====================================================
+   SEND RESPONSE BUTTON
+   ===================================================== */
+
+.send-response-btn {
+    align-self: center;
+
+    min-width: 180px;
+
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #111827;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.send-response-btn:hover {
+    background: #1f2937;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =====================================================
+   RESPONSE POPUP
+   ===================================================== */
+
+.response-popup {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+
+    z-index: 9999;
+
+    max-width: 400px;
+    padding: 15px 22px;
+
+    border-radius: 10px;
+
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+    transform: translateY(-15px);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+/* Success */
+.success-popup {
+    background: #198754;
+}
+
+/* Error */
+.error-popup {
+    background: #dc2626;
+}
+
+/* Visible state */
+.response-popup.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .response-popup {
+        left: 15px;
+        right: 15px;
+
+        top: 70px;
+
+        max-width: none;
+
+        text-align: center;
+    }
+
+    .send-response-btn {
+        width: 100%;
+    }
+}
+
 
 /* =========================================
    MOBILE
@@ -288,7 +468,7 @@
     }
 
     .back-btn {
-        width: 100%;
+        width: 85%;
 
         text-align: center;
     }
