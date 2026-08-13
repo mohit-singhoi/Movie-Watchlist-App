@@ -46,4 +46,24 @@ public class FeedbackService {
     public void deleteFeedbackByUser(User user) {
         feedbackRepo.deleteAll(feedbackRepo.findByUser(user));
     }
+    
+    public void deleteFeedbackByIdForUser(Long feedbackId, Long userId) {
+
+        Feedback feedback = feedbackRepo.findById(feedbackId)
+                .orElse(null);
+
+        if (feedback == null) {
+            throw new RuntimeException("Feedback not found");
+        }
+
+        if (feedback.getUser() == null ||
+            !feedback.getUser().getId().equals(userId)) {
+
+            throw new RuntimeException(
+                "Feedback does not belong to this user"
+            );
+        }
+
+        feedbackRepo.delete(feedback);
+    }
 }

@@ -302,4 +302,97 @@ public class AdminController {
     }
     
     
+    // Individual Movie Deletion
+    @PostMapping("/admin/users/{userId}/movies/{movieId}/delete")
+    public String deleteUserMovie(
+            @PathVariable Long userId,
+            @PathVariable Integer movieId,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+
+            movieServices.deleteMovieByIdForAdmin(
+                movieId,
+                userId
+            );
+
+            redirectAttributes.addFlashAttribute(
+                "successMessage",
+                "✅ Movie successfully deleted."
+            );
+
+        } catch (RuntimeException e) {
+
+            redirectAttributes.addFlashAttribute(
+                "errorMessage",
+                "❌ " + e.getMessage()
+            );
+        }
+
+        return "redirect:/admin/users/" + userId;
+    }
+    
+    
+    // Individual Feedback Deletion
+    @PostMapping("/admin/users/{userId}/feedback/{feedbackId}/delete")
+    public String deleteUserFeedbackItem(
+            @PathVariable Long userId,
+            @PathVariable Long feedbackId,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+
+            feedbackService.deleteFeedbackByIdForUser(
+                feedbackId,
+                userId
+            );
+
+            redirectAttributes.addFlashAttribute(
+                "successMessage",
+                "✅ Feedback successfully deleted."
+            );
+
+        } catch (RuntimeException e) {
+
+            redirectAttributes.addFlashAttribute(
+                "errorMessage",
+                "❌ " + e.getMessage()
+            );
+        }
+
+        return "redirect:/admin/users/" + userId;
+    }
+    
+    
+    // Individual Activities Deletion
+    @PostMapping("/admin/users/{userId}/activities/{activityId}/delete")
+    public String deleteUserActivity(
+            @PathVariable Long userId,
+            @PathVariable Long activityId,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+
+            activityService.deleteActivityByIdForUser(
+                activityId,
+                userId
+            );
+
+            redirectAttributes.addFlashAttribute(
+                "successMessage",
+                "✅ Activity successfully deleted."
+            );
+
+        } catch (RuntimeException e) {
+
+            redirectAttributes.addFlashAttribute(
+                "errorMessage",
+                "❌ " + e.getMessage()
+            );
+        }
+
+        return "redirect:/admin/users/" + userId;
+    }
+    
+    
 }

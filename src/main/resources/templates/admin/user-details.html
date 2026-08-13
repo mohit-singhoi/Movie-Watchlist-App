@@ -260,18 +260,31 @@
 		            </div>
 
 
-		            <!-- VIEW MOVIE BUTTON -->
+					<!-- MOVIE ACTIONS -->
 
-		            <div class="movie-action">
+					<div class="movie-action">
 
-		                <a th:href="@{/admin/movies/{id}(id=${movie.id})}"
-		                   class="view-movie-btn">
+					    <!-- VIEW MOVIE -->
+					    <a th:href="@{/admin/movies/{id}(id=${movie.id})}"
+					       class="view-movie-btn">
+					        👁 View Movie
+					    </a>
 
-		                    👁 View Movie
+					    <!-- DELETE MOVIE -->
+					    <form th:action="@{/admin/users/{userId}/movies/{movieId}/delete(
+					                    userId=${user.id},
+					                    movieId=${movie.id})}"
+					          method="post"
+					          onsubmit="return confirmDeleteMovie('[[${movie.title}]]');">
 
-		                </a>
+					        <button type="submit"
+					                class="delete-item-btn">
+					            🗑 Delete
+					        </button>
 
-		            </div>
+					    </form>
+
+					</div>
 
 
 		        </div>
@@ -372,18 +385,32 @@
 		                </p>
 
 		            </div>
+					
+					<!-- FEEDBACK ACTIONS -->
 
+					<div class="feedback-action">
 
-		            <div class="feedback-action">
+					    <!-- VIEW FEEDBACK -->
+					    <a th:href="@{/admin/feedback/{id}(id=${feedback.id})}"
+					       class="view-feedback-btn">
+					        👁 View Feedback
+					    </a>
 
-		                <a th:href="@{/admin/feedback/{id}(id=${feedback.id})}"
-		                   class="view-movie-btn">
+					    <!-- DELETE FEEDBACK -->
+					    <form th:action="@{/admin/users/{userId}/feedback/{feedbackId}/delete(
+					                    userId=${user.id},
+					                    feedbackId=${feedback.id})}"
+					          method="post"
+					          onsubmit="return confirmDeleteFeedback('[[${feedback.category}]]');">
 
-		                    👁 View Feedback
+					        <button type="submit"
+					                class="delete-feedback-btn">
+					            🗑 Delete
+					        </button>
 
-		                </a>
+					    </form>
 
-		            </div>
+					</div>
 
 
 		        </div>
@@ -473,18 +500,39 @@
 		                </small>
 
 		            </div>
+					
+					<!-- ACTIVITY ACTIONS -->
+
+					<div class="activity-action">
+
+					    <!-- VIEW ACTIVITY -->
+
+					    <a th:href="@{/admin/activities/{id}(id=${activity.id})}"
+					       class="view-activity-btn">
+
+					        👁 View Activity
+
+					    </a>
 
 
-		            <div class="activity-action">
+					    <!-- DELETE ACTIVITY -->
 
-		                <a th:href="@{/admin/activities/{id}(id=${activity.id})}"
-		                   class="view-movie-btn">
+					    <form th:action="@{/admin/users/{userId}/activities/{activityId}/delete(
+					                    userId=${user.id},
+					                    activityId=${activity.id})}"
+					          method="post"
+					          onsubmit="return confirmDeleteActivity('[[${activity.action}]]');">
 
-		                    👁 View
+					        <button type="submit"
+					                class="delete-activity-btn">
 
-		                </a>
+					            🗑 Delete
 
-		            </div>
+					        </button>
+
+					    </form>
+
+					</div>
 
 		        </div>
 

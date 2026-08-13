@@ -109,3 +109,48 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+// =====================================================
+// DELETE SPECIFIC MOVIE
+// =====================================================
+
+function confirmDeleteMovie(movieTitle) {
+
+    return confirm(
+        "⚠️ Delete Movie?\n\n" +
+        "Movie: " + movieTitle + "\n\n" +
+        "This movie will be permanently deleted " +
+        "from the user's watchlist.\n\n" +
+        "This action cannot be undone."
+    );
+}
+
+
+// =====================================================
+// DELETE SPECIFIC FEEDBACK
+// =====================================================
+
+function confirmDeleteFeedbackItem(category) {
+
+    return confirm(
+        "⚠️ Delete Feedback?\n\n" +
+        "Category: " + category + "\n\n" +
+        "This feedback will be permanently deleted.\n\n" +
+        "This action cannot be undone."
+    );
+}
+
+
+// =====================================================
+// DELETE SPECIFIC ACTIVITY
+// =====================================================
+
+function confirmDeleteActivity(action) {
+
+    return confirm(
+        "⚠️ Delete Activity?\n\n" +
+        "Activity: " + action + "\n\n" +
+        "This activity will be permanently deleted.\n\n" +
+        "This action cannot be undone."
+    );
+}

@@ -41,4 +41,24 @@ public class ActivityService {
     public void deleteActivitiesByUser(User user) {
         activityRepo.deleteAll(activityRepo.findByUserOrderByCreatedAtDesc(user));
     }
+    
+    public void deleteActivityByIdForUser(Long activityId, Long userId) {
+
+        Activity activity = activityRepo.findById(activityId)
+                .orElse(null);
+
+        if (activity == null) {
+            throw new RuntimeException("Activity not found");
+        }
+
+        if (activity.getUser() == null ||
+            !activity.getUser().getId().equals(userId)) {
+
+            throw new RuntimeException(
+                "Activity does not belong to this user"
+            );
+        }
+
+        activityRepo.delete(activity);
+    }
 }

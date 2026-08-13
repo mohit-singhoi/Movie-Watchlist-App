@@ -351,4 +351,28 @@ public class MovieServices {
 	    movieRepo.deleteAll(movieRepo.findByUser(user));
 	}
 		
+	
+	public void deleteMovieByIdForAdmin(Integer movieId, Long userId) {
+
+	    Movie movie = movieRepo.findById(movieId).orElse(null);
+
+	    if (movie == null) {
+	        throw new RuntimeException("Movie not found");
+	    }
+
+	    // Make sure this movie belongs to this user
+	    if (movie.getUser() == null ||
+	        !movie.getUser().getId().equals(userId)) {
+
+	        throw new RuntimeException("Movie does not belong to this user");
+	    }
+
+	    String movieTitle = movie.getTitle();
+
+	    movieRepo.delete(movie);
+
+	    System.out.println(
+	        "Admin deleted movie: " + movieTitle
+	    );
+	}
 }

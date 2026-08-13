@@ -327,10 +327,171 @@
 		}
 
 
-		/* VIEW BUTTON AREA */
+/* =====================================================
+   MOVIE ACTION BUTTONS
+   ===================================================== */
 
-		.movie-action {
-		    flex-shrink: 0;
+.movie-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 220px;
+}
+
+
+/* =====================================================
+   VIEW MOVIE BUTTON
+   ===================================================== */
+
+.view-movie-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 140px;
+    padding: 11px 18px;
+
+    background: #111827;
+    color: #ffffff;
+
+    border-radius: 9px;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.view-movie-btn:hover {
+    background: #1f2937;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   DELETE MOVIE BUTTON
+   ===================================================== */
+
+.delete-movie-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 100px;
+    padding: 11px 18px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.delete-movie-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
+}
+
+
+/* =====================================================
+   MOBILE VIEW
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .movie-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .movie-info {
+        width: 100%;
+    }
+
+    .movie-action {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: stretch;
+        justify-content: center;
+
+        gap: 10px;
+
+        margin-top: 15px;
+    }
+
+    .view-movie-btn,
+    .delete-movie-btn {
+        width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+}
+
+
+		/* =====================================================
+		   DELETE MOVIE FORM
+		   ===================================================== */
+
+		.movie-action form {
+		    margin: 0;
+		    padding: 0;
+		}
+
+
+		/* =====================================================
+		   DELETE BUTTON
+		   ===================================================== */
+
+		.delete-item-btn {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+
+		    min-width: 105px;
+		    height: 44px;
+
+		    padding: 0 18px;
+
+		    background: #dc2626;
+		    color: #ffffff;
+
+		    border: none;
+		    border-radius: 9px;
+
+		    font-size: 14px;
+		    font-weight: 600;
+
+		    cursor: pointer;
+
+		    box-sizing: border-box;
+
+		    transition: all 0.2s ease;
+		}
+
+		.delete-item-btn:hover {
+		    background: #b91c1c;
+
+		    transform: translateY(-2px);
+
+		    box-shadow: 0 5px 12px rgba(220, 38, 38, 0.22);
+		}
+
+		.delete-item-btn:active {
+		    transform: translateY(0);
 		}
 
 
@@ -479,6 +640,96 @@
 
 		.feedback-action {
 		    flex-shrink: 0;
+		}
+		
+		
+		/* =====================================================
+		   FEEDBACK ACTIONS
+		   ===================================================== */
+
+		.feedback-action {
+		    display: flex;
+		    align-items: center;
+		    justify-content: flex-end;
+
+		    gap: 12px;
+
+		    min-width: 250px;
+		}
+
+
+		/* VIEW FEEDBACK */
+
+		.view-feedback-btn {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+
+		    min-width: 140px;
+		    height: 44px;
+
+		    padding: 0 18px;
+
+		    background: #111827;
+		    color: #ffffff;
+
+		    border-radius: 9px;
+
+		    text-decoration: none;
+
+		    font-size: 14px;
+		    font-weight: 600;
+
+		    box-sizing: border-box;
+
+		    transition: all 0.2s ease;
+		}
+
+		.view-feedback-btn:hover {
+		    background: #1f2937;
+		    transform: translateY(-2px);
+		}
+
+
+		/* DELETE FORM */
+
+		.feedback-action form {
+		    margin: 0;
+		    padding: 0;
+		}
+
+
+		/* DELETE FEEDBACK */
+
+		.delete-feedback-btn {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+
+		    min-width: 105px;
+		    height: 44px;
+
+		    padding: 0 18px;
+
+		    background: #dc2626;
+		    color: #ffffff;
+
+		    border: none;
+		    border-radius: 9px;
+
+		    font-size: 14px;
+		    font-weight: 600;
+
+		    cursor: pointer;
+
+		    box-sizing: border-box;
+
+		    transition: all 0.2s ease;
+		}
+
+		.delete-feedback-btn:hover {
+		    background: #b91c1c;
+		    transform: translateY(-2px);
 		}
 
 		/* =====================================================
@@ -640,7 +891,99 @@
 		    font-weight: 600;
 		}
 
+		
+		
 
+		/* =====================================================
+		   ACTIVITY ACTIONS
+		   ===================================================== */
+
+		.activity-action {
+		    display: flex;
+		    align-items: center;
+		    justify-content: flex-end;
+
+		    gap: 12px;
+
+		    min-width: 250px;
+		}
+
+
+		/* VIEW ACTIVITY */
+
+		.view-activity-btn {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+
+		    min-width: 140px;
+		    height: 44px;
+
+		    padding: 0 18px;
+
+		    background: #111827;
+		    color: #ffffff;
+
+		    border-radius: 9px;
+
+		    text-decoration: none;
+
+		    font-size: 14px;
+		    font-weight: 600;
+
+		    box-sizing: border-box;
+
+		    transition: all 0.2s ease;
+		}
+
+		.view-activity-btn:hover {
+		    background: #1f2937;
+		    transform: translateY(-2px);
+		}
+
+
+		/* DELETE FORM */
+
+		.activity-action form {
+		    margin: 0;
+		    padding: 0;
+		}
+
+
+		/* DELETE ACTIVITY */
+
+		.delete-activity-btn {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+
+		    min-width: 105px;
+		    height: 44px;
+
+		    padding: 0 18px;
+
+		    background: #dc2626;
+		    color: #ffffff;
+
+		    border: none;
+		    border-radius: 9px;
+
+		    font-size: 14px;
+		    font-weight: 600;
+
+		    cursor: pointer;
+
+		    box-sizing: border-box;
+
+		    transition: all 0.2s ease;
+		}
+
+		.delete-activity-btn:hover {
+		    background: #b91c1c;
+		    transform: translateY(-2px);
+		}
+		
+		
 		/* =====================================================
 		   RESPONSIVE
 		   ===================================================== */
@@ -670,6 +1013,39 @@
 		    .user-activity-item .view-movie-btn {
 		        width: fit-content;
 		    }
+		}
+		
+		
+		/* Individual Delete Button */
+		
+		.delete-item-btn {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+
+		    padding: 9px 15px;
+
+		    background: #dc2626;
+		    color: #ffffff;
+
+		    border: none;
+		    border-radius: 7px;
+
+		    font-size: 13px;
+		    font-weight: 600;
+
+		    cursor: pointer;
+
+		    transition: all 0.2s ease;
+		}
+
+		.delete-item-btn:hover {
+		    background: #b91c1c;
+		    transform: translateY(-1px);
+		}
+
+		.delete-item-btn:active {
+		    transform: translateY(0);
 		}
 		
 		
@@ -912,5 +1288,120 @@
                 text-align: center;
             }
         }
+
+@media (max-width: 768px) {
+
+    .movie-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .movie-info {
+        width: 100%;
+    }
+
+    .movie-action {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        margin-top: 18px;
+    }
+
+    .view-movie-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .delete-movie-btn {
+        width: 132px;
+        min-width: 132px;
+    }
+}
+
+/* =====================================================
+   MOBILE - FEEDBACK
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .feedback-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .feedback-info {
+        width: 100%;
+    }
+
+    .feedback-action {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        margin-top: 18px;
+    }
+
+    .view-feedback-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .delete-feedback-btn {
+        width: 132px;
+        min-width: 132px;
+    }
+
+
+    /* =================================================
+       MOBILE - ACTIVITIES
+       ================================================= */
+
+    .activity-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .activity-info {
+        width: 100%;
+    }
+
+    .activity-action {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        margin-top: 18px;
+    }
+
+    .view-activity-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .delete-activity-btn {
+        width: 132px;
+        min-width: 132px;
+    }
+}
+
 
     
