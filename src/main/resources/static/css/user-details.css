@@ -1,348 +1,375 @@
-        /* =========================================
-           PAGE
-           ========================================= */
-
-        body {
-            margin: 0;
-            background: #f4f6f8;
-            font-family: Arial, sans-serif;
-            color: #292d32;
-        }
-
-        .user-details-page {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-
-        /* =========================================
-           HEADER
-           ========================================= */
-
-        .page-header {
-            margin-bottom: 25px;
-        }
-
-        .page-header h1 {
-            margin: 0;
-            font-size: 30px;
-        }
-
-        .page-header p {
-            margin-top: 8px;
-            color: #777;
-        }
-
-
-        /* =========================================
-           CARD
-           ========================================= */
-
-        .user-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-
-            box-shadow:
-                0 6px 20px rgba(0, 0, 0, 0.08);
-        }
-
-
-        /* =========================================
-           USER HEADER
-           ========================================= */
-
-        .user-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .user-avatar {
-            width: 75px;
-            height: 75px;
-
-            border-radius: 50%;
-
-            background: #292d32;
-            color: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 35px;
-        }
-
-        .user-header h2 {
-            margin: 0;
-            font-size: 25px;
-        }
-
-        .user-header p {
-            margin: 6px 0 0;
-            color: #777;
-        }
-
-
-        /* =========================================
-           INFORMATION GRID
-           ========================================= */
-
-        .user-info {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 18px;
-        }
-
-        .info-box {
-            background: #f8f9fa;
-
-            border-radius: 10px;
-
-            padding: 18px;
-        }
-
-        .info-label {
-            display: block;
-
-            color: #777;
-
-            font-size: 13px;
-
-            margin-bottom: 7px;
-
-            font-weight: 600;
-
-            text-transform: uppercase;
-        }
-
-        .info-value {
-            font-size: 17px;
-
-            font-weight: 600;
-
-            word-break: break-word;
-        }
-
-
-        /* =========================================
-           ROLE
-           ========================================= */
-
-        .role-badge {
-            display: inline-block;
-
-            padding: 7px 14px;
-
-            background: #292d32;
-
-            color: white;
-
-            border-radius: 20px;
-
-            font-size: 13px;
-
-            font-weight: 600;
-        }
-
-
-        /* =========================================
-           STATUS
-           ========================================= */
-
-        .active-status {
-            color: #198754;
-
-            font-weight: 700;
-        }
-		
-		/* =====================================================
-		   USER MOVIES SECTION
-		   ===================================================== */
-
-		.user-section {
-		    margin-top: 35px;
-		    padding-top: 25px;
-		    border-top: 1px solid #e5e7eb;
-		}
-
-
-		/* SECTION HEADER */
-
-		.section-header {
-		    display: flex;
-		    align-items: center;
-		    justify-content: space-between;
-		    margin-bottom: 20px;
-		}
-
-		.section-header h2 {
-		    margin: 0;
-		    font-size: 24px;
-		    color: #1f2937;
-		}
-
-
-		/* MOVIE COUNT */
-
-		.movie-count {
-		    min-width: 32px;
-		    height: 32px;
-
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    padding: 0 10px;
-
-		    border-radius: 20px;
-
-		    background: #eef2ff;
-		    color: #4f46e5;
-
-		    font-weight: 700;
-		}
-
-
-		/* MOVIES LIST */
-
-		.movies-list {
-		    display: flex;
-		    flex-direction: column;
-		    gap: 15px;
-		}
-
-
-		/* MOVIE CARD */
-
-		.movie-item {
-		    display: flex;
-		    align-items: center;
-		    justify-content: space-between;
-
-		    gap: 25px;
-
-		    padding: 20px 22px;
-
-		    background: #ffffff;
-
-		    border: 1px solid #e5e7eb;
-
-		    border-radius: 12px;
-
-		    transition: all 0.2s ease;
-		}
-
-		.movie-item:hover {
-		    border-color: #c7d2fe;
-
-		    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-
-		    transform: translateY(-1px);
-		}
-
-
-		/* MOVIE INFORMATION */
-
-		.movie-info {
-		    flex: 1;
-		    min-width: 0;
-		}
-
-		.movie-info h3 {
-		    margin: 0 0 12px;
-
-		    font-size: 19px;
-
-		    color: #111827;
-		}
-
-
-		/* MOVIE META */
-
-		.movie-meta {
-		    display: flex;
-
-		    flex-wrap: wrap;
-
-		    gap: 20px;
-
-		    margin-bottom: 10px;
-
-		    font-size: 14px;
-
-		    color: #6b7280;
-		}
-
-		.movie-meta strong {
-		    color: #374151;
-		}
-
-
-		/* SOURCE */
-
-		.movie-source {
-		    display: flex;
-
-		    align-items: center;
-
-		    gap: 5px;
-
-		    font-size: 14px;
-
-		    color: #6b7280;
-
-		    max-width: 100%;
-		}
-
-
-		/* SOURCE LINK */
-
-		.source-link {
-		    color: #4f46e5;
-
-		    text-decoration: none;
-
-		    max-width: 450px;
-
-		    overflow: hidden;
-
-		    text-overflow: ellipsis;
-
-		    white-space: nowrap;
-		}
-
-		.source-link:hover {
-		    text-decoration: underline;
-		}
-
-
-/* =====================================================
-   MOVIE ACTION BUTTONS
-   ===================================================== */
-
-.movie-action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-width: 220px;
+/* =========================================================
+   USER DETAILS PAGE
+   ========================================================= */
+
+body {
+    margin: 0;
+    background: #f4f6f8;
+    font-family: Arial, sans-serif;
+    color: #292d32;
+}
+
+.user-details-page {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 
-/* =====================================================
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.page-header p {
+    margin-top: 8px;
+    color: #777;
+}
+
+
+/* =========================================================
+   MAIN USER CARD
+   ========================================================= */
+
+.user-card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   USER HEADER
+   ========================================================= */
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.user-avatar {
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+
+    border-radius: 50%;
+
+    background: #292d32;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 35px;
+}
+
+.user-header h2 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.user-header p {
+    margin: 6px 0 0;
+    color: #777;
+}
+
+
+/* =========================================================
+   USER INFORMATION
+   ========================================================= */
+
+.user-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.info-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 18px;
+    box-sizing: border-box;
+}
+
+.info-label {
+    display: block;
+
+    color: #777;
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 7px;
+
+    text-transform: uppercase;
+}
+
+.info-value {
+    font-size: 17px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   ROLE
+   ========================================================= */
+
+.role-badge {
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    background: #292d32;
+    color: #ffffff;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.active-status {
+    color: #198754;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   COMMON USER SECTION
+   ========================================================= */
+
+.user-section {
+    width: 100%;
+
+    margin-top: 35px;
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    font-size: 24px;
+    color: #1f2937;
+}
+
+
+/* =========================================================
+   SECTION COUNT
+   ========================================================= */
+
+.movie-count {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: #eef2ff;
+    color: #4f46e5;
+
+    font-weight: 700;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MOVIES LIST
+   ========================================================= */
+
+.movies-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* =========================================================
+   MOVIE CARD
+   ========================================================= */
+
+.movie-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 20px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.movie-item:hover {
+    border-color: #c7d2fe;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.06);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOVIE INFORMATION
+   ========================================================= */
+
+.movie-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.movie-info h3 {
+    margin: 0 0 12px;
+
+    font-size: 19px;
+    color: #111827;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   MOVIE META
+   ========================================================= */
+
+.movie-meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+    margin-bottom: 10px;
+
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.movie-meta strong {
+    color: #374151;
+}
+
+
+/* =========================================================
+   MOVIE SOURCE
+   ========================================================= */
+
+.movie-source {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    max-width: 100%;
+
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.source-link {
+    max-width: 450px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+.source-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOVIE ACTIONS
+   ========================================================= */
+
+.movie-action {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-width: 220px;
+
+    box-sizing: border-box;
+}
+
+.movie-action form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
    VIEW MOVIE BUTTON
-   ===================================================== */
+   ========================================================= */
 
 .view-movie-btn {
     display: inline-flex;
@@ -350,37 +377,51 @@
     justify-content: center;
 
     min-width: 140px;
-    padding: 11px 18px;
+    height: 44px;
+
+    padding: 0 18px;
 
     background: #111827;
     color: #ffffff;
 
+    border: none;
     border-radius: 9px;
+
     text-decoration: none;
 
     font-size: 14px;
     font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
 
     transition: all 0.2s ease;
 }
 
 .view-movie-btn:hover {
     background: #1f2937;
+
     transform: translateY(-1px);
 }
 
 
-/* =====================================================
+/* =========================================================
    DELETE MOVIE BUTTON
-   ===================================================== */
+   ========================================================= */
 
-.delete-movie-btn {
+.delete-movie-btn,
+.delete-item-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-width: 100px;
-    padding: 11px 18px;
+    min-width: 105px;
+    height: 44px;
+
+    padding: 0 18px;
 
     background: #dc2626;
     color: #ffffff;
@@ -393,915 +434,729 @@
 
     cursor: pointer;
 
+    box-sizing: border-box;
+
     transition: all 0.2s ease;
 }
 
-.delete-movie-btn:hover {
+.delete-movie-btn:hover,
+.delete-item-btn:hover {
     background: #b91c1c;
+
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
+
+    box-shadow:
+        0 5px 12px rgba(220, 38, 38, 0.22);
+}
+
+.delete-movie-btn:active,
+.delete-item-btn:active {
+    transform: translateY(0);
 }
 
 
-/* =====================================================
-   MOBILE VIEW
-   ===================================================== */
+/* =========================================================
+   NO MOVIES
+   ========================================================= */
+
+.no-movies {
+    padding: 45px 20px;
+
+    text-align: center;
+
+    background: #f9fafb;
+
+    border: 1px dashed #d1d5db;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.no-movies h3 {
+    margin: 5px 0;
+    color: #374151;
+}
+
+.no-movies p {
+    margin: 5px 0;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   FEEDBACK LIST
+   ========================================================= */
+
+.feedback-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   FEEDBACK CARD
+   ========================================================= */
+
+.feedback-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 20px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.feedback-item:hover {
+    border-color: #c7d2fe;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.06);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FEEDBACK INFORMATION
+   ========================================================= */
+
+.feedback-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.feedback-info h3 {
+    margin: 0 0 10px;
+
+    font-size: 18px;
+    color: #111827;
+
+    word-break: break-word;
+}
+
+.feedback-rating {
+    margin-bottom: 10px;
+
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.feedback-rating strong {
+    color: #374151;
+}
+
+.feedback-message {
+    margin: 0;
+
+    color: #4b5563;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   FEEDBACK ACTIONS
+   ========================================================= */
+
+.feedback-action {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    min-width: 220px;
+
+    box-sizing: border-box;
+}
+
+.feedback-action form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   VIEW FEEDBACK BUTTON
+   ========================================================= */
+
+.view-feedback-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 140px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    background: #111827;
+    color: #ffffff;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.view-feedback-btn:hover {
+    background: #1f2937;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DELETE FEEDBACK
+   ========================================================= */
+
+.delete-feedback-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 105px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.delete-feedback-btn:hover {
+    background: #b91c1c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(220, 38, 38, 0.22);
+}
+
+
+/* =========================================================
+   ACTIVITY LIST
+   ========================================================= */
+
+.activity-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   ACTIVITY CARD
+   ========================================================= */
+
+.user-activity-item {
+    width: 100%;
+    max-width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 18px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.user-activity-item:hover {
+    border-color: #c7d2fe;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.06);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTIVITY ICON
+   ========================================================= */
+
+.user-activity-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f4f6;
+
+    border-radius: 12px;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   ACTIVITY CONTENT
+   ========================================================= */
+
+.user-activity-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-activity-content h3 {
+    margin: 0 0 6px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #111827;
+
+    word-break: break-word;
+}
+
+.user-activity-content p {
+    margin: 0 0 7px;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #4b5563;
+
+    word-break: break-word;
+}
+
+.user-activity-content small {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+
+/* =========================================================
+   ACTIVITY ACTIONS
+   ========================================================= */
+
+.activity-action {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    min-width: 220px;
+    max-width: 220px;
+
+    box-sizing: border-box;
+}
+
+.activity-action form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   VIEW ACTIVITY BUTTON
+   ========================================================= */
+
+.view-activity-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 140px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    background: #111827;
+    color: #ffffff;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.view-activity-btn:hover {
+    background: #1f2937;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DELETE ACTIVITY
+   ========================================================= */
+
+.delete-activity-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 105px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+.delete-activity-btn:hover {
+    background: #b91c1c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(220, 38, 38, 0.22);
+}
+
+
+/* =========================================================
+   SECTION DELETE ACTION
+   ========================================================= */
+
+.section-delete-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 25px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.delete-section-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 20px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.delete-section-btn:hover {
+    background: #b91c1c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(220, 38, 38, 0.25);
+}
+
+
+/* =========================================================
+   USER ACTIONS
+   ========================================================= */
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 30px;
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.user-actions form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 18px;
+
+    background: #f3f4f6;
+    color: #374151;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+
+/* =========================================================
+   DELETE USER BUTTON
+   ========================================================= */
+
+.delete-user-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 18px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.delete-user-btn:hover {
+    background: #b91c1c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(220, 38, 38, 0.25);
+}
+
+.delete-user-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SUCCESS POPUP
+   ========================================================= */
+
+.success-popup {
+    position: fixed;
+
+    top: 80px;
+    right: 25px;
+
+    z-index: 9999;
+
+    background: #16a34a;
+    color: #ffffff;
+
+    padding: 15px 22px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.18);
+
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE — 768px
+   ========================================================= */
 
 @media (max-width: 768px) {
 
-    .movie-item {
-        flex-direction: column;
-        align-items: stretch;
-    }
+    /* -----------------------------------------
+       PAGE
+       ----------------------------------------- */
 
-    .movie-info {
-        width: 100%;
-    }
-
-    .movie-action {
+    .user-details-page {
         width: 100%;
 
-        display: flex;
-        flex-direction: column;
-
-        align-items: stretch;
-        justify-content: center;
-
-        gap: 10px;
-
-        margin-top: 15px;
-    }
-
-    .view-movie-btn,
-    .delete-movie-btn {
-        width: 100%;
-        min-width: 0;
+        margin: 25px auto;
+        padding: 0 15px;
 
         box-sizing: border-box;
     }
-}
 
+    .user-card {
+        width: 100%;
+        padding: 20px;
 
-		/* =====================================================
-		   DELETE MOVIE FORM
-		   ===================================================== */
+        box-sizing: border-box;
+    }
 
-		.movie-action form {
-		    margin: 0;
-		    padding: 0;
-		}
 
+    /* -----------------------------------------
+       USER HEADER
+       ----------------------------------------- */
 
-		/* =====================================================
-		   DELETE BUTTON
-		   ===================================================== */
+    .user-header {
+        align-items: flex-start;
+    }
 
-		.delete-item-btn {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
 
-		    min-width: 105px;
-		    height: 44px;
+        font-size: 28px;
+    }
 
-		    padding: 0 18px;
+    .user-header h2 {
+        font-size: 21px;
+    }
 
-		    background: #dc2626;
-		    color: #ffffff;
 
-		    border: none;
-		    border-radius: 9px;
+    /* -----------------------------------------
+       USER INFO
+       ----------------------------------------- */
 
-		    font-size: 14px;
-		    font-weight: 600;
+    .user-info {
+        grid-template-columns: 1fr;
+    }
 
-		    cursor: pointer;
 
-		    box-sizing: border-box;
-
-		    transition: all 0.2s ease;
-		}
-
-		.delete-item-btn:hover {
-		    background: #b91c1c;
-
-		    transform: translateY(-2px);
-
-		    box-shadow: 0 5px 12px rgba(220, 38, 38, 0.22);
-		}
-
-		.delete-item-btn:active {
-		    transform: translateY(0);
-		}
-
-
-		/* VIEW MOVIE BUTTON */
-
-		.view-movie-btn {
-		    display: inline-flex;
-
-		    align-items: center;
-
-		    justify-content: center;
-
-		    gap: 6px;
-
-		    padding: 10px 16px;
-
-		    background: #111827;
-
-		    color: #ffffff;
-
-		    text-decoration: none;
-
-		    border-radius: 8px;
-
-		    font-size: 14px;
-
-		    font-weight: 600;
-
-		    white-space: nowrap;
-
-		    transition: all 0.2s ease;
-		}
-
-		.view-movie-btn:hover {
-		    background: #374151;
-
-		    transform: translateY(-1px);
-		}
-
-
-		/* =====================================================
-		   NO MOVIES
-		   ===================================================== */
-
-		.no-movies {
-		    padding: 45px 20px;
-
-		    text-align: center;
-
-		    background: #f9fafb;
-
-		    border: 1px dashed #d1d5db;
-
-		    border-radius: 12px;
-		}
-
-		.empty-icon {
-		    font-size: 40px;
-
-		    margin-bottom: 10px;
-		}
-
-		.no-movies h3 {
-		    margin: 5px 0;
-
-		    color: #374151;
-		}
-
-		.no-movies p {
-		    margin: 5px 0;
-
-		    color: #6b7280;
-		}
-		
-		
-		/* =====================================================
-		   USER FEEDBACK
-		   ===================================================== */
-
-		.feedback-list {
-		    display: flex;
-		    flex-direction: column;
-		    gap: 15px;
-		}
-
-		.feedback-item {
-		    display: flex;
-		    align-items: center;
-		    justify-content: space-between;
-
-		    gap: 25px;
-
-		    padding: 20px 22px;
-
-		    background: #ffffff;
-
-		    border: 1px solid #e5e7eb;
-
-		    border-radius: 12px;
-
-		    transition: all 0.2s ease;
-		}
-
-		.feedback-item:hover {
-		    border-color: #c7d2fe;
-
-		    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-
-		    transform: translateY(-1px);
-		}
-
-		.feedback-info {
-		    flex: 1;
-		    min-width: 0;
-		}
-
-		.feedback-info h3 {
-		    margin: 0 0 10px;
-
-		    font-size: 18px;
-
-		    color: #111827;
-		}
-
-		.feedback-rating {
-		    margin-bottom: 10px;
-
-		    font-size: 14px;
-
-		    color: #6b7280;
-		}
-
-		.feedback-rating strong {
-		    color: #374151;
-		}
-
-		.feedback-message {
-		    margin: 0;
-
-		    color: #4b5563;
-
-		    font-size: 14px;
-
-		    line-height: 1.6;
-		}
-
-		.feedback-action {
-		    flex-shrink: 0;
-		}
-		
-		
-		/* =====================================================
-		   FEEDBACK ACTIONS
-		   ===================================================== */
-
-		.feedback-action {
-		    display: flex;
-		    align-items: center;
-		    justify-content: flex-end;
-
-		    gap: 12px;
-
-		    min-width: 250px;
-		}
-
-
-		/* VIEW FEEDBACK */
-
-		.view-feedback-btn {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    min-width: 140px;
-		    height: 44px;
-
-		    padding: 0 18px;
-
-		    background: #111827;
-		    color: #ffffff;
-
-		    border-radius: 9px;
-
-		    text-decoration: none;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    box-sizing: border-box;
-
-		    transition: all 0.2s ease;
-		}
-
-		.view-feedback-btn:hover {
-		    background: #1f2937;
-		    transform: translateY(-2px);
-		}
-
-
-		/* DELETE FORM */
-
-		.feedback-action form {
-		    margin: 0;
-		    padding: 0;
-		}
-
-
-		/* DELETE FEEDBACK */
-
-		.delete-feedback-btn {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    min-width: 105px;
-		    height: 44px;
-
-		    padding: 0 18px;
-
-		    background: #dc2626;
-		    color: #ffffff;
-
-		    border: none;
-		    border-radius: 9px;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    cursor: pointer;
-
-		    box-sizing: border-box;
-
-		    transition: all 0.2s ease;
-		}
-
-		.delete-feedback-btn:hover {
-		    background: #b91c1c;
-		    transform: translateY(-2px);
-		}
-
-		/* =====================================================
-		   USER ACTIVITIES
-		   ===================================================== */
-
-		.activity-list {
-		    display: flex;
-		    flex-direction: column;
-		    gap: 14px;
-		}
-
-		.user-activity-item {
-		    display: flex;
-		    align-items: center;
-		    gap: 18px;
-
-		    padding: 18px 20px;
-
-		    background: #ffffff;
-
-		    border: 1px solid #e5e7eb;
-		    border-radius: 12px;
-
-		    transition: all 0.2s ease;
-		}
-
-		.user-activity-item:hover {
-		    border-color: #c7d2fe;
-
-		    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-
-		    transform: translateY(-1px);
-		}
-
-
-		/* =====================================================
-		   ACTIVITY ICON
-		   ===================================================== */
-
-		.user-activity-icon {
-		    width: 48px;
-		    height: 48px;
-
-		    min-width: 48px;
-
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    background: #f3f4f6;
-
-		    border-radius: 12px;
-
-		    font-size: 24px;
-		}
-
-
-		/* =====================================================
-		   ACTIVITY CONTENT
-		   ===================================================== */
-
-		.user-activity-content {
-		    flex: 1;
-		    min-width: 0;
-		}
-
-		.user-activity-content h3 {
-		    margin: 0 0 6px;
-
-		    font-size: 16px;
-		    font-weight: 600;
-
-		    color: #111827;
-		}
-
-		.user-activity-content p {
-		    margin: 0 0 7px;
-
-		    font-size: 14px;
-
-		    color: #4b5563;
-
-		    line-height: 1.5;
-		}
-
-		.user-activity-content small {
-		    font-size: 12px;
-
-		    color: #9ca3af;
-		}
-
-
-		/* =====================================================
-		   ACTIVITY VIEW BUTTON
-		   ===================================================== */
-
-		.user-activity-item .activity-action {
-		    flex-shrink: 0;
-		}
-
-		.user-activity-item .view-movie-btn {
-		    display: inline-flex;
-
-		    align-items: center;
-		    justify-content: center;
-
-		    padding: 9px 15px;
-
-		    background: #f3f4f6;
-
-		    color: #374151;
-
-		    border: 1px solid #d1d5db;
-
-		    border-radius: 8px;
-
-		    text-decoration: none;
-
-		    font-size: 13px;
-		    font-weight: 600;
-
-		    white-space: nowrap;
-
-		    transition: all 0.2s ease;
-		}
-
-		.user-activity-item .view-movie-btn:hover {
-		    background: #111827;
-
-		    color: #ffffff;
-
-		    border-color: #111827;
-		}
-
-
-		/* =====================================================
-		   ACTIVITY COUNT
-		   ===================================================== */
-
-		.section-header .movie-count {
-		    display: inline-flex;
-
-		    align-items: center;
-		    justify-content: center;
-
-		    min-width: 28px;
-		    height: 28px;
-
-		    padding: 0 8px;
-
-		    background: #f3f4f6;
-
-		    color: #374151;
-
-		    border-radius: 20px;
-
-		    font-size: 13px;
-		    font-weight: 600;
-		}
-
-		
-		
-
-		/* =====================================================
-		   ACTIVITY ACTIONS
-		   ===================================================== */
-
-		.activity-action {
-		    display: flex;
-		    align-items: center;
-		    justify-content: flex-end;
-
-		    gap: 12px;
-
-		    min-width: 250px;
-		}
-
-
-		/* VIEW ACTIVITY */
-
-		.view-activity-btn {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    min-width: 140px;
-		    height: 44px;
-
-		    padding: 0 18px;
-
-		    background: #111827;
-		    color: #ffffff;
-
-		    border-radius: 9px;
-
-		    text-decoration: none;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    box-sizing: border-box;
-
-		    transition: all 0.2s ease;
-		}
-
-		.view-activity-btn:hover {
-		    background: #1f2937;
-		    transform: translateY(-2px);
-		}
-
-
-		/* DELETE FORM */
-
-		.activity-action form {
-		    margin: 0;
-		    padding: 0;
-		}
-
-
-		/* DELETE ACTIVITY */
-
-		.delete-activity-btn {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    min-width: 105px;
-		    height: 44px;
-
-		    padding: 0 18px;
-
-		    background: #dc2626;
-		    color: #ffffff;
-
-		    border: none;
-		    border-radius: 9px;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    cursor: pointer;
-
-		    box-sizing: border-box;
-
-		    transition: all 0.2s ease;
-		}
-
-		.delete-activity-btn:hover {
-		    background: #b91c1c;
-		    transform: translateY(-2px);
-		}
-		
-		
-		/* =====================================================
-		   RESPONSIVE
-		   ===================================================== */
-
-		@media (max-width: 700px) {
-
-		    .user-activity-item {
-		        align-items: flex-start;
-
-		        flex-wrap: wrap;
-
-		        padding: 16px;
-		    }
-
-		    .user-activity-content {
-		        flex: 1;
-
-		        min-width: calc(100% - 70px);
-		    }
-
-		    .user-activity-item .activity-action {
-		        width: 100%;
-
-		        margin-left: 66px;
-		    }
-
-		    .user-activity-item .view-movie-btn {
-		        width: fit-content;
-		    }
-		}
-		
-		
-		/* Individual Delete Button */
-		
-		.delete-item-btn {
-		    display: inline-flex;
-		    align-items: center;
-		    justify-content: center;
-
-		    padding: 9px 15px;
-
-		    background: #dc2626;
-		    color: #ffffff;
-
-		    border: none;
-		    border-radius: 7px;
-
-		    font-size: 13px;
-		    font-weight: 600;
-
-		    cursor: pointer;
-
-		    transition: all 0.2s ease;
-		}
-
-		.delete-item-btn:hover {
-		    background: #b91c1c;
-		    transform: translateY(-1px);
-		}
-
-		.delete-item-btn:active {
-		    transform: translateY(0);
-		}
-		
-		
-
-		/* =====================================================
-		   USER ACTIONS
-		   ===================================================== */
-
-		.user-actions {
-		    display: flex;
-		    align-items: center;
-		    justify-content: space-between;
-
-		    gap: 15px;
-
-		    margin-top: 30px;
-		    padding-top: 25px;
-
-		    border-top: 1px solid #e5e7eb;
-		}
-
-		.success-popup {
-		    position: fixed;
-		    top: 80px;
-		    right: 25px;
-		    z-index: 9999;
-
-		    background: #16a34a;
-		    color: white;
-
-		    padding: 15px 22px;
-
-		    border-radius: 10px;
-
-		    font-size: 15px;
-		    font-weight: 600;
-
-		    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-
-		    animation: slideIn 0.3s ease;
-		}
-
-		@keyframes slideIn {
-		    from {
-		        opacity: 0;
-		        transform: translateX(30px);
-		    }
-
-		    to {
-		        opacity: 1;
-		        transform: translateX(0);
-		    }
-		}
-
-		/* =====================================================
-		   BACK BUTTON
-		   ===================================================== */
-
-		.back-btn {
-		    display: inline-flex;
-
-		    align-items: center;
-		    justify-content: center;
-
-		    padding: 10px 18px;
-
-		    background: #f3f4f6;
-		    color: #374151;
-
-		    border: 1px solid #d1d5db;
-		    border-radius: 8px;
-
-		    text-decoration: none;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    transition: all 0.2s ease;
-		}
-
-		.back-btn:hover {
-		    background: #e5e7eb;
-		    color: #111827;
-		}
-		
-		.user-actions form {
-		    margin: 0;
-		}
-
-
-		/* =====================================================
-		   DELETE USER BUTTON
-		   ===================================================== */
-
-		.delete-user-btn {
-		    display: inline-flex;
-
-		    align-items: center;
-		    justify-content: center;
-
-		    padding: 10px 18px;
-
-		    background: #dc2626;
-		    color: #ffffff;
-
-		    border: none;
-		    border-radius: 8px;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    cursor: pointer;
-
-		    transition: all 0.2s ease;
-		}
-
-		.delete-user-btn:hover {
-		    background: #b91c1c;
-
-		    transform: translateY(-1px);
-
-		    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
-		}
-
-		.delete-user-btn:active {
-		    transform: translateY(0);
-		}
-		
-		/* =====================================================
-		   SECTION DELETE ACTION
-		   ===================================================== */
-
-		.section-delete-action {
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-
-		    margin-top: 25px;
-		    padding-top: 20px;
-
-		    border-top: 1px solid #e5e7eb;
-		}
-
-
-		/* =====================================================
-		   DELETE SECTION BUTTON
-		   ===================================================== */
-
-		.delete-section-btn {
-		    display: inline-flex;
-
-		    align-items: center;
-		    justify-content: center;
-
-		    padding: 10px 20px;
-
-		    background: #dc2626;
-		    color: #ffffff;
-
-		    border: none;
-		    border-radius: 8px;
-
-		    font-size: 14px;
-		    font-weight: 600;
-
-		    cursor: pointer;
-
-		    transition: all 0.2s ease;
-		}
-
-		.delete-section-btn:hover {
-		    background: #b91c1c;
-
-		    transform: translateY(-1px);
-
-		    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
-		}
-
-		.delete-section-btn:active {
-		    transform: translateY(0);
-		}
-
-
-		/* =====================================================
-		   MOBILE
-		   ===================================================== */
-
-		@media (max-width: 600px) {
-
-		    .user-actions {
-		        flex-direction: column;
-		        align-items: stretch;
-		    }
-
-		    .back-btn,
-		    .delete-user-btn {
-		        width: 100%;
-		    }
-		}
-
-
-        /* =========================================
-           MOBILE
-           ========================================= */
-
-        @media (max-width: 700px) {
-
-            .user-details-page {
-                margin: 25px auto;
-                padding: 0 15px;
-            }
-
-            .user-card {
-                padding: 20px;
-            }
-
-            .user-header {
-                align-items: flex-start;
-            }
-
-            .user-avatar {
-                width: 60px;
-                height: 60px;
-                font-size: 28px;
-            }
-
-            .user-header h2 {
-                font-size: 21px;
-            }
-
-            .user-info {
-                grid-template-columns: 1fr;
-            }
-
-            .user-actions {
-                flex-direction: column;
-            }
-
-            .back-btn {
-                text-align: center;
-            }
-        }
-
-@media (max-width: 768px) {
+    /* -----------------------------------------
+       MOVIES
+       ----------------------------------------- */
 
     .movie-item {
+        width: 100%;
+
         flex-direction: column;
         align-items: stretch;
+
+        gap: 15px;
+
+        box-sizing: border-box;
     }
 
     .movie-info {
         width: 100%;
+        min-width: 0;
+    }
+
+    .movie-source {
+        width: 100%;
+    }
+
+    .source-link {
+        max-width: calc(100% - 65px);
     }
 
     .movie-action {
         width: 100%;
+        min-width: 0;
 
         display: flex;
         flex-direction: column;
@@ -1311,7 +1166,9 @@
 
         gap: 12px;
 
-        margin-top: 18px;
+        margin-top: 5px;
+
+        box-sizing: border-box;
     }
 
     .view-movie-btn {
@@ -1319,29 +1176,36 @@
         min-width: 0;
     }
 
-    .delete-movie-btn {
+    .delete-movie-btn,
+    .movie-action .delete-item-btn {
         width: 132px;
         min-width: 132px;
     }
-}
 
-/* =====================================================
-   MOBILE - FEEDBACK
-   ===================================================== */
 
-@media (max-width: 768px) {
+    /* -----------------------------------------
+       FEEDBACK
+       ----------------------------------------- */
 
     .feedback-item {
+        width: 100%;
+
         flex-direction: column;
         align-items: stretch;
+
+        gap: 15px;
+
+        box-sizing: border-box;
     }
 
     .feedback-info {
         width: 100%;
+        min-width: 0;
     }
 
     .feedback-action {
         width: 100%;
+        min-width: 0;
 
         display: flex;
         flex-direction: column;
@@ -1351,7 +1215,9 @@
 
         gap: 12px;
 
-        margin-top: 18px;
+        margin-top: 5px;
+
+        box-sizing: border-box;
     }
 
     .view-feedback-btn {
@@ -1365,21 +1231,40 @@
     }
 
 
-    /* =================================================
-       MOBILE - ACTIVITIES
-       ================================================= */
+    /* -----------------------------------------
+       ACTIVITIES
+       ----------------------------------------- */
 
-    .activity-item {
+    .user-activity-item {
+        width: 100%;
+        max-width: 100%;
+
         flex-direction: column;
         align-items: stretch;
+
+        gap: 15px;
+
+        padding: 18px;
+
+        box-sizing: border-box;
     }
 
-    .activity-info {
+    .user-activity-icon {
+        width: 48px;
+        min-width: 48px;
+    }
+
+    .user-activity-content {
         width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
     }
 
     .activity-action {
         width: 100%;
+        max-width: none;
+        min-width: 0;
 
         display: flex;
         flex-direction: column;
@@ -1389,19 +1274,65 @@
 
         gap: 12px;
 
-        margin-top: 18px;
+        margin-top: 5px;
+
+        box-sizing: border-box;
     }
 
     .view-activity-btn {
         width: 100%;
         min-width: 0;
+
+        box-sizing: border-box;
     }
 
     .delete-activity-btn {
         width: 132px;
         min-width: 132px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------------------
+       USER ACTIONS
+       ----------------------------------------- */
+
+    .user-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .back-btn,
+    .delete-user-btn {
+        width: 100%;
+        box-sizing: border-box;
     }
 }
 
 
-    
+/* =========================================================
+   SMALL MOBILE — 600px
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .user-details-page {
+        padding: 0 10px;
+    }
+
+    .user-card {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .section-header h2 {
+        font-size: 20px;
+    }
+
+    .movie-item,
+    .feedback-item,
+    .user-activity-item {
+        padding: 16px;
+    }
+}
