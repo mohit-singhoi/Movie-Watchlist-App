@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.mohit.watchlist.entity.Activity;
@@ -15,6 +16,7 @@ import com.example.mohit.watchlist.entity.User;
 import com.example.mohit.watchlist.security.CustomUserDetails;
 import com.example.mohit.watchlist.service.ActivityService;
 import com.example.mohit.watchlist.service.EmailService;
+import com.example.mohit.watchlist.service.FeedbackResponseService;
 import com.example.mohit.watchlist.service.FeedbackService;
 
 @Controller
@@ -23,32 +25,37 @@ public class FeedbackController {
     private final FeedbackService feedbackService;
     private final ActivityService activityService;
     private final EmailService emailService;
+    private final FeedbackResponseService feedbackResponseService;
 
     public FeedbackController(
             FeedbackService feedbackService,
             ActivityService activityService,
-            EmailService emailService) {
+            EmailService emailService,
+            FeedbackResponseService feedbackResponseService) {
 
         this.feedbackService = feedbackService;
         this.activityService = activityService;
         this.emailService = emailService;
+        this.feedbackResponseService = feedbackResponseService;
     }
 
     // =====================================================
-    // SHOW FEEDBACK PAGE
+    // USER - SHOW FEEDBACK PAGE
     // =====================================================
 
     @GetMapping("/feedback")
     public String showFeedbackForm(Model model) {
 
-        model.addAttribute("feedback", new Feedback());
+        model.addAttribute(
+                "feedback",
+                new Feedback()
+        );
 
         return "feedback";
     }
 
-
     // =====================================================
-    // SAVE FEEDBACK
+    // USER - SUBMIT FEEDBACK
     // =====================================================
 
     @PostMapping("/feedback")
@@ -70,24 +77,23 @@ public class FeedbackController {
 
         // Save activity
         activityService.saveActivity(
-            new Activity(
-                "💬",
-                "New Feedback Submitted",
-                user.getFullName()
-                    + " submitted new feedback.",
-                user
-            )
+                new Activity(
+                        "💬",
+                        "New Feedback Submitted",
+                        user.getFullName()
+                                + " submitted new feedback.",
+                        user
+                )
         );
 
         // Success popup
         redirectAttributes.addFlashAttribute(
-            "success",
-            true
+                "success",
+                true
         );
 
         return "redirect:/feedback";
     }
-
 
     // =====================================================
     // ADMIN - RESPOND TO FEEDBACK
@@ -96,62 +102,103 @@ public class FeedbackController {
     @PostMapping("/admin/feedback/{id}/respond")
     public String respondToFeedback(
             @PathVariable Long id,
-            @ModelAttribute("adminResponse") String adminResponse,
+            @RequestParam("responseMessage") String responseMessage,
             RedirectAttributes redirectAttributes) {
 
-        Feedback feedback =
-                feedbackService.getFeedbackById(id);
+        try {
 
-        // Feedback not found
-        if (feedback == null) {
+            // Get feedback
+            Feedback feedback =
+                    feedbackService.getFeedbackById(id);
 
-            redirectAttributes.addFlashAttribute(
-                "errorMessage",
-                "Feedback not found."
+            // Check feedback and user
+            if (feedback == null
+                    || feedback.getUser() == null) {
+
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ User information is not available."
+                );
+
+                return "redirect:/admin/feedback/" + id;
+            }
+
+            // Get user information
+            String userEmail =
+                    feedback.getUser().getEmail();
+
+            String userName =
+                    feedback.getUser().getFullName();
+
+            // Validate email
+            if (userEmail == null
+                    || userEmail.isBlank()) {
+
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ User email is not available."
+                );
+
+                return "redirect:/admin/feedback/" + id;
+            }
+
+            // Validate response message
+            if (responseMessage == null
+                    || responseMessage.trim().isEmpty()) {
+
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Please enter a response before sending."
+                );
+
+                return "redirect:/admin/feedback/" + id;
+            }
+
+            String cleanResponse =
+                    responseMessage.trim();
+
+            // =================================================
+            // 1. SEND EMAIL
+            // =================================================
+
+            emailService.sendFeedbackResponse(
+                    userEmail,
+                    userName,
+                    cleanResponse
             );
 
-            return "redirect:/admin/feedback";
-        }
+            // =================================================
+            // 2. SAVE RESPONSE HISTORY
+            // =================================================
 
-        // Check user/email
-        if (feedback.getUser() == null
-                || feedback.getUser().getEmail() == null
-                || feedback.getUser().getEmail().isBlank()) {
-
-            redirectAttributes.addFlashAttribute(
-                "errorMessage",
-                "User email is not available."
+            feedbackResponseService.saveResponse(
+                    feedback,
+                    "supportmoviewatchlist@gmail.com",
+                    cleanResponse,
+                    "SENT"
             );
 
-            return "redirect:/admin/feedback/" + id;
-        }
-
-        // Validate response
-        if (adminResponse == null
-                || adminResponse.trim().isEmpty()) {
+            // =================================================
+            // SUCCESS MESSAGE
+            // =================================================
 
             redirectAttributes.addFlashAttribute(
-                "errorMessage",
-                "Please enter a response before sending."
+                    "successMessage",
+                    "✅ Response successfully sent to the User."
             );
 
-            return "redirect:/admin/feedback/" + id;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Failed to send response. Please try again."
+            );
         }
-
-        // Send email
-        emailService.sendFeedbackResponse(
-            feedback.getUser().getEmail(),
-            feedback.getUser().getFullName(),
-            adminResponse.trim()
-        );
-
-        // Success message
-        redirectAttributes.addFlashAttribute(
-            "successMessage",
-            "✅ Response successfully sent to "
-                + feedback.getUser().getEmail()
-        );
 
         return "redirect:/admin/feedback/" + id;
     }
+    
 }
+

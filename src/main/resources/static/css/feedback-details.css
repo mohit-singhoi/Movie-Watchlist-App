@@ -405,6 +405,132 @@
 }
 
 /* =====================================================
+   RESPONSE HISTORY
+   ===================================================== */
+
+.response-history-section {
+    margin-top: 30px;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.response-history-section h3 {
+    margin: 0 0 20px;
+    font-size: 20px;
+    color: #1f2937;
+}
+
+.no-response-history {
+    padding: 18px;
+    text-align: center;
+    color: #6b7280;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+
+/* Individual response */
+
+.response-history-card {
+    margin-top: 16px;
+    padding: 18px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+
+/* Header */
+
+.response-history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 14px;
+}
+
+
+/* SENT badge */
+
+.response-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* Date */
+
+.response-date {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* Admin */
+
+.response-history-info {
+    margin-bottom: 12px;
+}
+
+.response-history-info p {
+    margin: 0;
+    color: #374151;
+    font-size: 14px;
+}
+
+
+/* Response message */
+
+.response-history-message {
+    padding: 14px;
+    background: #ffffff;
+    border-left: 4px solid #198754;
+    border-radius: 6px;
+}
+
+.response-history-message strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #374151;
+}
+
+.response-history-message p {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .response-history-section {
+        padding: 16px;
+    }
+
+    .response-history-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .response-date {
+        font-size: 12px;
+    }
+}
+
+/* =====================================================
    MOBILE
    ===================================================== */
 

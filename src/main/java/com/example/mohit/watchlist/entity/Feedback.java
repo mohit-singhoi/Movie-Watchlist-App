@@ -1,5 +1,8 @@
 package com.example.mohit.watchlist.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -21,9 +24,27 @@ public class Feedback {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+
+    // =====================================================
+    // FEEDBACK RESPONSE HISTORY
+    // =====================================================
+
+    @OneToMany(
+        mappedBy = "feedback",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<FeedbackResponse> responses = new ArrayList<>();
+
+
+    // =====================================================
+    // GETTERS AND SETTERS
+    // =====================================================
+
     public Long getId() {
         return id;
     }
+
 
     public String getCategory() {
         return category;
@@ -33,6 +54,7 @@ public class Feedback {
         this.category = category;
     }
 
+
     public Integer getRating() {
         return rating;
     }
@@ -40,6 +62,7 @@ public class Feedback {
     public void setRating(Integer rating) {
         this.rating = rating;
     }
+
 
     public String getMessage() {
         return message;
@@ -49,11 +72,50 @@ public class Feedback {
         this.message = message;
     }
 
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    // =====================================================
+    // RESPONSE HISTORY GETTER
+    // =====================================================
+
+    public List<FeedbackResponse> getResponses() {
+        return responses;
+    }
+
+
+    public void setResponses(List<FeedbackResponse> responses) {
+        this.responses = responses;
+    }
+
+
+    // =====================================================
+    // ADD RESPONSE
+    // =====================================================
+
+    public void addResponse(FeedbackResponse response) {
+
+        responses.add(response);
+
+        response.setFeedback(this);
+    }
+
+
+    // =====================================================
+    // REMOVE RESPONSE
+    // =====================================================
+
+    public void removeResponse(FeedbackResponse response) {
+
+        responses.remove(response);
+
+        response.setFeedback(null);
     }
 }

@@ -252,10 +252,11 @@
 		              method="post"
 		              class="response-form">
 
-		            <textarea name="adminResponse"
-		                      class="response-textarea"
-		                      placeholder="Write your response to the user..."
-		                      required></textarea>
+					  <textarea name="responseMessage"
+					            id="responseMessage"
+					            class="response-textarea"
+					            placeholder="Write your response to the user..."
+					            required></textarea>
 
 		            <button type="submit"
 		                    class="send-response-btn">
@@ -267,8 +268,74 @@
 		        </form>
 
 		    </div>
+			
 
-		</div>
+			<!-- =====================================================
+			     RESPONSE HISTORY
+			     ===================================================== -->
+
+				 <div class="response-history-section">
+
+				     <h3>📜 Email Response History</h3>
+
+				     <!-- No responses yet -->
+				     <div th:if="${responseHistory == null or #lists.isEmpty(responseHistory)}"
+				          class="no-response-history">
+
+				         No responses have been sent yet.
+
+				     </div>
+
+
+				     <!-- Response history -->
+				     <div th:if="${responseHistory != null and !#lists.isEmpty(responseHistory)}">
+
+				         <div th:each="response : ${responseHistory}"
+				              class="response-history-card">
+
+				             <div class="response-history-header">
+
+				                 <span class="response-status"
+				                       th:text="${response.emailStatus}">
+				                     SENT
+				                 </span>
+
+				                 <span class="response-date"
+				                       th:text="${#temporals.format(response.respondedAt, 'dd MMM yyyy, hh:mm a')}">
+				                     14 Aug 2026, 08:30 PM
+				                 </span>
+
+				             </div>
+
+
+				             <div class="response-history-info">
+
+				                 <p>
+				                     <strong>📧 Admin:</strong>
+
+				                     <span th:text="${response.adminEmail}">
+				                         supportmoviewatchlist@gmail.com
+				                     </span>
+				                 </p>
+
+				             </div>
+
+
+				             <div class="response-history-message">
+
+				                 <strong>💬 Response:</strong>
+
+				                 <p th:text="${response.responseMessage}">
+				                     Response message goes here.
+				                 </p>
+
+				             </div>
+
+				         </div>
+
+				     </div>
+
+				 </div>
 
 
     </div>

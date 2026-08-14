@@ -23,7 +23,18 @@
 </head>
 
 <body>
-	
+	<!----- Success Popup ---->
+	<div th:if="${successMessage}"
+	     class="success-popup"
+	     th:text="${successMessage}">
+	    ✅ User deleted successfully.
+	</div>
+
+	<div th:if="${errorMessage}"
+	     class="error-popup"
+	     th:text="${errorMessage}">
+	    ❌ Failed to delete user.
+	</div>
 
 <!-- =====================================================
      ADMIN NAVBAR
@@ -221,34 +232,11 @@
 <!-- =====================================================
      SEARCH SCRIPT
      ===================================================== -->
-
-<script>
-
-function searchUsers() {
-
-    const input =
-        document.getElementById("userSearch");
-
-    const filter =
-        input.value.toLowerCase();
-
-    const rows =
-        document.querySelectorAll("#usersTable tbody tr");
-
-    rows.forEach(function(row) {
-
-        const text =
-            row.textContent.toLowerCase();
-
-        row.style.display =
-            text.includes(filter) ? "" : "none";
-
-    });
-
-}
-
-</script>
+<script th:src="@{/js/admin-users.js}"></script>
+	 
+<!-----Navbar JS ----->
 <script th:src="@{/js/admin-navbar.js}"></script>
+
 
 </body>
 </html>

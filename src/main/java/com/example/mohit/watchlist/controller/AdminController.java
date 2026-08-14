@@ -11,6 +11,10 @@ import com.example.mohit.watchlist.entity.Feedback;
 import com.example.mohit.watchlist.entity.Movie;
 import com.example.mohit.watchlist.entity.User;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.List;
+
+import com.example.mohit.watchlist.entity.FeedbackResponse;
+import com.example.mohit.watchlist.service.FeedbackResponseService;
 
 
 
@@ -21,17 +25,20 @@ public class AdminController {
     private final MovieServices movieServices;
     private final FeedbackService feedbackService;
     private final ActivityService activityService;
+    private final FeedbackResponseService feedbackResponseService;
 
     public AdminController(
             UserService userService,
             MovieServices movieService,
             FeedbackService feedbackService,
-            ActivityService activityService) {
+            ActivityService activityService,
+            FeedbackResponseService feedbackResponseService) {
 
         this.userService = userService;
         this.movieServices = movieService;
         this.feedbackService = feedbackService;
         this.activityService = activityService;
+        this.feedbackResponseService = feedbackResponseService;
     }
 
     // ==============================
@@ -86,8 +93,6 @@ public class AdminController {
     // VIEW SINGLE USER
     // ==============================
     
-    
-
     @GetMapping("/admin/users/{id}")
     public String viewUser(
             @PathVariable Long id,
@@ -183,13 +188,23 @@ public class AdminController {
             @PathVariable Long id,
             Model model) {
 
-        Feedback feedback = feedbackService.getFeedbackById(id);
+        Feedback feedback =
+                feedbackService.getFeedbackById(id);
 
         if (feedback == null) {
             return "redirect:/admin/feedback";
         }
 
+        List<FeedbackResponse> responseHistory =
+                feedbackResponseService
+                        .getResponsesByFeedback(feedback);
+
         model.addAttribute("feedback", feedback);
+
+        model.addAttribute(
+                "responseHistory",
+                responseHistory
+        );
 
         return "admin/feedback-details";
     }
@@ -394,5 +409,32 @@ public class AdminController {
         return "redirect:/admin/users/" + userId;
     }
     
+    
+    // Delete User Completely 
+    
+    @PostMapping("/admin/users/{id}/delete")
+    public String deleteUser(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            userService.deleteUser(id);
+
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ User deleted successfully."
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Failed to delete user."
+            );
+        }
+
+        return "redirect:/admin/users";
+    }
     
 }

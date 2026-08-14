@@ -154,3 +154,6 @@ function confirmDeleteActivity(action) {
         "This action cannot be undone."
     );
 }
+
+
+

@@ -364,6 +364,53 @@ tbody tr:hover {
     color: #777;
 }
 
+/* =====================================================
+   SUCCESS POPUP
+   ===================================================== */
+
+.success-popup {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+
+    z-index: 99999;
+
+    max-width: 400px;
+
+    padding: 15px 22px;
+
+    background: #198754;
+    color: #ffffff;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+
+    animation: successPopupIn 0.4s ease;
+}
+
+
+/* =====================================================
+   SUCCESS POPUP ANIMATION
+   ===================================================== */
+
+@keyframes successPopupIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
 
 /* =====================================================
    TABLET
