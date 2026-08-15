@@ -1,627 +1,252 @@
-# 🎬 Movie Watchlist App - Application Workflow
+# Movie Watchlist App — Working Flow
 
-This document explains how the Movie Watchlist Application works internally, from user registration and login to adding movies, fetching IMDb ratings, managing priorities, viewing the dashboard, and submitting feedback.
+## 1. Project Overview
+
+Movie Watchlist App is a Spring Boot web application that allows registered users to manage their personal movie watchlist, submit feedback, and track their activities.
+
+The application also provides an Admin Panel for managing users, movies, feedback, activities, and email communication with users.
+
+The application follows a layered architecture using:
+
+* Spring Boot
+* Spring MVC
+* Spring Security
+* Spring Data JPA / Hibernate
+* PostgreSQL
+* Thymeleaf
+* HTML, CSS, JavaScript
+* JavaMail / Spring Mail
 
 ---
 
-# 📌 1. Application Startup
+# 2. Application Architecture
 
-When the application starts, Spring Boot initializes the application using:
+The application follows a layered architecture:
+
+```text
+User Interface
+     │
+     ▼
+Controllers
+     │
+     ▼
+Services
+     │
+     ▼
+Repositories
+     │
+     ▼
+Entities
+     │
+     ▼
+PostgreSQL Database
+```
+
+Additional layers handle:
+
+* Authentication and authorization
+* Form validation
+* Email communication
+* DTO-based request handling
+
+---
+
+# 3. Application Startup
+
+The application starts from:
 
 ```text
 WatchlistApplication.java
 ```
 
-Spring Boot loads:
+Spring Boot initializes:
 
-- Controllers
-- Services
-- Repositories
-- Entities
-- Security configuration
-- Validation components
+1. Application context
+2. Database connection
+3. JPA/Hibernate
+4. Spring Security
+5. Controllers
+6. Services
+7. Repositories
+8. Thymeleaf templates
+9. Email configuration
 
-The application runs on:
-
-```text
-http://localhost:8080
-```
-
----
-
-# 🏠 2. Home Page Workflow
-
-When a user opens:
-
-```text
-/
-```
-
-the request is handled by:
-
-```text
-HomeController
-```
-
-The controller returns the home page.
-
-```text
-User
-  │
-  ▼
-Home Page
-  │
-  ├── Login
-  ├── Sign Up
-  ├── Watchlist
-  └── About
-```
-
-The common navigation bar and footer are loaded using Thymeleaf fragments:
-
-```html
-<div th:replace="~{fragments/navbar :: navbar}"></div>
-```
-
-```html
-<div th:replace="~{fragments/footer :: footer}"></div>
-```
+After successful startup, the application is available through the configured local server port.
 
 ---
 
-# 👤 3. User Registration Workflow
+# 4. User Registration and Authentication
 
-A new user can create an account through:
+## 4.1 Signup
+
+A new user accesses the signup page:
 
 ```text
 /signup
 ```
 
+The signup form collects user information such as:
+
+* Full name
+* Email
+* Password
+
 The request is handled by:
 
 ```text
 AuthController
 ```
 
-The registration form uses:
+The application uses:
 
 ```text
-SignupRequest.java
-```
-
-for receiving user registration data.
-
-### Workflow
-
-```text
-User
- │
- ▼
-Signup Page
- │
- ▼
 SignupRequest
- │
- ▼
-AuthController
- │
- ▼
-UserService
- │
- ▼
-UserRepo
- │
- ▼
-Database
 ```
 
-The user information is stored in the database.
+as the DTO for signup data.
+
+The password is securely encoded using the configured password encoder before being stored in the database.
 
 ---
 
-# 🔐 4. Login Workflow
+## 4.2 User Login
 
-The user logs in through:
-
-```text
-/login
-```
-
-Spring Security handles the authentication process.
-
-The login form uses:
+Users can access:
 
 ```text
-LoginRequest.java
+/userlogin
 ```
 
-The login process uses:
+The login process is handled through Spring Security.
 
-```text
-CustomUserDetailsService
-```
+The application:
 
-and:
+1. Receives the user's credentials.
+2. Finds the user using `CustomUserDetailsService`.
+3. Loads the corresponding `User` entity.
+4. Verifies the password.
+5. Authenticates the user.
+6. Redirects the user according to the authentication-success configuration.
+
+The application uses:
 
 ```text
 CustomUserDetails
-```
-
-### Authentication Flow
-
-```text
-User
- │
- ▼
-Login Page
- │
- ▼
-Email + Password
- │
- ▼
-Spring Security
- │
- ▼
 CustomUserDetailsService
- │
- ▼
-UserRepo
- │
- ▼
-Find User by Email
- │
- ▼
-CustomUserDetails
- │
- ▼
-Authentication Successful
+CustomAuthenticationSuccessHandler
 ```
 
-If the credentials are valid, the user is authenticated and can access protected features.
+for custom authentication handling.
 
 ---
 
-# 🛡️ 5. Spring Security Workflow
+# 5. Role-Based Access
 
-Security configuration is handled by:
+The application supports different user roles.
 
-```text
-SecurityConfig.java
-```
-
-Password handling is configured through:
+The main roles are:
 
 ```text
-PasswordConfig.java
+USER
+ADMIN
 ```
 
-Passwords should be stored securely using password encoding rather than plain text.
+`SecurityConfig.java` controls access to protected routes.
 
-After successful authentication, the user can access authenticated pages such as:
+Users cannot access administrative functionality without the required role.
 
-```text
-/dashboard
-/watchlist
-/watchlistItemForm
-/feedback
-```
+Admin-specific pages and operations are protected through Spring Security.
 
 ---
 
-# 📊 6. Dashboard Workflow
+# 6. User Dashboard Workflow
 
-After login, the user can open:
+After successful authentication, the user can access the dashboard.
 
-```text
-/dashboard
-```
-
-The request is handled by:
+The dashboard is handled by:
 
 ```text
 DashboardController
-```
-
-The controller gets the currently logged-in user's email from Spring Security:
-
-```text
-Authentication
-      │
-      ▼
-Logged-in User Email
-      │
-      ▼
-UserRepo
-      │
-      ▼
-User
-```
-
-The dashboard then uses:
-
-```text
 DashboardService
 ```
 
-to calculate:
+The dashboard provides an overview of the user's application activity and watchlist-related information.
 
-- Total Movies
-- Average Rating
-- High Priority Movies
-- Review Count
-- Recent Movies
-
-### Dashboard Flow
-
-```text
-DashboardController
-        │
-        ▼
-DashboardService
-        │
-        ▼
-     MovieRepo
-        │
-        ▼
- Movies of Logged-in User
-        │
-        ├── Total Movies
-        ├── Average Rating
-        ├── High Priority
-        ├── Review Count
-        └── Recent Movies
-```
-
-The calculated data is sent to:
+The dashboard template is:
 
 ```text
 dashboard.html
 ```
 
-using the Thymeleaf model.
-
 ---
 
-# 🎬 7. Watchlist Workflow
+# 7. Movie Watchlist Workflow
 
-The watchlist page displays movies belonging to the logged-in user.
+## 7.1 Add Movie
 
-```text
-/watchlist
-```
+Users can add movies to their personal watchlist.
 
-The request is handled by:
+The movie functionality is handled by:
 
 ```text
 MovieController
+MovieService
+MovieRepo
+Movie
 ```
 
-The controller communicates with:
+The movie form is:
 
 ```text
-DatabaseService
+watchlistItemForm.html
 ```
 
-which uses:
+The submitted movie information is validated before being saved.
+
+---
+
+## 7.2 Movie Data
+
+The movie entity stores information related to the user's watchlist.
+
+Movie data is persisted through:
 
 ```text
 MovieRepo
 ```
 
-to retrieve movies.
-
-### Flow
-
-```text
-User
- │
- ▼
-Watchlist Page
- │
- ▼
-MovieController
- │
- ▼
-DatabaseService
- │
- ▼
-MovieRepo
- │
- ▼
-Database
- │
- ▼
-Movies
- │
- ▼
-watchlist.html
-```
-
-Only movies associated with the current user are displayed.
+using Spring Data JPA.
 
 ---
 
-# ➕ 8. Add Movie Workflow
+## 7.3 Movie Rating
 
-The user can add a movie through:
-
-```text
-/watchlistItemForm
-```
-
-The form collects information such as:
-
-- Movie Title
-- Rating
-- Priority
-- Comment
-- Source
-
-The request is processed by:
-
-```text
-MovieController
-```
-
----
-
-# ⭐ 9. IMDb Rating Workflow
-
-When a movie is submitted, the application attempts to retrieve its IMDb rating through the:
-
-```text
-OMDb API
-```
-
-The responsible service is:
+Movie ratings are handled using:
 
 ```text
 RatingService
-```
-
-### Workflow
-
-```text
-User enters movie title
-          │
-          ▼
-    MovieController
-          │
-          ▼
-     RatingService
-          │
-          ▼
-       OMDb API
-          │
-      ┌───┴───┐
-      ▼       ▼
-   Found    Not Found
-      │       │
-      ▼       ▼
-IMDb Rating  Manual Rating
-      │       │
-      └───┬───┘
-          ▼
-       Movie
-          │
-          ▼
-   DatabaseService
-          │
-          ▼
-       MovieRepo
-          │
-          ▼
-       Database
-```
-
-If the movie is available through OMDb, the IMDb rating can be used automatically.
-
-If the movie cannot be found, the user can provide a manual rating.
-
----
-
-# 🚦 10. Priority Workflow
-
-The application supports:
-
-```text
-H = High
-M = Medium
-L = Low
-```
-
-Priority can be assigned automatically based on the movie rating or entered manually.
-
-Supported manual values include:
-
-```text
-H
-High
-
-M
-Med
-Medium
-
-L
-Low
-```
-
-The application normalizes accepted priority values.
-
-For example:
-
-```text
-High → H
-Medium → M
-Low → L
-```
-
----
-
-# ✅ 11. Priority Validation
-
-Priority validation is implemented using custom Bean Validation.
-
-The validation components are:
-
-```text
-Priority.java
-PriorityAnnotationLogic.java
-```
-
-The validation checks whether the supplied priority value is acceptable.
-
-### Validation Flow
-
-```text
-User Input
-    │
-    ▼
-Priority Validation
-    │
-    ▼
-PriorityAnnotationLogic
-    │
- ┌──┴──┐
- ▼     ▼
-Valid Invalid
- │       │
- ▼       ▼
-Continue Error Message
-```
-
----
-
-# ⭐ 12. Rating Validation
-
-Rating validation is handled using:
-
-```text
 Rating.java
 RatingAnnotationLogic.java
 ```
 
-The entered rating is checked before the movie is saved.
-
-```text
-Rating Input
-     │
-     ▼
-Rating Validation
-     │
-     ▼
-RatingAnnotationLogic
-     │
- ┌───┴───┐
- ▼       ▼
-Valid   Invalid
- │        │
- ▼        ▼
-Save    Show Error
-```
+The validation layer ensures that the submitted rating follows the application's configured rules.
 
 ---
 
-# 💾 13. Saving a Movie
+## 7.4 Watchlist Display
 
-After validation and rating processing, the movie is passed to:
-
-```text
-DatabaseService
-```
-
-The service communicates with:
+The user's movies are displayed through:
 
 ```text
-MovieRepo
+watchlist.html
+watchlistItem.html
 ```
 
-which extends:
-
-```text
-JpaRepository<Movie, Integer>
-```
-
-### Save Flow
-
-```text
-MovieController
-      │
-      ▼
-DatabaseService
-      │
-      ▼
-MovieRepo
-      │
-      ▼
-JPA / Hibernate
-      │
-      ▼
-Database
-```
+The application retrieves the user's movie records from the database and displays them in the watchlist interface.
 
 ---
 
-# ✏️ 14. Update Movie Workflow
-
-Users can update an existing movie.
-
-```text
-Watchlist
-   │
-   ▼
-Update Movie
-   │
-   ▼
-MovieController
-   │
-   ▼
-DatabaseService
-   │
-   ▼
-MovieRepo
-   │
-   ▼
-Database
-```
-
-The updated information may include:
-
-- Movie title
-- Rating
-- Priority
-- Comment
-- Source
-
-After the update, the user is redirected back to the appropriate page.
-
----
-
-# ❌ 15. Delete Movie Workflow
-
-When a user deletes a movie:
-
-```text
-Delete
-  │
-  ▼
-MovieController
-  │
-  ▼
-DatabaseService
-  │
-  ▼
-MovieRepo
-  │
-  ▼
-Database
-```
-
-The selected movie is permanently removed from the database.
-
----
-
-# 💬 16. Feedback Workflow
+# 8. Feedback Workflow
 
 Authenticated users can submit feedback through:
 
@@ -629,103 +254,651 @@ Authenticated users can submit feedback through:
 /feedback
 ```
 
-The feedback feature is protected so that only logged-in users can submit feedback.
-
-### Workflow
+The request is handled by:
 
 ```text
-Logged-in User
-      │
-      ▼
-Feedback Page
-      │
-      ▼
 FeedbackController
-      │
-      ▼
-Feedback
-      │
-      ▼
+FeedbackService
 FeedbackRepo
-      │
-      ▼
-Database
 ```
 
-After successful submission, the application redirects back to the feedback page and displays the success message.
+The feedback contains information such as:
+
+* Category
+* Rating
+* Message
+* User
+
+The logged-in user is automatically associated with the submitted feedback.
+
+The application also creates an activity entry when feedback is submitted.
 
 ---
 
-# 🧭 17. Navigation Workflow
+# 9. Activity Tracking
 
-The application uses a common navbar fragment:
+User activities are managed through:
 
 ```text
-templates/fragments/navbar.html
+ActivityService
+ActivityRepo
+Activity
 ```
 
-Pages include the navbar using:
+Activities can record important user actions such as feedback submission.
 
-```html
-<div th:replace="~{fragments/navbar :: navbar}"></div>
+Each activity is associated with the relevant user.
+
+The Admin Panel can display these activities through:
+
+```text
+activities.html
+activity-details.html
 ```
-
-The footer is included using:
-
-```html
-<div th:replace="~{fragments/footer :: footer}"></div>
-```
-
-This keeps the navigation and footer consistent across the application.
 
 ---
 
-# 🗂️ 18. Overall Application Workflow
+# 10. Admin Panel Workflow
 
-The complete application flow can be summarized as:
+The Admin Panel is available only to authorized administrators.
+
+Admin functionality is managed mainly through:
 
 ```text
-                         Movie Watchlist App
-                                  │
-                                  ▼
-                              Home Page
-                                  │
-                    ┌─────────────┴─────────────┐
-                    ▼                           ▼
-                 Sign Up                      Login
-                    │                           │
-                    ▼                           ▼
-               UserService              Spring Security
-                    │                           │
-                    ▼                           ▼
-                 UserRepo              CustomUserDetailsService
-                    │                           │
-                    ▼                           ▼
-                Database                 Authentication
-                                                │
-                                                ▼
-                                           Dashboard
-                                                │
-                         ┌──────────────────────┼──────────────────────┐
-                         ▼                      ▼                      ▼
-                     Watchlist              Add Movie             Feedback
-                         │                      │                      │
-                         ▼                      ▼                      ▼
-                  MovieController        MovieController       FeedbackController
-                         │                      │                      │
-                         ▼                      ▼                      ▼
-                  DatabaseService        RatingService          FeedbackRepo
-                         │                      │
-                         ▼                      ▼
-                     MovieRepo              OMDb API
+AdminController
+```
+
+The Admin Panel contains sections for:
+
+```text
+Admin Dashboard
+Users
+Movies
+Feedback
+Activities
+```
+
+The Admin UI uses dedicated templates and shared admin navigation/footer fragments.
+
+---
+
+# 11. Admin User Management
+
+Administrators can view registered users through:
+
+```text
+/admin/users
+```
+
+The user list is loaded using:
+
+```text
+UserService
+UserRepo
+```
+
+The administrator can open individual user details and manage user-related information.
+
+---
+
+# 12. Complete User Deletion
+
+The Admin Panel supports complete user deletion.
+
+The deletion workflow is:
+
+```text
+Admin
+  │
+  ▼
+Select User
+  │
+  ▼
+Delete User
+  │
+  ▼
+Confirmation
+  │
+  ▼
+AdminController
+  │
+  ▼
+UserService
+  │
+  ▼
+Delete Related Records
+  │
+  ▼
+Delete User
+  │
+  ▼
+Redirect to Users
+```
+
+Associated user data includes records such as:
+
+* Movies
+* Feedback
+* Feedback responses
+* Activities
+
+The database relationships and cascade/orphan-removal configuration ensure that dependent records are handled correctly.
+
+After successful deletion, the application displays:
+
+```text
+✅ User deleted successfully.
+```
+
+The success popup automatically disappears after the configured duration.
+
+---
+
+# 13. Admin Feedback Management
+
+Administrators can view all submitted feedback through the Admin Panel.
+
+The feedback section provides:
+
+* Feedback ID
+* Category
+* Rating
+* User
+* Email
+* Message
+
+Administrators can open individual feedback details.
+
+The relevant template is:
+
+```text
+admin/feedback-details.html
+```
+
+---
+
+# 14. Admin Email Response
+
+Administrators can respond directly to users through email.
+
+The workflow is:
+
+```text
+Admin opens feedback
+        │
+        ▼
+Writes response
+        │
+        ▼
+Submit response
+        │
+        ▼
+EmailService
+        │
+        ▼
+Email sent to user's email
+        │
+        ▼
+Response saved in database
+```
+
+The email functionality is handled by:
+
+```text
+EmailService
+```
+
+The response is sent to the email address associated with the feedback user.
+
+---
+
+# 15. Email Response History
+
+Every successful admin response is stored in the:
+
+```text
+feedback_responses
+```
+
+database table.
+
+The corresponding entity is:
+
+```text
+FeedbackResponse
+```
+
+The response contains:
+
+* Feedback
+* Admin email
+* Response message
+* Email status
+* Response date/time
+
+The relationship is:
+
+```text
+Feedback
+    │
+    └── FeedbackResponse
+            ├── Admin Email
+            ├── Response Message
+            ├── Email Status
+            └── Responded At
+```
+
+Response history is retrieved using:
+
+```text
+FeedbackResponseService
+FeedbackResponseRepository
+```
+
+and displayed on the feedback details page.
+
+This allows administrators to review previous responses sent for the same feedback.
+
+---
+
+# 16. Email Sending Process
+
+The application uses Spring Mail for sending responses.
+
+The process is:
+
+```text
+FeedbackController
+        │
+        ▼
+EmailService
+        │
+        ▼
+SMTP Server
+        │
+        ▼
+User Email
+```
+
+Email authentication is configured using environment variables rather than storing credentials directly in source code.
+
+The application uses an email application password where required by the configured email provider.
+
+Sensitive credentials should never be committed to GitHub.
+
+---
+
+# 17. Validation
+
+The application uses custom validation components for application-specific input validation.
+
+Validation classes include:
+
+```text
+Priority.java
+PriorityAnnotationLogic.java
+
+Rating.java
+RatingAnnotationLogic.java
+```
+
+These validations help ensure that invalid data is rejected before being persisted.
+
+---
+
+# 18. Database Layer
+
+The application uses PostgreSQL as its persistent database.
+
+Hibernate/JPA manages communication between Java entities and database tables.
+
+Main entities include:
+
+```text
+User
+Movie
+Feedback
+Activity
+FeedbackResponse
+```
+
+Repositories extend Spring Data JPA repositories to perform database operations.
+
+Example architecture:
+
+```text
+Movie
+  ↓
+MovieRepo
+  ↓
+PostgreSQL
+
+Feedback
+  ↓
+FeedbackRepo
+  ↓
+PostgreSQL
+
+FeedbackResponse
+  ↓
+FeedbackResponseRepository
+  ↓
+PostgreSQL
+```
+
+---
+
+# 19. Entity Relationships
+
+The main relationships are:
+
+```text
+User
+ ├── Movies
+ ├── Feedback
+ └── Activities
+
+Feedback
+ └── FeedbackResponses
+```
+
+A feedback record belongs to a user.
+
+A feedback response belongs to a feedback record.
+
+When dependent records are deleted, the configured JPA relationships ensure that database foreign-key constraints are respected.
+
+---
+
+# 20. Frontend Structure
+
+The frontend uses:
+
+```text
+Thymeleaf
+HTML
+CSS
+JavaScript
+```
+
+Templates are separated into:
+
+```text
+templates/
+├── fragments/
+├── admin/
+├── auth/
+└── user pages
+```
+
+Static resources are organized into:
+
+```text
+static/
+├── css/
+├── js/
+└── Images/
+```
+
+---
+
+# 21. Navigation and Layout
+
+Common user navigation and footer elements are maintained using Thymeleaf fragments:
+
+```text
+fragments/navbar.html
+fragments/footer.html
+```
+
+The Admin Panel uses:
+
+```text
+admin/admin-navbar.html
+admin/admin-footer.html
+```
+
+This keeps common UI components reusable across multiple pages.
+
+---
+
+# 22. Success and Error Messages
+
+The application uses redirect flash attributes for user feedback.
+
+Examples include:
+
+```text
+✅ Response successfully sent to the User.
+✅ User deleted successfully.
+❌ Failed to send response.
+❌ Failed to delete user.
+```
+
+These messages are displayed using popup components.
+
+JavaScript controls the automatic disappearance of popup messages after a configured time.
+
+---
+
+# 23. Security Workflow
+
+Spring Security protects authenticated and administrative functionality.
+
+The security configuration is managed by:
+
+```text
+SecurityConfig.java
+PasswordConfig.java
+```
+
+The application:
+
+1. Authenticates users.
+2. Loads user information.
+3. Encodes passwords.
+4. Applies role-based authorization.
+5. Protects administrative routes.
+6. Restricts unauthorized access.
+
+---
+
+# 24. Complete User Workflow
+
+```text
+Open Application
+       │
+       ▼
+Signup / Login
+       │
+       ▼
+User Dashboard
+       │
+       ├───────────────┐
+       ▼               ▼
+Manage Watchlist     Submit Feedback
+       │               │
+       ▼               ▼
+Movie Database      Feedback Database
+       │               │
+       └───────┬───────┘
+               ▼
+          User Activities
+```
+
+---
+
+# 25. Complete Admin Workflow
+
+```text
+Admin Login
+     │
+     ▼
+Admin Dashboard
+     │
+     ├── Manage Users
+     │      └── View / Delete User
+     │
+     ├── Manage Movies
+     │      └── View Movie Details
+     │
+     ├── Manage Feedback
+     │      ├── View Feedback
+     │      ├── Respond by Email
+     │      └── View Response History
+     │
+     └── Manage Activities
+            ├── View Activities
+            └── View Activity Details
+```
+
+---
+
+# 26. Error Handling
+
+The application handles common application errors through controller-level validation and exception handling.
+
+For example:
+
+* Feedback not found
+* User information unavailable
+* Missing email address
+* Empty response message
+* Email authentication failure
+* Database constraint violations
+
+Error messages are returned to the appropriate page using redirect attributes where applicable.
+
+---
+
+# 27. Development Workflow
+
+During development, changes are implemented in layers:
+
+```text
+Entity
+   ↓
+Repository
+   ↓
+Service
+   ↓
+Controller
+   ↓
+Thymeleaf Template
+   ↓
+CSS / JavaScript
+   ↓
+Testing
+```
+
+For new database functionality:
+
+1. Create/update entity.
+2. Configure entity relationships.
+3. Create repository.
+4. Create service methods.
+5. Add controller endpoints.
+6. Update Thymeleaf UI.
+7. Add CSS/JavaScript where required.
+8. Test database operations.
+9. Test the complete user workflow.
+
+---
+
+# 28. Final Testing Workflow
+
+Before publishing the project, verify:
+
+### User Side
+
+* Signup
+* Login
+* Logout
+* Dashboard
+* Add movie
+* Update movie
+* Delete movie
+* Movie rating
+* Submit feedback
+* Activity creation
+
+### Admin Side
+
+* Admin login
+* Admin dashboard
+* View users
+* View user details
+* View movies
+* View movie details
+* View feedback
+* View feedback details
+* Send email response
+* View email response history
+* View activities
+* Delete individual records
+* Completely delete user
+
+### System
+
+* Database operations
+* Foreign-key relationships
+* Email configuration
+* Authentication
+* Authorization
+* Success popups
+* Error popups
+* Redirects
+* Responsive UI
+
+---
+
+# 29. Production / GitHub Preparation
+
+Before pushing the project to GitHub:
+
+* Remove passwords from source code.
+* Remove email application passwords.
+* Use environment variables for sensitive configuration.
+* Verify `.gitignore`.
+* Remove unnecessary generated files.
+* Remove unused code.
+* Check database configuration.
+* Update README.
+* Update project structure documentation.
+* Update workflow documentation.
+
+Sensitive configuration must never be committed to the public repository.
+
+---
+
+# 30. Final Project Flow
+
+The final application can be summarized as:
+
+```text
+                 MOVIE WATCHLIST APP
                          │
-                         ▼
-                      Database
+          ┌──────────────┴──────────────┐
+          │                             │
+        USER                           ADMIN
+          │                             │
+     Authentication                 Authentication
+          │                             │
+     Dashboard                    Admin Dashboard
+          │                             │
+     Watchlist              ┌───────────┼───────────┐
+          │                 │           │           │
+     Feedback             Users       Movies     Feedback
+          │                 │                       │
+     Activities        User Management        Email Response
+                                                  │
+                                                  ▼
+                                           Response History
 ```
 
 ---
 
-# 🧩 19. Main Components and Responsibilities
+# 🧩 31. Main Components and Responsibilities
 
 | Component | Responsibility |
 |---|---|
@@ -743,7 +916,7 @@ The complete application flow can be summarized as:
 
 ---
 
-# 🔄 20. MVC Request Flow
+# 🔄 32. MVC Request Flow
 
 The general request flow of the application is:
 
@@ -824,4 +997,7 @@ This structure keeps the application organized, maintainable, secure, and easier
 
 - 📖 [README.md](README.md) — Project overview, features, technology stack and setup
 - 🏗️ [STRUCTURE.md](STRUCTURE.md) — Complete package and file structure
-- ⚙️ **WORKING.md** — Step-by-step application workflow
+- ⚙️ [WORKING.md](WORKING.md) — Step-by-step application workflow
+
+
+The application combines authentication, watchlist management, feedback management, activity tracking, administrative management, email communication, and response-history tracking into a single Spring Boot application.
