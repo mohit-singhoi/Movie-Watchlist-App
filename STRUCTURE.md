@@ -263,3 +263,11 @@ Contains static resources used by the frontend.
 - **README.md** — Project overview, features, technologies, setup, and usage information.
 - **WORKING.md** — Step-by-step explanation of how the application works.
 - **STRUCTURE.md** — Project structure and package/file responsibilities.
+
+
+
+### 📚 Related Documentation
+
+- 📖 [README.md](README.md) — Project overview, features, technology stack and setup
+- 🏗️ [STRUCTURE.md](STRUCTURE.md) — Complete package and file structure
+- ⚙️ [WORKING.md](WORKING.md) — Step-by-step application workflow

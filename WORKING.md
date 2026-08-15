@@ -1,6 +1,6 @@
 # 🎬 Movie Watchlist App — Working Flow
 
-## 1. Project Overview
+# 1. Project Overview
 
 Movie Watchlist App is a Spring Boot web application that allows registered users to manage their personal movie watchlist, submit feedback, and track their activities.
 
