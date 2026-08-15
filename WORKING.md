@@ -1,4 +1,4 @@
-# Movie Watchlist App — Working Flow
+# 🎬 Movie Watchlist App — Working Flow
 
 ## 1. Project Overview
 
