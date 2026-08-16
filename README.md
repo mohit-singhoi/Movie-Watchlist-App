@@ -989,7 +989,14 @@ The following screenshots demonstrate the main pages and features of the Movie W
 | Login | Signup |
 |---|---|
 | <img src="screenshots/Login.png" width="450"> | <img src="screenshots/Signup.png" width="450"> |
-| **User Login Page** | **Signup Page** |
+| **Login Page** | **Signup Page** |
+
+---
+
+| User Login | AdminLogin |
+|---|---|
+| <img src="screenshots/UserLogin.png" width="450"> | <img src="screenshots/AdminLogin.png" width="450"> |
+| **User Login Page** | **Admin Login Page** |
 
 ---
 
