@@ -1078,6 +1078,14 @@ The following screenshots demonstrate the main pages and features of the Movie W
 
 ---
 
+### 📊 Successfully Deployed on render
+
+<img src="screenshots/Deployed.png" width="900">
+
+**Project Deployment**
+
+---
+
 # 📚 23. Project Documentation
 
 Additional documentation is maintained separately.
