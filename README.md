@@ -1178,7 +1178,7 @@ Possible future improvements include:
 
 ## Mohit Kumar
 
-**MCA Student | Java Full Stack Developer | Spring Boot Developer**
+**Java Full Stack Developer | Spring Boot Developer | AI & ML**
 
 📧 Email: [mohitsinghoi501@gmail.com](mailto:mohitsinghoi501@gmail.com)
 
