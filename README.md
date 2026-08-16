@@ -1069,20 +1069,12 @@ The following screenshots demonstrate the main pages and features of the Movie W
 
 ---
 
-### 📩 Feedback Response
+### 📩 Feedback Response & User Activities
 
-<img src="screenshots/Admin/FeedbackResponse.png" width="900">
-
-**Feedback Response**
-
----
-
-### 📋 All Activities
-
-<img src="screenshots/Admin/Activities.png" width="900">
-
-**User Activities**
-
+| User Feedback Response | User Activities |
+|---|---|
+| <img src="screenshots/Admin/FeedbackResponse.png" width="450"> | <img src="screenshots/Admin/Activities.png" width="450"> |
+| **Feedback Response** | **User Activities** |
 
 ---
 
