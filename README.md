@@ -993,7 +993,7 @@ The following screenshots demonstrate the main pages and features of the Movie W
 
 ---
 
-| User Login | AdminLogin |
+| User Login | Admin Login |
 |---|---|
 | <img src="screenshots/UserLogin.png" width="450"> | <img src="screenshots/AdminLogin.png" width="450"> |
 | **User Login Page** | **Admin Login Page** |
@@ -1032,20 +1032,49 @@ The following screenshots demonstrate the main pages and features of the Movie W
 ---
 
 
-### 👨‍💼 Admin Panel
+## 🛠️ Admin Panel
 
-Add screenshots for:
+### 📊 Admin Dashboard
 
-* Admin Dashboard
-* Users
-* User Details
-* Movies
-* Feedback
-* Feedback Details
-* Email Response History
-* Activities
+<img src="screenshots/Admin/Dashboard.png" width="900">
 
+**Admin Dashboard**
 
+---
+
+### 🎬 Movie Management
+
+| Movie Details | Movie Management |
+|---|---|
+| <img src="screenshots/Admin/MovieDetails.png" width="450"> | <img src="screenshots/Admin/MovieMgmt.png" width="450"> |
+| **Movie Details** | **Manage Movies** |
+
+---
+
+### 👥 User Management
+
+| User Details | User Management |
+|---|---|
+| <img src="screenshots/Admin/UserDetails.png" width="450"> | <img src="screenshots/Admin/UserMgmt.png" width="450"> |
+| **User Details** | **Manage Users** |
+
+---
+
+### 💬 Feedback Management
+
+| Feedback Details | Feedback Management |
+|---|---|
+| <img src="screenshots/Admin/FeedbackDetails.png" width="450"> | <img src="screenshots/Admin/FeedbackMgmt.png" width="450"> |
+| **Feedback Details** | **Manage Feedback** |
+
+---
+
+### 📩 Feedback Response & User Activities
+
+| User Feedback Response | User Activities |
+|---|---|
+| <img src="screenshots/Admin/FeedbackResponse.png" width="450"> | <img src="screenshots/Admin/Activities.png" width="450"> |
+| **Feedback Response** | **User Activities** |
 
 ---
 
@@ -1149,7 +1178,7 @@ Possible future improvements include:
 
 ## Mohit Kumar
 
-**MCA Student | Java Full Stack Developer | Spring Boot Developer**
+**Java Full Stack Developer | Spring Boot Developer | AI & ML**
 
 📧 Email: [mohitsinghoi501@gmail.com](mailto:mohitsinghoi501@gmail.com)
 
