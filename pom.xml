@@ -78,6 +78,17 @@
     <artifactId>thymeleaf-extras-springsecurity6</artifactId>
 </dependency>
 
+<!---  Email Resend -->
+
+<!--
+<dependency>
+    <groupId>com.resend</groupId>
+    <artifactId>resend-java</artifactId>
+    <version>4.11.0</version>
+</dependency>
+
+-->
+
 <!---Spring Mail Dependency-->
 <dependency>
     <groupId>org.springframework.boot</groupId>
