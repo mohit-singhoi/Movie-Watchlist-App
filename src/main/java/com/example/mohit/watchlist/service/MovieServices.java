@@ -97,32 +97,76 @@ public class MovieServices {
 //	}
 	
 	
-	//Version 3 for Multi user support 
+//	//Version 3 for Multi user support 
+//	public void create(Movie movie) {
+//
+//	    String rating = ratingService.getMovieRating(movie.getTitle());
+//
+//	    if (rating != null && !rating.isBlank()) {
+//
+//	        float imdbRating = Float.parseFloat(rating);
+//
+//	        movie.setRating(imdbRating);
+//
+//	        if (imdbRating < 3) {
+//	            movie.setPriority("Low");
+//	        } else if (imdbRating < 7) {
+//	            movie.setPriority("Medium");
+//	        } else {
+//	            movie.setPriority("High");
+//	        }
+//
+//	    } else {
+//
+//	        // Movie not found on IMDb
+//	        movie.setPriority(normalizePriority(movie.getPriority()));
+//	    }
+//
+//	    // Get the currently logged-in user
+//	    Authentication authentication =
+//	            SecurityContextHolder.getContext().getAuthentication();
+//
+//	    CustomUserDetails customUser =
+//	            (CustomUserDetails) authentication.getPrincipal();
+//
+//	    User user = customUser.getUser();
+//
+//	    // Associate the movie with the logged-in user
+//	    movie.setUser(user);
+//
+//	 // Save the movie
+//	    movieRepo.save(movie);
+//
+//	    // Save activity
+//	    activityService.saveActivity(
+//	        new Activity(
+//	            "🎬",
+//	            "Movie Added",
+//	            user.getFullName()
+//	                + " added \"" + movie.getTitle() + "\" to the watchlist.",user
+//	        )
+//	    );
+//	}
+//	
+	
+	// Movie priority Set by own user
+	
+	// Version 3 for Multi-user support
+
 	public void create(Movie movie) {
 
+	    // Get IMDb rating
 	    String rating = ratingService.getMovieRating(movie.getTitle());
 
 	    if (rating != null && !rating.isBlank()) {
-
 	        float imdbRating = Float.parseFloat(rating);
-
 	        movie.setRating(imdbRating);
-
-	        if (imdbRating < 3) {
-	            movie.setPriority("Low");
-	        } else if (imdbRating < 7) {
-	            movie.setPriority("Medium");
-	        } else {
-	            movie.setPriority("High");
-	        }
-
-	    } else {
-
-	        // Movie not found on IMDb
-	        movie.setPriority(normalizePriority(movie.getPriority()));
 	    }
 
-	    // Get the currently logged-in user
+	    // Priority is selected by the user
+	    movie.setPriority(normalizePriority(movie.getPriority()));
+
+	    // Get currently logged-in user
 	    Authentication authentication =
 	            SecurityContextHolder.getContext().getAuthentication();
 
@@ -131,10 +175,10 @@ public class MovieServices {
 
 	    User user = customUser.getUser();
 
-	    // Associate the movie with the logged-in user
+	    // Associate movie with the logged-in user
 	    movie.setUser(user);
 
-	 // Save the movie
+	    // Save movie
 	    movieRepo.save(movie);
 
 	    // Save activity
@@ -143,11 +187,12 @@ public class MovieServices {
 	            "🎬",
 	            "Movie Added",
 	            user.getFullName()
-	                + " added \"" + movie.getTitle() + "\" to the watchlist.",user
+	                + " added \"" + movie.getTitle()
+	                + "\" to the watchlist.",
+	            user
 	        )
 	    );
 	}
-	
 	
 	//show all movie to all user
 	
@@ -194,7 +239,79 @@ public class MovieServices {
 //	}
 	
 	
-	// New version to Automate Priority and ratings.
+//	// New version to Automate Priority and ratings.
+//	public void update(Movie movie, Integer id) {
+//
+//	    Movie toBeUpdated = getMovieById(id);
+//
+//	    Authentication authentication =
+//	            SecurityContextHolder.getContext().getAuthentication();
+//
+//	    CustomUserDetails customUser =
+//	            (CustomUserDetails) authentication.getPrincipal();
+//
+//	    // Get logged-in user
+//	    User user = customUser.getUser();
+//
+//	    // Check movie ownership
+//	    if (!toBeUpdated.getUser().getId()
+//	            .equals(user.getId())) {
+//
+//	        throw new RuntimeException("Access Denied");
+//	    }
+//
+//	    toBeUpdated.setTitle(movie.getTitle());
+//	    toBeUpdated.setSource(movie.getSource());
+//	    toBeUpdated.setComment(movie.getComment());
+//
+//	    String rating = ratingService.getMovieRating(movie.getTitle());
+//
+//	    if (rating != null && !rating.isBlank()) {
+//
+//	        float imdbRating = Float.parseFloat(rating);
+//
+//	        toBeUpdated.setRating(imdbRating);
+//
+//	        if (imdbRating < 3) {
+//	            toBeUpdated.setPriority("Low");
+//
+//	        } else if (imdbRating < 7) {
+//	            toBeUpdated.setPriority("Medium");
+//
+//	        } else {
+//	            toBeUpdated.setPriority("High");
+//	        }
+//
+//	    } else {
+//
+//	        // Movie not found on IMDb
+//	        toBeUpdated.setRating(movie.getRating());
+//
+//	        toBeUpdated.setPriority(
+//	            normalizePriority(movie.getPriority())
+//	        );
+//	    }
+//
+//	    // Save updated movie
+//	    movieRepo.save(toBeUpdated);
+//
+//	    // Save activity
+//	    activityService.saveActivity(
+//	        new Activity(
+//	            "✏️",
+//	            "Movie Updated",
+//	            user.getFullName()
+//	                + " updated \""
+//	                + toBeUpdated.getTitle()
+//	                + "\".",
+//	            user
+//	        )
+//	    );
+//	}
+	
+	
+	// Movie Update and user any set rating by Automatically by IMDB ratings and priority is set by own user what user want to give priority to own movie Watchlist.
+	
 	public void update(Movie movie, Integer id) {
 
 	    Movie toBeUpdated = getMovieById(id);
@@ -215,37 +332,32 @@ public class MovieServices {
 	        throw new RuntimeException("Access Denied");
 	    }
 
+	    // Update movie details
 	    toBeUpdated.setTitle(movie.getTitle());
 	    toBeUpdated.setSource(movie.getSource());
 	    toBeUpdated.setComment(movie.getComment());
 
+	    // Get IMDb rating
 	    String rating = ratingService.getMovieRating(movie.getTitle());
 
 	    if (rating != null && !rating.isBlank()) {
 
 	        float imdbRating = Float.parseFloat(rating);
 
+	        // IMDb controls ONLY the rating
 	        toBeUpdated.setRating(imdbRating);
-
-	        if (imdbRating < 3) {
-	            toBeUpdated.setPriority("Low");
-
-	        } else if (imdbRating < 7) {
-	            toBeUpdated.setPriority("Medium");
-
-	        } else {
-	            toBeUpdated.setPriority("High");
-	        }
 
 	    } else {
 
 	        // Movie not found on IMDb
+	        // Keep manually entered rating
 	        toBeUpdated.setRating(movie.getRating());
-
-	        toBeUpdated.setPriority(
-	            normalizePriority(movie.getPriority())
-	        );
 	    }
+
+	    // Priority is ALWAYS selected by the user
+	    toBeUpdated.setPriority(
+	            normalizePriority(movie.getPriority())
+	    );
 
 	    // Save updated movie
 	    movieRepo.save(toBeUpdated);
@@ -263,7 +375,6 @@ public class MovieServices {
 	        )
 	    );
 	}
-	
 	
 	
 	// Delete Movie by id
