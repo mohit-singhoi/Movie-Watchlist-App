@@ -1,3 +1,5 @@
+// Security Config
+
 package com.example.mohit.watchlist.config;
 
 import org.springframework.context.annotation.Bean;
