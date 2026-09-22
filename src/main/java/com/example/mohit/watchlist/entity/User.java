@@ -1,3 +1,5 @@
+// User Page
+
 package com.example.mohit.watchlist.entity;
 
 import jakarta.persistence.*;
