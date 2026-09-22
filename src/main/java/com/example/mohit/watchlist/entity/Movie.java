@@ -1,3 +1,5 @@
+// Movie Page
+
 package com.example.mohit.watchlist.entity;
 
 import com.example.mohit.watchlist.entity.validations.Priority;
