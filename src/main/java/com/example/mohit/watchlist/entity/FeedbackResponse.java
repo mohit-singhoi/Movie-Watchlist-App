@@ -1,4 +1,4 @@
-// Feedback response Page
+// Feedback Response Page
 
 package com.example.mohit.watchlist.entity;
 
