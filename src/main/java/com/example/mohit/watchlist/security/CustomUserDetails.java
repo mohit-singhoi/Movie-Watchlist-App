@@ -1,3 +1,5 @@
+// Custom User Details Page
+
 package com.example.mohit.watchlist.security;
 
 import java.util.Collection;
