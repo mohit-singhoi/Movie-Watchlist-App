@@ -1,3 +1,5 @@
+// Email Service Page
+
 package com.example.mohit.watchlist.service;
 
 import org.springframework.mail.SimpleMailMessage;
