@@ -1,4 +1,4 @@
-// Admin Password Generator Page
+// Admin PasswordGenerator Page
 
 //package com.example.mohit.watchlist;
 //
